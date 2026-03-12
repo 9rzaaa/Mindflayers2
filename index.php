@@ -1055,7 +1055,7 @@ $products = [
                         <?= $tagline ?> Hand-crafted drinks made with ethically sourced beans and real ingredients.
                     </p>
                     <div class="hero-cta-group">
-                        <a href="pages/productpage/products.php" class="btn-primary-cta">
+                        <a href="pages/ProductListPage/products.php" class="btn-primary-cta">
                             <i class="bi-grid-fill bi"></i> Explore Menu
                         </a>
                         <a href="#experience" class="btn-ghost-cta">
@@ -1148,7 +1148,7 @@ $products = [
                     <h2 class="section-title">Our most-loved <em>crafted</em> sips.</h2>
                 </div>
                 <div class="mt-3 mt-lg-0 text-lg-end col-lg-5">
-                    <a href="#order" class="btn-ghost-cta" style="border-color: rgba(194,178,128,0.3); color: var(--sand);">
+                    <a href="pages/ProductListPage/products.php" class="btn-ghost-cta" style="border-color: rgba(194,178,128,0.3); color: var(--sand);">
                         View Full Menu <i class="bi-arrow-right bi"></i>
                     </a>
                 </div>

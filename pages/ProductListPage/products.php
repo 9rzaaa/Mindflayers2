@@ -1,5 +1,5 @@
 <?php
-// pages/productpage/products.php
+// pages/ProductListPage/products.php
 
 $products = [
     [
