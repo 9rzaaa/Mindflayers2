@@ -40,8 +40,11 @@ $iconMap = [
         .card-hero { border: 1px solid rgba(0,0,0,.06); border-radius: 0.8rem; background: #fff; }
         .card-hero img { border-top-left-radius: 0.8rem; border-top-right-radius: 0.8rem; }
         .modal-header { border-bottom: 1px solid #e8e5e0; }
-        .section-heading { font-weight: 600; margin-top: 1rem; margin-bottom: 0.8rem; }
-        .section-heading i { margin-right: 0.45rem; color: #7f5a3f; }
+        .modal-body { background: #fcfbf8; }
+        .section-heading { font-weight: 600; margin-top: 1.2rem; margin-bottom: 0.75rem; text-transform: uppercase; font-size: 0.93rem; letter-spacing: 0.04em; }
+        .section-heading i { margin-right: 0.4rem; color: #7f5a3f; }
+        .tag-badge { border-radius: 0.45rem; padding: 0.22rem 0.65rem; }
+        .tasting-badge { background: #fff; border: 1px solid #e2dace; border-radius: 0.55rem; color: #6b5138; }
         .spec-row { margin-bottom: 0.55rem; }
         .spec-label { color: #7b5b4a; font-weight: 500; }
         .ship-list li { margin-bottom: 0.45rem; }
@@ -49,6 +52,11 @@ $iconMap = [
         .tag-badge { font-size: 0.75rem; border-radius: 0.35rem; }
         .btn-brown { background: #8b5e3c; color: #fff; border-color: #8b5e3c; }
         .btn-brown:hover { background: #79523a; color: #fff; }
+        .spec-card { background: #fff; border: 1px solid #e6dfd4; border-radius: 0.75rem; padding: 0.95rem; min-height: 76px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .spec-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+        .spec-card-title { display: flex; align-items: center; gap: 0.45rem; font-weight: 600; color: #5d3f2a; margin-bottom: 0.35rem; }
+        .spec-card-title i { color: #8c6a4f; }
+        .spec-card-value { color: #6f5b50; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -104,7 +112,7 @@ $iconMap = [
 <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header">  
                 <div>
                     <h5 class="modal-title" id="productDetailModalLabel">
                         <?= html($selectedProduct['name']) ?> <small class="text-muted">· <?= html($selectedProduct['category']) ?></small>
@@ -127,49 +135,94 @@ $iconMap = [
                             <span class="badge bg-light text-dark"><?= html($selectedProduct['volume']) ?></span>
                         </div>
                         <div class="row g-2 mb-3 text-smaller" style="font-size:0.93rem;">
-                            <div class="col-6"><strong>Price:</strong> ₱<?= number_format($selectedProduct['price']) ?></div>
-                            <div class="col-6"><strong>Calories:</strong> <?= html($selectedProduct['calories']) ?></div>
-                            <div class="col-6"><strong>Rating:</strong> <?= number_format($selectedProduct['rating'],1) ?> ⭐</div>
-                            <div class="col-6"><strong>Reviews:</strong> <?= html($selectedProduct['reviews']) ?></div>
+                            <div class="col-6"><i class="bi bi-currency-dollar"></i> <strong>Price:</strong> ₱<?= number_format($selectedProduct['price']) ?></div>
+                            <div class="col-6"><i class="bi bi-thermometer-half"></i> <strong>Calories:</strong> <?= html($selectedProduct['calories']) ?></div>
+                            <div class="col-6"><i class="bi bi-star-fill text-warning"></i> <strong>Rating:</strong> <?= number_format($selectedProduct['rating'],1) ?> ⭐</div>
+                            <div class="col-6"><i class="bi bi-chat-dots"></i> <strong>Reviews:</strong> <?= html($selectedProduct['reviews']) ?></div>
                         </div>
-                        <button class="btn btn-brown text-white" data-bs-dismiss="modal">Close</button>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-brown text-white">
+                                <i class="bi bi-cart-fill"> Add to Cart <i class="bi bi-plus-circle"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                <i class="bi bi-x-lg"></i> Close
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <section class="mb-4">
                     <h6 class="section-heading"><i class="bi bi-info-circle"></i> About this drink</h6>
                     <p><?= html($selectedProduct['desc']) ?></p>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <span class="badge bg-light text-dark p-2 border"><i class="bi bi-heart-fill text-danger"></i> Cozy Flavor</span>
+                        <span class="badge bg-light text-dark p-2 border"><i class="bi bi-lightning-fill text-warning"></i> Energy Boost</span>
+                        <span class="badge bg-light text-dark p-2 border"><i class="bi bi-emoji-smile-fill text-success"></i> Feel Good</span>
+                    </div>
+                </section>
+
+                <section class="mb-4">
+                    <h6 class="section-heading"><i class="bi bi-clipboard-data"></i> Taste Profile</h6>
+                    <div class="row g-2 text-muted" style="font-size:0.92rem;">
+                        <div class="col-6"><i class="bi bi-droplet-half"></i> Creamy</div>
+                        <div class="col-6"><i class="bi bi-stars"></i> Sweet</div>
+                        <div class="col-6"><i class="bi bi-flower1"></i> Floral</div>
+                        <div class="col-6"><i class="bi bi-snow"></i> Cool Finish</div>
+                    </div>
                 </section>
 
                 <section class="mb-4">
                     <h6 class="section-heading"><i class="bi bi-list-check"></i> Key Specifications</h6>
-                    <div class="row g-2">
-                        <?php foreach ($selectedProduct['specs'] as $spec): ?>
-                        <div class="col-12 col-sm-6">
-                            <div class="p-2 border rounded bg-white">
-                                <strong><?= html($spec['label']) ?>:</strong> <?= html($spec['value']) ?>
+                    <div class="row g-2 mb-3">
+                        <?php
+                        $mainSpecs = array_filter($selectedProduct['specs'], function ($spec) {
+                            return in_array(strtolower($spec['label']), ['temperature', 'base', 'milk', 'caffeine']);
+                        });
+                        ?>
+                        <?php foreach ($mainSpecs as $spec): ?>
+                            <?php
+                            $specIcon = match(strtolower($spec['label'])) {
+                                'temperature' => 'bi-thermometer-half',
+                                'base' => 'bi-cup-straw',
+                                'milk' => 'bi-droplet-half',
+                                'caffeine' => 'bi-lightning-charge',
+                                default => $spec['icon'] ?? 'bi-chevron-right',
+                            };
+                            ?>
+                            <div class="col-6 col-md-3">
+                                <div class="p-2 rounded-3 border bg-white text-center" style="min-height:88px;">
+                                    <i class="bi <?= html($specIcon) ?> fs-3 text-brown"></i>
+                                    <div class="fw-bold" style="font-size:0.9rem;"><?= html($spec['label']) ?></div>
+                                    <small class="text-secondary"><?= html($spec['value']) ?></small>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="row g-3">
+                        <?php foreach ($selectedProduct['specs'] as $spec): ?>
+                            <?php
+                            $specIcon = match(strtolower($spec['label'])) {
+                                'temperature' => 'bi-thermometer-half',
+                                'base' => 'bi-cup-straw',
+                                'milk' => 'bi-droplet-half',
+                                'caffeine' => 'bi-lightning-charge',
+                                default => $spec['icon'] ?? 'bi-chevron-right',
+                            };
+                            ?>
+                            <div class="col-12 col-sm-6 col-xl-4">
+                                <article class="spec-card">
+                                    <div class="spec-card-title">
+                                        <i class="bi <?= html($specIcon) ?> fs-5"></i>
+                                        <?= html($spec['label']) ?>
+                                    </div>
+                                    <div class="spec-card-value"><?= html($spec['value']) ?></div>
+                                </article>
+                            </div>
                         <?php endforeach; ?>
                     </div>
                 </section>
 
-                <section class="mb-4">
-                    <h6 class="section-heading"><i class="bi bi-chat-square-text"></i> Customer Feedback</h6>
-                    <p>Based on <strong><?= html($selectedProduct['reviews']) ?></strong> reviews, average rating is <strong><?= number_format($selectedProduct['rating'], 1) ?></strong> / 5.</p>
-                    <div class="alert alert-success p-2" role="alert">
-                        "Smooth, balanced, and every sip is consistent — I’d order this again." — 4.9 (⭐)
-                    </div>
-                </section>
 
-                <section>
-                    <h6 class="section-heading"><i class="bi bi-truck"></i> Shipping &amp; Pickup</h6>
-                    <ul class="ship-list ps-3 mb-0">
-                        <li><strong>Local delivery:</strong> 30-45 minutes within Metro area.</li>
-                        <li><strong>In-store pickup:</strong> Ready in 5 minutes after order confirmation.</li>
-                        <li><strong>Packaging:</strong> recyclable cups with insulated carry sleeve mode.</li>
-                    </ul>
-                </section>
             </div>
         </div>
     </div>
