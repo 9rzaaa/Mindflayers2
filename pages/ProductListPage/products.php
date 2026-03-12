@@ -550,30 +550,17 @@ foreach ($products as $p) {
                         <div class="mb-2"><strong>Volume:</strong> <span id="modal-volume"></span></div>
                         <div class="mb-2"><strong>Category:</strong> <span id="modal-cat"></span></div>
                         <div class="mb-2"><strong>Calories:</strong> <span id="modal-cals"></span></div>
-                        <a href="#" id="modal-add-cart" class="btn btn-sm btn-primary mt-2">Add to Cart</a>
+                        <a href="#" id="modal-add-cart" class="btn btn-sm btn-primary mt-2"><i class="bi bi-cart-fill"></i> Add to Cart</a>
                     </div>
                 </div>
 
                 <hr>
                 <div>
-                    <h6 class="section-heading"><i class="bi bi-list-check"></i> Specifications</h6>
+                    <h5 class="section-heading" style="font-size:1.2rem; font-weight:700;" font-family="var(--font-serif)";><i class="bi bi-list-check"></i> Specifications</h5>
                     <div id="modal-specs" class="row gy-2"></div>
                 </div>
 
-                <div class="mt-3">
-                    <h6 class="section-heading"><i class="bi bi-chat-square-text"></i> Ratings & Reviews</h6>
-                    <p id="modal-reviews"></p>
-                </div>
-
-                <div class="mt-3">
-                    <h6 class="section-heading"><i class="bi bi-truck"></i> Shipping & Pickup</h6>
-                    <ul class="ps-3 mb-0">
-                        <li>Local delivery 30-45 min</li>
-                        <li>In-store pickup available</li>
-                        <li>Recyclable packaging</li>
-                    </ul>
-                </div>
-            </div>
+            </div>  
         </div>
     </div>
 </div>
@@ -596,17 +583,34 @@ foreach ($products as $p) {
     const productsData = <?= json_encode($products, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
     const productModal = new bootstrap.Modal(document.getElementById('productDetailModal'));
 
-    function formatSpecs(specs) {
-        if (!Array.isArray(specs)) return '';
-        return specs.map(spec => `
-            <div class="col-12 col-sm-6">
-                <div class="bg-light rounded p-2">
-                    <strong>${spec.label}:</strong> ${spec.value}
-                </div>
-            </div>`) .join('');
+    function getSpecIcon(label) {
+        switch (label.toLowerCase()) {
+            case 'temperature': return 'bi-thermometer-half';
+            case 'base': return 'bi-cup-straw';
+            case 'milk': return 'bi-droplet-half';
+            case 'caffeine': return 'bi-lightning-charge';
+            default: return 'bi-list';
+        }
     }
 
-    function showProductModal(product) {
+    function formatSpecs(specs) {
+        if (!Array.isArray(specs)) return '';
+        return specs.map(spec => {
+            const icon = getSpecIcon(spec.label || '');
+            return `
+            <div class="col-12 col-sm-6">
+                <div class="bg-light rounded p-3 d-flex align-items-start gap-2" style="border-left: 3px solid #8b5e3c;">
+                    <i class="bi ${icon}" style="font-size:1.25rem; color:#8b5e3c; margin-top: 3px;"></i>
+                    <div>
+                        <div class="fw-bold" style="font-size:1.03rem; letter-spacing:0.02em; text-transform: uppercase;">${spec.label}</div>
+                        <div class="text-secondary" style="font-size:0.92rem;">${spec.value}</div>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function showProductModal(product) {    
         if (!product) return;
 
         const placeholder = 'https://via.placeholder.com/700x420?text=Mindflayer+Coffee';
@@ -622,7 +626,6 @@ foreach ($products as $p) {
         document.getElementById('modal-volume').textContent = product.volume;
         document.getElementById('modal-cat').textContent = product.category;
         document.getElementById('modal-cals').textContent = product.calories;
-        document.getElementById('modal-reviews').textContent = `Average ★${product.rating} • ${product.reviews} reviews`;
         document.getElementById('modal-specs').innerHTML = formatSpecs(product.specs);
 
         document.getElementById('modal-add-cart').dataset.productId = product.id;
