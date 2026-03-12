@@ -654,7 +654,7 @@ foreach ($products as $p) {
                 <div class="bg-light rounded p-3 d-flex align-items-start gap-2" style="border-left: 3px solid #8b5e3c;">
                     <i class="bi ${icon}" style="font-size:1.25rem; color:#8b5e3c; margin-top: 3px;"></i>
                     <div>
-                        <div class="fw-bold" style="font-size:1.03rem; letter-spacing:0.02em; text-transform: uppercase;">${spec.label}</div>
+                        <div class="fw-bold" style="font-size:1.03rem; letter-spacing:0.02em;">${spec.label}</div>
                         <div class="text-secondary" style="font-size:0.92rem;">${spec.value}</div>
                     </div>
                 </div>
