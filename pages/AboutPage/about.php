@@ -18,10 +18,31 @@ $values = [
 ];
 
 $team = [
-    ["name" => "Mara Santos",      "role" => "Founder & Head Roaster",   "note" => "Former biochemist. Fell in love with extraction science. Now obsessed with sourcing the perfect Geisha."],
-    ["name" => "Jolo Reyes",       "role" => "Head Barista & Trainer",   "note" => "2× Philippine Brewers Cup finalist. Believes every great cup starts with 93°C water and patience."],
-    ["name" => "Ines Villanueva",  "role" => "Creative & Menu Design",   "note" => "Introduced the Ube Latte. Her rule: if it doesn't taste like something your lola would recognize, it doesn't make the menu."],
-    ["name" => "Kuya Dan",         "role" => "Operations & Community",   "note" => "Has been with Mindflayer since Day 1. Knows every regular by name and their usual order by heart."],
+    [
+        "name" => "Steven Kyle",
+        "role" => "Lead Barista & Developer",
+        "note" => "Trains the bar team and obsesses over extractions so every shot tastes the same, every day."
+    ],
+    [
+        "name" => "Daniel",
+        "role" => "Head Roaster & Founder",
+        "note" => "Leads sourcing and roasting, making sure every bean that reaches the bar is worth brewing."
+    ],
+    [
+        "name" => "Hilary Ashley",
+        "role" => "Menu Organizer & Developer",
+        "note" => "Works on seasonal drinks and signatures, balancing flavors so nothing feels too sweet or too safe."
+    ],
+    [
+        "name" => "Rhanz Christian",
+        "role" => "Store Operations & Quality Assurance",
+        "note" => "Keeps the doors running smoothly and makes sure regulars feel like the space is theirs, too."
+    ],
+    [
+        "name" => "Amilia Danielle",
+        "role" => "Assistant Barista & Designer",
+        "note" => "Jumps between bar and floor, helping the team stay fast, calm, and extra friendly during rush hours."
+    ],
 ];
 ?>
 <!DOCTYPE html>
@@ -372,13 +393,28 @@ $team = [
         }
 
         .team-avatar {
-            width: 56px; height: 56px; border-radius: 50%;
-            background: var(--mocha); border: 2px solid var(--sand);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; font-weight: 900;
-            color: var(--cream); letter-spacing: -0.02em;
-            /* Tip 41: space below avatar */
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--sand);
+            background: var(--mocha);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: var(--space-md);
+        }
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .team-avatar-fallback {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--cream);
+            letter-spacing: -0.02em;
         }
 
         .team-card .t-h3 { color: var(--linen); margin-bottom: var(--space-xs); }
@@ -652,10 +688,16 @@ $team = [
 
         <div class="row g-4 reveal">
             <?php foreach ($team as $i => $member): ?>
-            <div class="col-sm-6 col-lg-3" style="transition-delay:<?= $i * 0.08 ?>s">
+            <div class="col-6 col-lg" style="transition-delay:<?= $i * 0.08 ?>s">
                 <div class="team-card">
                     <div class="team-avatar">
-                        <?= mb_substr($member['name'], 0, 1) ?>
+                        <?php if (!empty($member['image'] ?? '')): ?>
+                            <img src="<?= htmlspecialchars($member['image']) ?>" alt="<?= htmlspecialchars($member['name']) ?> photo">
+                        <?php else: ?>
+                            <span class="team-avatar-fallback">
+                                <?= mb_substr($member['name'], 0, 1) ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <h3 class="t-h3"><?= $member['name'] ?></h3>
                     <p class="team-role"><?= $member['role'] ?></p>
