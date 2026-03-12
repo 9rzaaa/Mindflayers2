@@ -1017,6 +1017,7 @@ $products = [
                     <li class="nav-item"><a class="nav-link" href="pages/AboutPage/about.php">Our Story</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/ProfilePage/profile.php">Profile</a></li>
                 </ul>
 
                 <!-- SERIAL POSITIONING: Auth + primary CTA on the right -->
