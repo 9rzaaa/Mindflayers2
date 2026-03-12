@@ -51,6 +51,31 @@ $shop_name = "Mindflayer";
             padding: 0.9rem 1.5rem;
         }
 
+        .btn-home-nav {
+            background-color: var(--sand);
+            color: var(--espresso);
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2px;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .btn-home-nav:hover {
+            background-color: var(--cream);
+            color: var(--espresso);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(194, 178, 128, 0.4);
+        }
+
         .profile-brand {
             font-family: var(--font-display);
             font-weight: 900;
@@ -229,8 +254,9 @@ $shop_name = "Mindflayer";
             <a href="../../index.php" class="d-flex align-items-center gap-2 text-decoration-none text-light">
                 <span class="profile-brand">☕ <?= $shop_name ?><span class="dot">.</span></span>
             </a>
-            <a href="../ShoppingCartPage/shoppingcart.php" class="text-light small text-uppercase" style="letter-spacing:0.12em;">
-                <i class="bi bi-house-door me-1"></i> Home
+            <!-- Home button styled similarly to primary CTA, text only -->
+            <a href="../../index.php" class="btn-home-nav">
+                Home
             </a>
         </div>
     </header>
@@ -250,17 +276,17 @@ $shop_name = "Mindflayer";
                     <div class="d-flex flex-column align-items-center text-center h-100">
                         <div class="avatar-upload mb-2">
                             <div class="avatar-wrapper" id="avatarPreview">
-                                <span id="avatarInitials">JD</span>
+                                <span id="avatarInitials">MF</span>
                             </div>
                             <label class="avatar-upload-btn mt-2">
                                 <i class="bi bi-camera me-1"></i> Update photo
                                 <input type="file" id="avatarInput" accept="image/*">
                             </label>
                         </div>
-                        <h2 class="mt-2 mb-0" style="font-size:1.1rem; font-weight:700;"><?= "Juan Dela Cruz" ?></h2>
-                        <p class="mb-1" style="font-size:0.86rem; color:var(--text-light);">Member since 2024</p>
+                        <h2 class="mt-2 mb-0" style="font-size:1.1rem; font-weight:700;">Your name</h2>
+                        <p class="mb-1" style="font-size:0.86rem; color:var(--text-light);">Add your details to personalize your orders.</p>
                         <p class="profile-meta mb-0">
-                            <i class="bi bi-cup-hot me-1"></i> Favourite drink: Spanish Latte
+                            <i class="bi bi-cup-hot me-1"></i> Save your favourites for faster checkout.
                         </p>
                     </div>
                 </div>
@@ -273,11 +299,14 @@ $shop_name = "Mindflayer";
                             <label for="name" class="profile-label">
                                 Full name
                                 <!-- Tip 10 – Tooltips & Guides -->
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Use your full legal name so receipts and invoices are correct.">
+                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Use your full name so receipts and rewards are linked to the right person.">
                                     <i class="bi bi-question-lg"></i>
                                 </span>
                             </label>
-                            <input type="text" class="form-control" id="name" value="Juan Dela Cruz" required>
+                            <input type="text" class="form-control" id="name" placeholder="e.g. Alex Reyes" required>
+                            <div class="form-text" style="font-size:0.78rem;">
+                                Type your first and last name, just like on your ID.
+                            </div>
                             <div class="field-error" id="nameError" hidden>
                                 Please enter your full name (first and last).
                             </div>
@@ -287,13 +316,16 @@ $shop_name = "Mindflayer";
                         <div class="mb-3">
                             <label for="phone" class="profile-label">
                                 Mobile number
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We text you order updates and rider details. Format: 09XX XXX XXXX.">
+                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We text you order updates and rider details. Format: +63 9XX XXX XXXX.">
                                     <i class="bi bi-question-lg"></i>
                                 </span>
                             </label>
-                            <input type="tel" class="form-control" id="phone" placeholder="09XX XXX XXXX" value="0917 123 4567" required>
+                            <input type="tel" class="form-control" id="phone" placeholder="+63 912 345 6789" required>
+                            <div class="form-text" style="font-size:0.78rem;">
+                                Start with country code +63, then your 10‑digit mobile number.
+                            </div>
                             <div class="field-error" id="phoneError" hidden>
-                                Enter an 11-digit PH mobile number in the format 09XX XXX XXXX.
+                                Enter a valid PH mobile in the format +63 9XX XXX XXXX.
                             </div>
                         </div>
 
@@ -301,13 +333,16 @@ $shop_name = "Mindflayer";
                         <div class="mb-3">
                             <label for="birthdate" class="profile-label">
                                 Birth date
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We use this for age verification and birthday treats. Format: YYYY-MM-DD.">
+                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We use this for age verification and birthday treats. Format: DD/MM/YYYY.">
                                     <i class="bi bi-question-lg"></i>
                                 </span>
                             </label>
-                            <input type="text" class="form-control" id="birthdate" placeholder="YYYY-MM-DD" value="1998-05-24" required>
+                            <input type="text" class="form-control" id="birthdate" placeholder="DD/MM/YYYY" required>
+                            <div class="form-text" style="font-size:0.78rem;">
+                                Example: 24/05/1998 (day / month / year).
+                            </div>
                             <div class="field-error" id="birthdateError" hidden>
-                                Use the format YYYY-MM-DD (for example, 1998-05-24).
+                                Use the format DD/MM/YYYY (for example, 24/05/1998).
                             </div>
                         </div>
 
@@ -319,7 +354,7 @@ $shop_name = "Mindflayer";
                                     <i class="bi bi-question-lg"></i>
                                 </span>
                             </label>
-                            <input type="email" class="form-control" id="email" value="juan@example.com" readonly>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
                             <div class="form-text" style="font-size:0.78rem;">
                                 To update your email, contact support so we can verify ownership.
                             </div>
@@ -360,27 +395,41 @@ $shop_name = "Mindflayer";
         const birthdateError = document.getElementById('birthdateError');
         const saveStatus = document.getElementById('saveStatus');
 
-        // Tip 38 – Input Masks: Phone
+        // Tip 38 – Input Masks: Phone (+63 9XX XXX XXXX)
         phoneInput.addEventListener('input', (e) => {
-            let digits = e.target.value.replace(/\D/g, '').slice(0, 11); // PH mobile: 11 digits
-            let formatted = '';
-            if (digits.length <= 4) {
-                formatted = digits;
-            } else if (digits.length <= 7) {
-                formatted = digits.slice(0, 4) + ' ' + digits.slice(4);
-            } else {
-                formatted = digits.slice(0, 4) + ' ' + digits.slice(4, 7) + ' ' + digits.slice(7);
+            // keep only digits, but preserve leading country code 63
+            let digits = e.target.value.replace(/\D/g, '');
+
+            // ensure we always start with country code 63
+            if (!digits.startsWith('63')) {
+                digits = '63' + digits;
             }
-            e.target.value = formatted;
+
+            // after 63 we expect 10 digits (e.g. 9123456789)
+            digits = digits.slice(0, 12); // 2 for '63' + 10 for mobile
+
+            const country = digits.slice(0, 2); // '63'
+            const rest = digits.slice(2); // up to 10 digits
+
+            let formattedRest = '';
+            if (rest.length <= 3) {
+                formattedRest = rest;
+            } else if (rest.length <= 6) {
+                formattedRest = rest.slice(0, 3) + ' ' + rest.slice(3);
+            } else {
+                formattedRest = rest.slice(0, 3) + ' ' + rest.slice(3, 6) + ' ' + rest.slice(6);
+            }
+
+            e.target.value = '+63' + (formattedRest ? ' ' + formattedRest : '');
         });
 
-        // Tip 38 – Input Masks: Birth date (YYYY-MM-DD)
+        // Tip 38 – Input Masks: Birth date (DD/MM/YYYY)
         birthdateInput.addEventListener('input', (e) => {
-            let digits = e.target.value.replace(/\D/g, '').slice(0, 8);
+            let digits = e.target.value.replace(/\D/g, '').slice(0, 8); // DDMMYYYY = 8 digits
             if (digits.length >= 5) {
-                e.target.value = digits.slice(0, 4) + '-' + digits.slice(4, 6) + (digits.length > 6 ? '-' + digits.slice(6, 8) : '');
-            } else if (digits.length >= 4) {
-                e.target.value = digits.slice(0, 4) + '-' + digits.slice(4);
+                e.target.value = digits.slice(0, 2) + '/' + digits.slice(2, 4) + '/' + digits.slice(4);
+            } else if (digits.length >= 3) {
+                e.target.value = digits.slice(0, 2) + '/' + digits.slice(2);
             } else {
                 e.target.value = digits;
             }
@@ -410,8 +459,9 @@ $shop_name = "Mindflayer";
 
         phoneInput.addEventListener('blur', () => {
             const digits = phoneInput.value.replace(/\D/g, '');
-            if (digits.length !== 11 || !digits.startsWith('09')) {
-                setError(phoneInput, phoneError, 'Enter a valid PH mobile number starting with 09 and 11 digits long.');
+            // Expect '63' + 10 digits (PH mobile with country code)
+            if (digits.length !== 12 || !digits.startsWith('63')) {
+                setError(phoneInput, phoneError, 'Enter a valid PH mobile in the format +63 9XX XXX XXXX.');
             } else {
                 clearError(phoneInput, phoneError);
             }
@@ -419,12 +469,12 @@ $shop_name = "Mindflayer";
 
         birthdateInput.addEventListener('blur', () => {
             const value = birthdateInput.value.trim();
-            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            const regex = /^\d{2}\/\d{2}\/\d{4}$/;
             if (!regex.test(value)) {
-                setError(birthdateInput, birthdateError, 'Use the format YYYY-MM-DD (for example, 1998-05-24).');
+                setError(birthdateInput, birthdateError, 'Use the format DD/MM/YYYY (for example, 24/05/1998).');
                 return;
             }
-            const [year, month, day] = value.split('-').map(Number);
+            const [day, month, year] = value.split('/').map(Number);
             const date = new Date(year, month - 1, day);
             const isValidDate = date.getFullYear() === year && (date.getMonth() + 1) === month && date.getDate() === day;
             if (!isValidDate) {
