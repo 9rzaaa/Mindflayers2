@@ -89,21 +89,38 @@ $shop_name = "Mindflayer";
         }
 
         .btn-nav-cta {
-            background-color: var(--sand);
+            background: linear-gradient(135deg, var(--sand), var(--cream));
             color: var(--espresso) !important;
             font-size: 0.82rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 0.5rem 1.4rem !important;
+            padding: 0.6rem 1.7rem !important;
             border-radius: 2px;
             border: none;
-            transition: background var(--transition), transform var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 26px rgba(194, 178, 128, 0.28);
+            transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+        }
+
+        .btn-nav-cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateX(-110%);
+            transition: transform 0.45s ease;
         }
 
         .btn-nav-cta:hover {
-            background-color: var(--cream);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(194, 178, 128, 0.45);
+            filter: saturate(1.05);
+        }
+
+        .btn-nav-cta:hover::after {
+            transform: translateX(0);
         }
 
         .profile-brand {

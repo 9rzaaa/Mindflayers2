@@ -428,19 +428,31 @@ foreach ($products as $p) {
 <body>
 
 <!-- ══════════════════════════════════════
-     NAVBAR
+     NAVBAR (consistent with other pages)
 ══════════════════════════════════════ -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="../../index.php">☕ Mindflayer<span class="dot">.</span></a>
-        <div class="d-flex align-items-center gap-3 ms-auto">
-            <a href="../../index.php" class="nav-back">
-                <i class="bi bi-arrow-left"></i> Back to Home
-            </a>
-            <a href="../ShoppingCartPage/shoppingcart.php" class="nav-back">
-                <i class="bi bi-bag"></i> Shopping Cart
-            </a>
-            <a href="../ShoppingCartPage/shoppingcart.php" class="btn-nav-order">Order Now</a>
+
+        <button class="border-0 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMainMenu" aria-controls="navMainMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="text-warning bi bi-list fs-4"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMainMenu">
+            <ul class="gap-1 mx-auto navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="./products.php">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="../AboutPage/about.php">Our Story</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>
+                <li class="nav-item"><a class="nav-link" href="../ProfilePage/profile.php">Profile</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="../ShoppingCartPage/shoppingcart.php" class="nav-back">
+                    <i class="bi bi-bag"></i> Shopping Cart
+                </a>
+                <a href="../ShoppingCartPage/shoppingcart.php" class="btn-nav-order">Order Now</a>
+            </div>
         </div>
     </div>
 </nav>

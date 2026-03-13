@@ -92,6 +92,84 @@ $sessionCart = $_SESSION['cart'] ?? [];
             flex-direction: column;
         }
 
+        /* Navbar (matches homepage look) */
+        .navbar {
+            background-color: var(--espresso);
+            padding: 1.1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
+        }
+
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: var(--cream) !important;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand span.dot {
+            color: var(--sand);
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(232, 216, 176, 0.75) !important;
+            font-size: 0.88rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 1rem !important;
+            transition: color var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--cream) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--cream) !important;
+        }
+
+        .btn-nav-cta {
+            background: linear-gradient(135deg, var(--sand), var(--cream));
+            color: var(--espresso) !important;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.7rem !important;
+            border-radius: 2px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 26px rgba(194, 178, 128, 0.28);
+            transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+        }
+
+        .btn-nav-cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateX(-110%);
+            transition: transform 0.45s ease;
+        }
+
+        .btn-nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(194, 178, 128, 0.45);
+            filter: saturate(1.05);
+        }
+
+        .btn-nav-cta:hover::after {
+            transform: translateX(0);
+        }
+
         .cart-shell {
             max-width: 1120px;
             margin: 2rem auto 3rem;
@@ -129,6 +207,31 @@ $sessionCart = $_SESSION['cart'] ?? [];
             text-align: right;
             font-size: 0.9rem;
             color: var(--muted);
+        }
+
+        .btn-back-menu {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(111, 76, 62, 0.22);
+            background: rgba(255, 255, 255, 0.86);
+            color: var(--mocha);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.55rem 1rem;
+            text-decoration: none;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+            margin-bottom: 0.55rem;
+        }
+
+        .btn-back-menu:hover {
+            transform: translateY(-1px);
+            background: #fff;
+            box-shadow: 0 10px 18px rgba(42, 22, 8, 0.12);
         }
 
         /* Layout: list + summary */
@@ -447,6 +550,37 @@ $sessionCart = $_SESSION['cart'] ?? [];
 </head>
 
 <body>
+    <!-- Navbar (Back to Product List) -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.php">
+                ☕ Mindflayer<span class="dot">.</span>
+            </a>
+
+            <button class="border-0 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMainCart" aria-controls="navMainCart" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="text-warning bi bi-list fs-4"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMainCart">
+                <ul class="gap-1 mx-auto navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../ProductListPage/products.php">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../AboutPage/about.php">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../ProfilePage/profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./shoppingcart.php">Shopping Cart</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <a href="../ProductListPage/products.php" class="nav-link" style="font-size: 0.85rem;">
+                        Back to Menu
+                    </a>
+                    <a href="../CheckoutPage/checkout.php" class="btn-nav-cta nav-link">
+                        Checkout <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <main class="cart-shell">
         <header class="cart-header">
             <div>
@@ -459,6 +593,9 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 </p>
             </div>
             <div class="cart-header-meta">
+                <a class="btn-back-menu" href="../ProductListPage/products.php" aria-label="Back to Menu">
+                    <i class="bi bi-arrow-left"></i> Back to Menu
+                </a>
                 <div class="fw-semibold">
                     <span id="cart-count-label">0 items</span> in your order
                 </div>
@@ -522,6 +659,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Cart data hydrated from PHP session
         const initialCart = <?php echo json_encode(array_values($sessionCart), JSON_UNESCAPED_UNICODE); ?>;
@@ -611,6 +749,9 @@ $sessionCart = $_SESSION['cart'] ?? [];
                     <div class="cart-item-actions">
                         <div class="price-tag">${formatPeso(item.price * item.qty)}</div>
                         <div class="cart-item-cta-row">
+                            <a class="btn-icon-soft js-view" href="../ProductDetailsPage/productdetails.php?id=${encodeURIComponent(item.id)}" title="View product details" aria-label="View product details">
+                                <i class="bi bi-eye"></i>
+                            </a>
                             <button class="btn-icon-soft js-edit" type="button" title="Edit options">
                                 <i class="bi bi-pencil"></i>
                             </button>
