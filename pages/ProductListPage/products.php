@@ -254,7 +254,85 @@ foreach ($products as $p) {
             transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,42,42,0.25);
         }
 
+<<<<<<< HEAD
         /* ── Footer ── */
+=======
+        /* Add-to-cart micro-interaction */
+        .btn-add.is-added {
+            background: #5C7A4A !important;
+            box-shadow: 0 10px 28px rgba(92, 122, 74, 0.35);
+            transform: translateY(-2px);
+        }
+        @keyframes popIn {
+            0% { transform: translateY(6px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .cart-toast {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 1100;
+            background: rgba(59, 42, 42, 0.92);
+            color: var(--linen);
+            border: 1px solid rgba(194,178,128,0.25);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            min-width: 240px;
+            max-width: 320px;
+            animation: popIn 0.18s ease both;
+            backdrop-filter: blur(8px);
+        }
+        .cart-toast strong { color: var(--cream); }
+
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #5b3f2f;
+            letter-spacing: 0.04em;
+        }
+
+        .modal-content {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 22px 50px rgba(59, 42, 42, 0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(194,178,128,0.35);
+            background: linear-gradient(110deg, #f8f1e8 0%, #fff7ef 100%);
+        }
+
+        .modal-body {
+            background: radial-gradient(circle at top left, #fffaf3 0%, #fef9f5 55%, #f6efe4 100%);
+        }
+
+        /* Modal: left landscape image gallery */
+        .modal-gallery-left {
+            flex: 0 0 42%;
+            max-width: 42%;
+        }
+        .modal-gallery-main {
+            aspect-ratio: 16 / 10;
+            border-radius: 0.65rem;
+            overflow: hidden;
+            background: var(--cream);
+            border: 1px solid #e6dac8;
+        }
+        .modal-gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 767px) {
+            .modal-gallery-left { flex: 0 0 100%; max-width: 100%; order: -1; }
+        }
+
+        /* ═══════════════════════════════
+           FOOTER
+        ═══════════════════════════════ */
+>>>>>>> 97729296bb78d4e157d9cce461acbf97c3105fd5
         .page-footer {
             background: var(--espresso);
             border-top: 1px solid rgba(194,178,128,0.12);
@@ -395,6 +473,7 @@ foreach ($products as $p) {
                                 <div class="price-val">₱<?= number_format($p['price']) ?></div>
                                 <div class="price-sub"><?= $p['volume'] ?> · <?= $p['category'] ?></div>
                             </div>
+<<<<<<< HEAD
                             <form method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="m-0"
                                   onclick="event.stopPropagation(); event.preventDefault(); this.submit();">
                                 <input type="hidden" name="product_id" value="<?= (int)$p['id'] ?>">
@@ -402,6 +481,13 @@ foreach ($products as $p) {
                                     Add to Cart <i class="bi bi-plus-circle"></i>
                                 </button>
                             </form>
+=======
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn-add add-cart-btn" data-product-id="<?= $p['id'] ?>">
+                                    Add to Cart <i class="bi bi-plus-circle"></i>
+                                </button>
+                            </div>
+>>>>>>> 97729296bb78d4e157d9cce461acbf97c3105fd5
                         </div>
 
                     </a>
@@ -421,6 +507,54 @@ foreach ($products as $p) {
     </div>
 </footer>
 
+<<<<<<< HEAD
+=======
+<!-- Quick view product modal -->
+<div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="productDetailModalLabel">Product</h5>
+                    <p id="modal-tagline" class="mb-0 text-muted" style="font-size:0.9rem;"></p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4 align-items-start flex-lg-nowrap">
+                    <!-- Left: single photo -->
+                    <div class="modal-gallery-left col-12 col-lg-5">
+                        <div class="modal-gallery-main">
+                            <img id="modal-image" src="" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <!-- Right: product details -->
+                    <div class="col-12 col-lg-7">
+                        <h4 id="modal-name"></h4>
+                        <p id="modal-desc" class="mb-3"></p>
+                        <div class="mb-2"><strong>Price:</strong> <span id="modal-price"></span></div>
+                        <div class="mb-2"><strong>Volume:</strong> <span id="modal-volume"></span></div>
+                        <div class="mb-2"><strong>Category:</strong> <span id="modal-cat"></span></div>
+                        <div class="mb-2"><strong>Calories:</strong> <span id="modal-cals"></span></div>
+                        <button type="button" id="modal-add-cart" class="btn btn-sm btn-primary mt-2"><i class="bi bi-cart-fill"></i> Add to Cart</button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="p-3 rounded-3">
+                    <h4 class="section-heading" style="font-size:1.3rem; font-weight:600; font-family:var(--font-serif);"><i class="bi bi-list-check"></i> Specifications</h4>
+                    <div id="modal-specs" class="row gy-3"></div>
+                </div>
+
+            </div>  
+        </div>
+    </div>
+</div>
+
+<div id="cart-toast-root" aria-live="polite" aria-atomic="true"></div>
+
+>>>>>>> 97729296bb78d4e157d9cce461acbf97c3105fd5
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const revealEls = document.querySelectorAll('.reveal');
@@ -433,6 +567,150 @@ foreach ($products as $p) {
         });
     }, { threshold: 0.1 });
     revealEls.forEach(el => obs.observe(el));
+<<<<<<< HEAD
+=======
+
+    // Product data for quick view modal
+    const productsData = <?= json_encode($products, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) ?>;
+    const productModal = new bootstrap.Modal(document.getElementById('productDetailModal'));
+
+    function getSpecIcon(label) {
+        switch (label.toLowerCase()) {
+            case 'temperature': return 'bi-thermometer-half';
+            case 'base': return 'bi-cup-straw';
+            case 'milk': return 'bi-droplet-half';
+            case 'caffeine': return 'bi-lightning-charge';
+            default: return 'bi-list';
+        }
+    }
+
+    function formatSpecs(specs) {
+        if (!Array.isArray(specs)) return '';
+        return specs.map(spec => {
+            const icon = getSpecIcon(spec.label || '');
+            return `
+            <div class="col-12 col-sm-6">
+                <div class="bg-light rounded p-3 d-flex align-items-start gap-2" style="border-left: 3px solid #8b5e3c;">
+                    <i class="bi ${icon}" style="font-size:1.25rem; color:#8b5e3c; margin-top: 3px;"></i>
+                    <div>
+                        <div class="fw-bold" style="font-size:1.03rem; letter-spacing:0.02em;">${spec.label}</div>
+                        <div class="text-secondary" style="font-size:0.92rem;">${spec.value}</div>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function showProductModal(product) {
+        if (!product) return;
+
+        const placeholder = 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80';
+        const imageUrl = (product.image && product.image.trim()) ? product.image : placeholder;
+
+        document.getElementById('productDetailModalLabel').textContent = product.name;
+        document.getElementById('modal-tagline').textContent = product.tagline;
+        document.getElementById('modal-name').textContent = product.name;
+        document.getElementById('modal-desc').textContent = product.desc;
+        document.getElementById('modal-image').src = imageUrl;
+        document.getElementById('modal-image').alt = product.name;
+        document.getElementById('modal-price').textContent = '₱' + Number(product.price).toLocaleString();
+        document.getElementById('modal-volume').textContent = product.volume;
+        document.getElementById('modal-cat').textContent = product.category;
+        document.getElementById('modal-cals').textContent = product.calories;
+        document.getElementById('modal-specs').innerHTML = formatSpecs(product.specs);
+
+        document.getElementById('modal-add-cart').dataset.productId = product.id;
+        productModal.show();
+    }
+
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.add-cart-btn')) {
+                return;
+            }
+            const id = Number(this.dataset.productId);
+            const prod = productsData.find(item => item.id === id);
+            showProductModal(prod);
+        });
+    });
+
+    function showCartToast(message) {
+        const root = document.getElementById('cart-toast-root');
+        if (!root) return;
+
+        const toast = document.createElement('div');
+        toast.className = 'cart-toast';
+        toast.innerHTML = message;
+        root.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(6px)';
+            toast.style.transition = 'opacity 220ms ease, transform 220ms ease';
+        }, 1500);
+
+        setTimeout(() => toast.remove(), 1850);
+    }
+
+    function animateAdd(btnEl, productName) {
+        if (!btnEl) return;
+        const orig = btnEl.innerHTML;
+        btnEl.classList.add('is-added');
+        btnEl.disabled = true;
+        btnEl.innerHTML = '<i class="bi bi-check-circle-fill"></i> Added';
+
+        showCartToast(`<strong>${productName}</strong> added to cart.`);
+
+        setTimeout(() => {
+            btnEl.classList.remove('is-added');
+            btnEl.disabled = false;
+            btnEl.innerHTML = orig;
+        }, 1500);
+    }
+
+    async function addToCartSession(productId) {
+        const fd = new FormData();
+        fd.set('product_id', String(productId));
+
+        const res = await fetch('/Mindflayers/pages/ShoppingCartPage/shoppingcart.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: fd,
+            credentials: 'same-origin',
+        });
+
+        if (!res.ok) throw new Error('Add to cart failed');
+        const data = await res.json();
+        if (!data || data.ok !== true) throw new Error('Add to cart failed');
+        return data;
+    }
+
+    document.querySelectorAll('.add-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const id = Number(this.dataset.productId);
+            const prod = productsData.find(item => item.id === id);
+
+            addToCartSession(id)
+                .then(() => animateAdd(this, prod?.name || 'Item'))
+                .catch(() => showCartToast(`Couldn’t add <strong>${prod?.name || 'item'}</strong>. Please try again.`));
+        });
+    });
+
+    document.getElementById('modal-add-cart').addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = Number(this.dataset.productId);
+        const prod = productsData.find(item => item.id === id);
+
+        addToCartSession(id)
+            .then(() => animateAdd(this, prod?.name || 'Item'))
+            .catch(() => showCartToast(`Couldn’t add <strong>${prod?.name || 'item'}</strong>. Please try again.`));
+    });
+>>>>>>> 97729296bb78d4e157d9cce461acbf97c3105fd5
 </script>
 
 </body>
