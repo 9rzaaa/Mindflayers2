@@ -573,9 +573,6 @@ $sessionCart = $_SESSION['cart'] ?? [];
                     <a href="../ProductListPage/products.php" class="nav-link" style="font-size: 0.85rem;">
                         Back to Menu
                     </a>
-                    <a href="../CheckoutPage/checkout.php" class="btn-nav-cta nav-link">
-                        Checkout <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
                 </div>
             </div>
         </div>
