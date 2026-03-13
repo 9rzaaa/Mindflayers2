@@ -1022,11 +1022,8 @@ $products = [
 
                 <!-- SERIAL POSITIONING: Auth + primary CTA on the right -->
                 <div class="d-flex align-items-center gap-2">
-                    <a href="pages/SignupPage/login.php" class="nav-link" style="font-size: 0.85rem;">
-                        Login
-                    </a>
-                    <a href="pages/SignupPage/signup.php" class="btn-nav-cta nav-link">
-                        Sign Up <i class="bi bi-arrow-right ms-1"></i>
+                    <a href="pages/SignupPage/login.php" class="btn-nav-cta nav-link">
+                        Login <i class="bi-arrow-right ms-1 bi"></i>
                     </a>
                 </div>
             </div>
