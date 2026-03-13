@@ -317,11 +317,8 @@ $shop_name = "Mindflayer";
                 </ul>
 
                 <div class="d-flex align-items-center gap-2">
-                    <a href="../../index.php" class="nav-link" style="font-size: 0.85rem;">
-                        Home
-                    </a>
-                    <a href="../CheckoutPage/checkout.php" class="btn-nav-cta nav-link">
-                        Checkout <i class="bi bi-arrow-right ms-1"></i>
+                    <a href="../../index.php" class="btn-nav-cta nav-link">
+                        Home <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
             </div>
