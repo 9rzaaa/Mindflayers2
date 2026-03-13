@@ -509,7 +509,7 @@ $team = [
 ════════════════════════════════════ -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../index.php">☕ Mindflayer<span class="dot">.</span></a>
+        <a class="navbar-brand" href="../../index.php">☕ Mindflayer<span class="dot">.</span></a>
 
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navAbout">
             <i class="bi bi-list text-warning fs-4"></i>
