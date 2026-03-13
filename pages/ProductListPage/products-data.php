@@ -9,7 +9,7 @@ $products = [
         "price"    => 180,
         "category" => "Espresso",
         "badge"    => "Bestseller",
-        "image"    => "assets/images/spanish-latte.jpg",
+        "image"    => "assets/js/images/spanish-latte.jpg",
         "desc"     => "A rich double shot of espresso balanced with sweetened condensed milk and whole milk, creating a caramel-sweet, velvety cup that keeps you coming back.",
         "specs" => [
             ["icon" => "bi-thermometer-half", "label" => "Temperature", "value" => "Hot / Iced"],
@@ -33,7 +33,7 @@ $products = [
         "price"    => 195,
         "category" => "Non-Espresso",
         "badge"    => "Fan Fave",
-        "image"    => "assets/images/matcha-latte.jpg",
+        "image"    => "assets/js/images/matcha-latte.jpg",
         "desc"     => "Ceremonial-grade Japanese matcha whisked smooth and layered over steamed oat milk. Subtle sweetness, grassy depth, and a calm clean finish.",
         "specs" => [
             ["icon" => "bi-thermometer-half", "label" => "Temperature", "value" => "Hot / Iced"],
@@ -56,7 +56,7 @@ $products = [
         "price"    => 195,
         "category" => "Non-Espresso",
         "badge"    => "Local Pride",
-        "image"    => "assets/images/ube-latte.jpg",
+        "image"    => "assets/js/images/ube-latte.webp",
         "desc"     => "Real ube halaya blended into steamed milk creates this gorgeous violet drink — gently sweet, subtly nutty, and unmistakably Filipino.",
         "specs" => [
             ["icon" => "bi-thermometer-half", "label" => "Temperature", "value" => "Hot / Iced"],
@@ -79,7 +79,7 @@ $products = [
         "price"    => 170,
         "category" => "Cold Brew",
         "badge"    => "Refreshing",
-        "image"    => "assets/images/iced-seasalt.jpg",
+        "image"    => "assets/js/images/iced-seasalt.webp",
         "desc"     => "Our house cold brew — steeped 24 hours — topped with a whisper of lightly salted cream that slowly folds into the coffee as you sip.",
         "specs" => [
             ["icon" => "bi-thermometer-half", "label" => "Temperature", "value" => "Iced Only"],
@@ -101,7 +101,7 @@ $products = [
         "price"    => 185,
         "category" => "Espresso",
         "badge"    => "Classic",
-        "image"    => "assets/images/caramel-macchiato.jpg",
+        "image"    => "assets/js/images/caramel-macchiato.jpg",
         "desc"     => "Vanilla-infused milk, a bold espresso mark, and a generous drizzle of house caramel. Layered to look as good as it tastes.",
         "specs" => [
             ["icon" => "bi-thermometer-half", "label" => "Temperature", "value" => "Hot / Iced"],
