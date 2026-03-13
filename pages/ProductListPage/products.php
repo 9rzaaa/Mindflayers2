@@ -615,6 +615,11 @@ foreach ($products as $p) {
     </div>
 </div>
 
+<!-- Hidden form to post cart additions -->
+<form id="add-to-cart-form" method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="d-none">
+    <input type="hidden" name="product_id" id="add-to-cart-product-id" value="">
+</form>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Scroll reveal
@@ -693,28 +698,26 @@ foreach ($products as $p) {
         });
     });
 
-    // Add to cart button interactions for list and modal
-    function markAdded(btn) {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Added!';
-        btn.style.background = '#5C7A4A';
-        setTimeout(() => {
-            btn.innerHTML = orig;
-            btn.style.background = '';
-        }, 1800);
+    // Add to cart: submit to shopping cart (session-backed)
+    const cartForm = document.getElementById('add-to-cart-form');
+    const cartInput = document.getElementById('add-to-cart-product-id');
+
+    function submitAddToCart(productId) {
+        cartInput.value = String(productId || '');
+        cartForm.submit();
     }
 
     document.querySelectorAll('.add-cart-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            markAdded(this);
+            submitAddToCart(this.dataset.productId);
         });
     });
 
     document.getElementById('modal-add-cart').addEventListener('click', function(e) {
         e.preventDefault();
-        markAdded(this);
+        submitAddToCart(this.dataset.productId);
     });
 </script>
 

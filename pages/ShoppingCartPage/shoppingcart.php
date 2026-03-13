@@ -1,5 +1,53 @@
 <?php
 // MindFlayer Coffee — Shopping Cart Page
+session_start();
+
+require_once __DIR__ . '/../ProductListPage/products-data.php';
+
+// Handle "Add to cart" POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+    $productId = (int) $_POST['product_id'];
+
+    foreach ($products as $product) {
+        if ((int) $product['id'] === $productId) {
+            if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+                $_SESSION['cart'] = [];
+            }
+
+            $found = false;
+            foreach ($_SESSION['cart'] as &$item) {
+                if ((int) ($item['id'] ?? 0) === $productId) {
+                    $item['qty'] = (int) ($item['qty'] ?? 1) + 1;
+                    $found = true;
+                    break;
+                }
+            }
+            unset($item);
+
+            if (!$found) {
+                $_SESSION['cart'][] = [
+                    'id'     => (int) $product['id'],
+                    'name'   => (string) $product['name'],
+                    'emoji'  => (string) ($product['emoji'] ?? '☕'),
+                    'badge'  => (string) ($product['badge'] ?? 'Drink'),
+                    'size'   => (string) ($product['volume'] ?? '12 oz'),
+                    'milk'   => 'Whole milk',
+                    'temp'   => 'Hot',
+                    'price'  => (float) $product['price'],
+                    'qty'    => 1,
+                ];
+            }
+
+            break;
+        }
+    }
+
+    // Redirect to avoid resubmission on refresh
+    header('Location: /Mindflayers/pages/ShoppingCartPage/shoppingcart.php');
+    exit;
+}
+
+$sessionCart = $_SESSION['cart'] ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -475,33 +523,9 @@
     </main>
 
     <script>
-        // Mock cart data for now — wire this up to your backend / session as needed.
-        const initialCart = [
-            {
-                id: 1,
-                name: 'Spanish Latte',
-                emoji: '☕',
-                badge: 'Bestseller',
-                size: '12 oz',
-                milk: 'Oat milk',
-                temp: 'Iced',
-                price: 180,
-                qty: 1
-            },
-            {
-                id: 2,
-                name: 'Matcha Latte',
-                emoji: '🍵',
-                badge: 'Fan Fave',
-                size: '16 oz',
-                milk: 'Almond milk',
-                temp: 'Hot',
-                price: 195,
-                qty: 2
-            }
-        ];
-
-        let cart = [...initialCart];
+        // Cart data hydrated from PHP session
+        const initialCart = <?php echo json_encode(array_values($sessionCart), JSON_UNESCAPED_UNICODE); ?>;
+        let cart = Array.isArray(initialCart) ? [...initialCart] : [];
 
         const cartListEl = document.getElementById('cart-list');
         const cartEmptyEl = document.getElementById('cart-empty');

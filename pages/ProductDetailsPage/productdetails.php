@@ -1,6 +1,8 @@
 <?php
 // pages/ProductDetailsPage/productdetails.php
 
+session_start();
+
 require_once __DIR__ . '/../ProductListPage/products-data.php';
 
 $productId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -156,9 +158,12 @@ $iconMap = [
                             <div class="col-6"><i class="bi bi-chat-dots"></i> <strong>Reviews:</strong> <?= html($selectedProduct['reviews']) ?></div>
                         </div>
                         <div class="d-flex flex-wrap gap-2">
-                            <button class="btn btn-brown text-white">
-                                <i class="bi bi-cart-fill"></i> Add to Cart <i class="bi bi-plus-circle"></i>
-                            </button>
+                            <form method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="m-0">
+                                <input type="hidden" name="product_id" value="<?= (int) $selectedProduct['id'] ?>">
+                                <button type="submit" class="btn btn-brown text-white">
+                                    <i class="bi bi-cart-fill"></i> Add to Cart <i class="bi bi-plus-circle ms-1"></i>
+                                </button>
+                            </form>
                             <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                 <i class="bi bi-x-lg"></i> Close
                             </button>
@@ -244,10 +249,7 @@ $iconMap = [
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const productModal = new bootstrap.Modal(document.getElementById('productDetailModal'));
-    productModal.show();
-</script>
+<script src="assets/js/scripts.js"></script>
 
 </body>
 </html>
