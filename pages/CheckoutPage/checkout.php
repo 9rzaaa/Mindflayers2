@@ -374,7 +374,7 @@ $shop_name = "Mindflayer";
 
         <!-- Single-column layout (Tip 14) -->
         <section class="checkout-card" aria-label="Checkout details">
-            <form id="checkoutForm" class="single-column-form">
+            <form id="checkoutForm" class="single-column-form" method="post" action="../OrderConfirmPage/order.php">
                 <!-- Contact & shipping -->
                 <div class="mb-4">
                     <div class="section-title-sm">Contact & Shipping</div>
@@ -385,36 +385,36 @@ $shop_name = "Mindflayer";
 
                 <div class="mb-3">
                     <label for="fullName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="fullName" placeholder="Juan Dela Cruz" required>
+                    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Juan Dela Cruz" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email for receipt</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="phone" class="form-label">Mobile number</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="09XX XXX XXXX" required>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="09XX XXX XXXX" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">Delivery address</label>
-                    <textarea id="address" rows="2" class="form-control" placeholder="Unit / building · street · barangay · city" required></textarea>
+                    <textarea id="address" name="address" rows="2" class="form-control" placeholder="Unit / building · street · barangay · city" required></textarea>
                 </div>
 
                 <div class="row g-3 input-row-spacer">
                     <div class="col-sm-6">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="Makati City" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Makati City" required>
                     </div>
                     <div class="col-sm-3">
                         <label for="postal" class="form-label">ZIP</label>
-                        <input type="text" class="form-control" id="postal" maxlength="4" pattern="\d{4}" placeholder="1200" required>
+                        <input type="text" class="form-control" id="postal" name="postal" maxlength="4" pattern="\d{4}" placeholder="1200" required>
                     </div>
                     <div class="col-sm-3">
                         <label for="deliveryNotes" class="form-label">Rider note (optional)</label>
-                        <input type="text" class="form-control" id="deliveryNotes" placeholder="Gate code, landmark, etc.">
+                        <input type="text" class="form-control" id="deliveryNotes" name="deliveryNotes" placeholder="Gate code, landmark, etc.">
                     </div>
                 </div>
 
@@ -522,8 +522,7 @@ $shop_name = "Mindflayer";
             btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
 
             setTimeout(() => {
-                // In a real app, redirect to confirmation page
-                window.location.href = '../OrderConfirmPage/order.php';
+                this.submit();
             }, 1200);
         });
 
