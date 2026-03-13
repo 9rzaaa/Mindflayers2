@@ -309,7 +309,7 @@ $shop_name = "Mindflayer";
 
             <div class="collapse navbar-collapse" id="navMainProfile">
                 <ul class="gap-1 mx-auto navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../../index.php#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../ProductListPage/products.php">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="../AboutPage/about.php">Our Story</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>
@@ -318,7 +318,7 @@ $shop_name = "Mindflayer";
 
                 <div class="d-flex align-items-center gap-2">
                     <a href="../../index.php" class="btn-nav-cta nav-link">
-                        Home <i class="bi bi-arrow-right ms-1"></i>
+                        Home <i class="bi-arrow-right ms-1 bi"></i>
                     </a>
                 </div>
             </div>
@@ -328,7 +328,7 @@ $shop_name = "Mindflayer";
     <main class="profile-wrapper">
         <div class="mb-3">
             <h1 class="profile-heading">Your profile</h1>
-            <p class="profile-subtitle mb-0">
+            <p class="mb-0 profile-subtitle">
                 View and update your personal details. We use this information to personalize your experience and keep your orders accurate.
             </p>
         </div>
@@ -336,21 +336,21 @@ $shop_name = "Mindflayer";
         <section class="profile-card" aria-label="Profile and edit form">
             <div class="row g-4">
                 <!-- Left: current profile snapshot -->
-                <div class="col-md-4 border-end border-light-subtle">
-                    <div class="d-flex flex-column align-items-center text-center h-100">
-                        <div class="avatar-upload mb-2">
+                <div class="border-end border-light-subtle col-md-4">
+                    <div class="d-flex flex-column align-items-center h-100 text-center">
+                        <div class="mb-2 avatar-upload">
                             <div class="avatar-wrapper" id="avatarPreview">
                                 <span id="avatarInitials">MF</span>
                             </div>
-                            <label class="avatar-upload-btn mt-2">
-                                <i class="bi bi-camera me-1"></i> Update photo
+                            <label class="mt-2 avatar-upload-btn">
+                                <i class="me-1 bi bi-camera"></i> Update photo
                                 <input type="file" id="avatarInput" accept="image/*">
                             </label>
                         </div>
                         <h2 class="mt-2 mb-0" style="font-size:1.1rem; font-weight:700;">Your name</h2>
                         <p class="mb-1" style="font-size:0.86rem; color:var(--text-light);">Add your details to personalize your orders.</p>
-                        <p class="profile-meta mb-0">
-                            <i class="bi bi-cup-hot me-1"></i> Save your favourites for faster checkout.
+                        <p class="mb-0 profile-meta">
+                            <i class="me-1 bi bi-cup-hot"></i> Save your favourites for faster checkout.
                         </p>
                     </div>
                 </div>
@@ -424,7 +424,7 @@ $shop_name = "Mindflayer";
                             </div>
                         </div>
 
-                        <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                        <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
                             <button type="submit" class="btn-save-profile">
                                 Save changes
                                 <i class="bi bi-check-circle"></i>
@@ -432,7 +432,7 @@ $shop_name = "Mindflayer";
                             <button type="button" id="resetBtn" class="btn-outline-ghost">
                                 Cancel
                             </button>
-                            <span class="profile-meta ms-md-2 mt-2 mt-md-0" id="saveStatus">
+                            <span class="ms-md-2 mt-2 mt-md-0 profile-meta" id="saveStatus">
                                 Last updated · just now
                             </span>
                         </div>
@@ -566,7 +566,7 @@ $shop_name = "Mindflayer";
             const saveBtn = e.target.querySelector('.btn-save-profile');
             saveBtn.disabled = true;
             const originalLabel = saveBtn.innerHTML;
-            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Saving...';
+            saveBtn.innerHTML = '<span class="me-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Saving...';
 
             setTimeout(() => {
                 saveBtn.disabled = false;
