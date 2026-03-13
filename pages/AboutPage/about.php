@@ -519,7 +519,7 @@ $team = [
             <ul class="navbar-nav mx-auto gap-1">
                 <li class="nav-item"><a class="nav-link-item" href="../../index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link-item active" href="about.php">Our Story</a></li>
-                <li class="nav-item"><a class="nav-link-item" href="ProductListPage/products.php">Menu</a></li>
+                <li class="nav-item"><a class="nav-link-item" href="../ProductListPage/products.php">Menu</a></li>
                 <li class="nav-item"><a class="nav-link-item" href="#">Locations</a></li>
             </ul>
             <a href="ProductListPage/products.php" class="btn-nav">Order Now <i class="bi bi-arrow-right ms-1"></i></a>
@@ -732,7 +732,7 @@ $team = [
             </div>
             <!-- Gutenberg terminal CTA — bottom-right -->
             <div class="col-lg-5 d-flex flex-column align-items-lg-end align-items-start gap-3">
-                <a href="ProductListPage/products.php" class="btn-cta-primary">
+                <a href="../ProductListPage/products.php" class="btn-cta-primary">
                     Explore the Menu <i class="bi bi-arrow-right-circle"></i>
                 </a>
                 <a href="../../index.php" class="btn-cta-ghost">
