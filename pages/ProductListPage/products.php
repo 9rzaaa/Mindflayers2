@@ -390,6 +390,33 @@ foreach ($products as $p) {
             transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,42,42,0.25);
         }
 
+        /* Add-to-cart micro-interaction */
+        .btn-add.is-added {
+            background: #5C7A4A !important;
+            box-shadow: 0 10px 28px rgba(92, 122, 74, 0.35);
+            transform: translateY(-2px);
+        }
+        @keyframes popIn {
+            0% { transform: translateY(6px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .cart-toast {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 1100;
+            background: rgba(59, 42, 42, 0.92);
+            color: var(--linen);
+            border: 1px solid rgba(194,178,128,0.25);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            min-width: 240px;
+            max-width: 320px;
+            animation: popIn 0.18s ease both;
+            backdrop-filter: blur(8px);
+        }
+        .cart-toast strong { color: var(--cream); }
+
         .section-heading {
             font-family: var(--font-serif);
             font-size: 1.1rem;
@@ -603,9 +630,9 @@ foreach ($products as $p) {
                                 <div class="price-sub"><?= $p['volume'] ?> · <?= $p['category'] ?></div>
                             </div>
                             <div class="d-flex gap-2">
-                                <a href="#" class="btn-add add-cart-btn" data-product-id="<?= $p['id'] ?>">
+                                <button type="button" class="btn-add add-cart-btn" data-product-id="<?= $p['id'] ?>">
                                     Add to Cart <i class="bi bi-plus-circle"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -656,7 +683,7 @@ foreach ($products as $p) {
                         <div class="mb-2"><strong>Volume:</strong> <span id="modal-volume"></span></div>
                         <div class="mb-2"><strong>Category:</strong> <span id="modal-cat"></span></div>
                         <div class="mb-2"><strong>Calories:</strong> <span id="modal-cals"></span></div>
-                        <a href="#" id="modal-add-cart" class="btn btn-sm btn-primary mt-2"><i class="bi bi-cart-fill"></i> Add to Cart</a>
+                        <button type="button" id="modal-add-cart" class="btn btn-sm btn-primary mt-2"><i class="bi bi-cart-fill"></i> Add to Cart</button>
                     </div>
                 </div>
 
@@ -672,10 +699,7 @@ foreach ($products as $p) {
     </div>
 </div>
 
-<!-- Hidden form to post cart additions -->
-<form id="add-to-cart-form" method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="d-none">
-    <input type="hidden" name="product_id" id="add-to-cart-product-id" value="">
-</form>
+<div id="cart-toast-root" aria-live="polite" aria-atomic="true"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -755,26 +779,81 @@ foreach ($products as $p) {
         });
     });
 
-    // Add to cart: submit to shopping cart (session-backed)
-    const cartForm = document.getElementById('add-to-cart-form');
-    const cartInput = document.getElementById('add-to-cart-product-id');
+    function showCartToast(message) {
+        const root = document.getElementById('cart-toast-root');
+        if (!root) return;
 
-    function submitAddToCart(productId) {
-        cartInput.value = String(productId || '');
-        cartForm.submit();
+        const toast = document.createElement('div');
+        toast.className = 'cart-toast';
+        toast.innerHTML = message;
+        root.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(6px)';
+            toast.style.transition = 'opacity 220ms ease, transform 220ms ease';
+        }, 1500);
+
+        setTimeout(() => toast.remove(), 1850);
+    }
+
+    function animateAdd(btnEl, productName) {
+        if (!btnEl) return;
+        const orig = btnEl.innerHTML;
+        btnEl.classList.add('is-added');
+        btnEl.disabled = true;
+        btnEl.innerHTML = '<i class="bi bi-check-circle-fill"></i> Added';
+
+        showCartToast(`<strong>${productName}</strong> added to cart.`);
+
+        setTimeout(() => {
+            btnEl.classList.remove('is-added');
+            btnEl.disabled = false;
+            btnEl.innerHTML = orig;
+        }, 1500);
+    }
+
+    async function addToCartSession(productId) {
+        const fd = new FormData();
+        fd.set('product_id', String(productId));
+
+        const res = await fetch('/Mindflayers/pages/ShoppingCartPage/shoppingcart.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: fd,
+            credentials: 'same-origin',
+        });
+
+        if (!res.ok) throw new Error('Add to cart failed');
+        const data = await res.json();
+        if (!data || data.ok !== true) throw new Error('Add to cart failed');
+        return data;
     }
 
     document.querySelectorAll('.add-cart-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            submitAddToCart(this.dataset.productId);
+            const id = Number(this.dataset.productId);
+            const prod = productsData.find(item => item.id === id);
+
+            addToCartSession(id)
+                .then(() => animateAdd(this, prod?.name || 'Item'))
+                .catch(() => showCartToast(`Couldn’t add <strong>${prod?.name || 'item'}</strong>. Please try again.`));
         });
     });
 
     document.getElementById('modal-add-cart').addEventListener('click', function(e) {
         e.preventDefault();
-        submitAddToCart(this.dataset.productId);
+        const id = Number(this.dataset.productId);
+        const prod = productsData.find(item => item.id === id);
+
+        addToCartSession(id)
+            .then(() => animateAdd(this, prod?.name || 'Item'))
+            .catch(() => showCartToast(`Couldn’t add <strong>${prod?.name || 'item'}</strong>. Please try again.`));
     });
 </script>
 
