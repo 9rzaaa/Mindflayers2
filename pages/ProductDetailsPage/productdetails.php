@@ -58,6 +58,17 @@ $iconMap = [
         .spec-card-title { display: flex; align-items: center; gap: 0.45rem; font-weight: 600; color: #5d3f2a; margin-bottom: 0.35rem; }
         .spec-card-title i { color: #8c6a4f; }
         .spec-card-value { color: #6f5b50; font-size: 0.9rem; }
+        /* Modal: left landscape image gallery */
+        .modal-gallery-left { flex: 0 0 42%; max-width: 42%; }
+        .modal-gallery-main {
+            aspect-ratio: 16 / 10;
+            border-radius: 0.65rem;
+            overflow: hidden;
+            background: #E8D8B0;
+            border: 1px solid #e6dac8;
+        }
+        .modal-gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+        @media (max-width: 767px) { .modal-gallery-left { flex: 0 0 100%; max-width: 100%; order: -1; } }
     </style>
 </head>
 <body>
@@ -123,8 +134,15 @@ $iconMap = [
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>  
             <div class="modal-body p-4">
-                <div class="row g-3 mb-4">
-                    <div class="col-12">
+                <div class="row g-4 align-items-start flex-lg-nowrap mb-4">
+                    <!-- Left: single photo -->
+                    <div class="modal-gallery-left col-12 col-lg-5">
+                        <div class="modal-gallery-main">
+                            <img src="<?= html($selectedProduct['image']) ?>" alt="<?= html($selectedProduct['name']) ?>" class="img-fluid">
+                        </div>
+                    </div>
+                    <!-- Right: product info -->
+                    <div class="col-12 col-lg-7">
                         <p class="text-muted mb-3"><?= html($selectedProduct['tagline']) ?></p>
                         <div class="d-flex flex-wrap gap-2 mb-3">
                             <span class="badge bg-warning text-dark"><?= html($selectedProduct['badge']) ?></span>
@@ -139,7 +157,7 @@ $iconMap = [
                         </div>
                         <div class="d-flex flex-wrap gap-2">
                             <button class="btn btn-brown text-white">
-                                <i class="bi bi-cart-fill"> Add to Cart <i class="bi bi-plus-circle"></i>
+                                <i class="bi bi-cart-fill"></i> Add to Cart <i class="bi bi-plus-circle"></i>
                             </button>
                             <button class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                 <i class="bi bi-x-lg"></i> Close
