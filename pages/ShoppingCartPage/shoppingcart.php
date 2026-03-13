@@ -4,16 +4,60 @@ session_start();
 
 require_once __DIR__ . '/../ProductListPage/products-data.php';
 
-// Handle "Add to cart" POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+function wants_json(): bool {
+    $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+    $xrw = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
+    return (stripos($accept, 'application/json') !== false) || (strtolower($xrw) === 'xmlhttprequest');
+}
+
+function json_response(array $data, int $statusCode = 200): void {
+    http_response_code($statusCode);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+// Handle cart mutations (AJAX)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && wants_json()) {
+    $action = (string) $_POST['action'];
+
+    if ($action === 'remove') {
+        $productId = (int) ($_POST['product_id'] ?? 0);
+        $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], function($item) use ($productId) {
+            return (int)($item['id'] ?? 0) !== $productId;
+        }));
+        json_response(['ok' => true, 'cart' => array_values($_SESSION['cart'])]);
+    }
+
+    if ($action === 'set_qty') {
+        $productId = (int) ($_POST['product_id'] ?? 0);
+        $qty = (int) ($_POST['qty'] ?? 1);
+        $qty = max(1, $qty);
+
+        foreach ($_SESSION['cart'] as &$item) {
+            if ((int) ($item['id'] ?? 0) === $productId) {
+                $item['qty'] = $qty;
+                break;
+            }
+        }
+        unset($item);
+
+        json_response(['ok' => true, 'cart' => array_values($_SESSION['cart'])]);
+    }
+
+    json_response(['ok' => false, 'error' => 'Unknown action'], 400);
+}
+
+// Handle "Add to cart" POST (form or AJAX)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id']) && !isset($_POST['action'])) {
     $productId = (int) $_POST['product_id'];
 
     foreach ($products as $product) {
         if ((int) $product['id'] === $productId) {
-            if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            }
-
             $found = false;
             foreach ($_SESSION['cart'] as &$item) {
                 if ((int) ($item['id'] ?? 0) === $productId) {
@@ -40,6 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
 
             break;
         }
+    }
+
+    if (wants_json()) {
+        json_response(['ok' => true, 'cart' => array_values($_SESSION['cart'])]);
     }
 
     // Redirect to avoid resubmission on refresh
@@ -772,12 +820,41 @@ $sessionCart = $_SESSION['cart'] ?? [];
         function removeItem(id) {
             cart = cart.filter(item => item.id !== id);
             renderCart();
+
+            const fd = new FormData();
+            fd.set('action', 'remove');
+            fd.set('product_id', String(id));
+            fetch('/Mindflayers/pages/ShoppingCartPage/shoppingcart.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: fd,
+                credentials: 'same-origin',
+            }).catch(() => {});
         }
 
         function changeQty(id, delta) {
             cart = cart
                 .map(item => item.id === id ? { ...item, qty: Math.max(1, item.qty + delta) } : item);
             renderCart();
+
+            const updated = cart.find(item => item.id === id);
+            if (!updated) return;
+            const fd = new FormData();
+            fd.set('action', 'set_qty');
+            fd.set('product_id', String(id));
+            fd.set('qty', String(updated.qty));
+            fetch('/Mindflayers/pages/ShoppingCartPage/shoppingcart.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: fd,
+                credentials: 'same-origin',
+            }).catch(() => {});
         }
 
         function attachSwipeHandlers(wrapper, card, id) {
