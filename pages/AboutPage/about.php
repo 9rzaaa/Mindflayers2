@@ -552,7 +552,7 @@ $team = [
         <div class="collapse navbar-collapse" id="navMain">
             <!-- Center nav items -->
             <ul class="gap-1 mx-auto navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="../../index.php#menu">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="../ProductListPage/products.php">Menu</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.php">Our Story</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>

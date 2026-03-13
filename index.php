@@ -1013,7 +1013,7 @@ $products = [
             <div class="collapse navbar-collapse" id="navMain">
                 <!-- Center nav items -->
                 <ul class="gap-1 mx-auto navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/ProductListPage/products.php">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="pages/AboutPage/about.php">Our Story</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Locations</a></li>
