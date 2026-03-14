@@ -360,68 +360,29 @@ $shop_name = "Mindflayer";
                     <form id="profileForm" novalidate>
                         <!-- Name -->
                         <div class="mb-3">
-                            <label for="name" class="profile-label">
-                                Full name
-                                <!-- Tip 10 – Tooltips & Guides -->
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Use your full name so receipts and rewards are linked to the right person.">
-                                    <i class="bi bi-question-lg"></i>
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" id="name" placeholder="e.g. Alex Reyes" required>
-                            <div class="form-text" style="font-size:0.78rem;">
-                                Type your first and last name, just like on your ID.
-                            </div>
-                            <div class="field-error" id="nameError" hidden>
-                                Please enter your full name (first and last).
-                            </div>
+                            <label for="name" class="profile-label">Full name</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div class="field-error" id="nameError" hidden>Error in form.</div>
                         </div>
 
-                        <!-- Phone with input mask (Tip 38) -->
+                        <!-- Phone -->
                         <div class="mb-3">
-                            <label for="phone" class="profile-label">
-                                Mobile number
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We text you order updates and rider details. Format: +63 9XX XXX XXXX.">
-                                    <i class="bi bi-question-lg"></i>
-                                </span>
-                            </label>
-                            <input type="tel" class="form-control" id="phone" placeholder="+63 912 345 6789" required>
-                            <div class="form-text" style="font-size:0.78rem;">
-                                Start with country code +63, then your 10‑digit mobile number.
-                            </div>
-                            <div class="field-error" id="phoneError" hidden>
-                                Enter a valid PH mobile in the format +63 9XX XXX XXXX.
-                            </div>
+                            <label for="phone" class="profile-label">Mobile number</label>
+                            <input type="text" class="form-control" id="phone" required>
+                            <div class="field-error" id="phoneError" hidden>Error in form.</div>
                         </div>
 
-                        <!-- Birth date with input mask (Tip 38) -->
+                        <!-- Birth date -->
                         <div class="mb-3">
-                            <label for="birthdate" class="profile-label">
-                                Birth date
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We use this for age verification and birthday treats. Format: DD/MM/YYYY.">
-                                    <i class="bi bi-question-lg"></i>
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" id="birthdate" placeholder="DD/MM/YYYY" required>
-                            <div class="form-text" style="font-size:0.78rem;">
-                                Example: 24/05/1998 (day / month / year).
-                            </div>
-                            <div class="field-error" id="birthdateError" hidden>
-                                Use the format DD/MM/YYYY (for example, 24/05/1998).
-                            </div>
+                            <label for="birthdate" class="profile-label">Birth date</label>
+                            <input type="text" class="form-control" id="birthdate" required>
+                            <div class="field-error" id="birthdateError" hidden>Error in form.</div>
                         </div>
 
-                        <!-- Email (read-only here) -->
+                        <!-- Email -->
                         <div class="mb-3">
-                            <label for="email" class="profile-label">
-                                Email address
-                                <span class="profile-tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="We send receipts and security alerts here.">
-                                    <i class="bi bi-question-lg"></i>
-                                </span>
-                            </label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
-                            <div class="form-text" style="font-size:0.78rem;">
-                                To update your email, contact support so we can verify ownership.
-                            </div>
+                            <label for="email" class="profile-label">Email address</label>
+                            <input type="email" class="form-control" id="email" required>
                         </div>
 
                         <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
@@ -459,44 +420,82 @@ $shop_name = "Mindflayer";
         const birthdateError = document.getElementById('birthdateError');
         const saveStatus = document.getElementById('saveStatus');
 
-        // Tip 38 – Input Masks: Phone (+63 9XX XXX XXXX)
-        phoneInput.addEventListener('input', (e) => {
-            // keep only digits, but preserve leading country code 63
-            let digits = e.target.value.replace(/\D/g, '');
+        // No input masks - plain text fields for bad UI
 
-            // ensure we always start with country code 63
-            if (!digits.startsWith('63')) {
-                digits = '63' + digits;
-            }
+        // Contextual validation helper
+        function setError(input, errorEl, message) {
+            input.classList.add('is-invalid');
+            errorEl.textContent = message;
+            errorEl.hidden = false;
+        }
 
-            // after 63 we expect 10 digits (e.g. 9123456789)
-            digits = digits.slice(0, 12); // 2 for '63' + 10 for mobile
+        function clearError(input, errorEl) {
+            input.classList.remove('is-invalid');
+            errorEl.hidden = true;
+        }
 
-            const country = digits.slice(0, 2); // '63'
-            const rest = digits.slice(2); // up to 10 digits
-
-            let formattedRest = '';
-            if (rest.length <= 3) {
-                formattedRest = rest;
-            } else if (rest.length <= 6) {
-                formattedRest = rest.slice(0, 3) + ' ' + rest.slice(3);
+        // Generic, unhelpful error validation - no field-specific messages
+        nameInput.addEventListener('blur', () => {
+            if (!nameInput.value.trim()) {
+                setError(nameInput, nameError, 'Error in form.');
             } else {
-                formattedRest = rest.slice(0, 3) + ' ' + rest.slice(3, 6) + ' ' + rest.slice(6);
+                clearError(nameInput, nameError);
             }
-
-            e.target.value = '+63' + (formattedRest ? ' ' + formattedRest : '');
         });
 
-        // Tip 38 – Input Masks: Birth date (DD/MM/YYYY)
-        birthdateInput.addEventListener('input', (e) => {
-            let digits = e.target.value.replace(/\D/g, '').slice(0, 8); // DDMMYYYY = 8 digits
-            if (digits.length >= 5) {
-                e.target.value = digits.slice(0, 2) + '/' + digits.slice(2, 4) + '/' + digits.slice(4);
-            } else if (digits.length >= 3) {
-                e.target.value = digits.slice(0, 2) + '/' + digits.slice(2);
+        phoneInput.addEventListener('blur', () => {
+            if (!phoneInput.value.trim()) {
+                setError(phoneInput, phoneError, 'Error in form.');
             } else {
-                e.target.value = digits;
+                clearError(phoneInput, phoneError);
             }
+        });
+
+        birthdateInput.addEventListener('blur', () => {
+            if (!birthdateInput.value.trim()) {
+                setError(birthdateInput, birthdateError, 'Error in form.');
+            } else {
+                clearError(birthdateInput, birthdateError);
+            }
+        });
+
+
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Trigger blur validations
+            nameInput.dispatchEvent(new Event('blur'));
+            phoneInput.dispatchEvent(new Event('blur'));
+            birthdateInput.dispatchEvent(new Event('blur'));
+
+            if (document.querySelector('.form-control.is-invalid')) {
+                // Generic error message, no indication of which field(s) have problems
+                saveStatus.textContent = 'An error occurred.';
+                saveStatus.style.color = '#b02a37';
+                return;
+            }
+
+            const saveBtn = e.target.querySelector('.btn-save-profile');
+            saveBtn.disabled = true;
+            const originalLabel = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<span class="me-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Saving...';
+
+            setTimeout(() => {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = originalLabel;
+                saveStatus.textContent = 'Profile saved · a few seconds ago';
+                saveStatus.style.color = 'var(--text-light)';
+            }, 900);
+        });
+
+        // Reset form
+        if (digits.length >= 5) {
+            e.target.value = digits.slice(0, 2) + '/' + digits.slice(2, 4) + '/' + digits.slice(4);
+        } else if (digits.length >= 3) {
+            e.target.value = digits.slice(0, 2) + '/' + digits.slice(2);
+        } else {
+            e.target.value = digits;
+        }
         });
 
         // Contextual validation helper
@@ -557,8 +556,8 @@ $shop_name = "Mindflayer";
             birthdateInput.dispatchEvent(new Event('blur'));
 
             if (document.querySelector('.form-control.is-invalid')) {
-                // Remind user that fields with red borders need attention
-                saveStatus.textContent = 'Fix the highlighted fields to save your profile.';
+                // Generic error message, no indication of which field(s) have problems
+                saveStatus.textContent = 'An error occurred.';
                 saveStatus.style.color = '#b02a37';
                 return;
             }
