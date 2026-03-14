@@ -1,5 +1,5 @@
 <?php
-// pages/about.php  — OR place at root as about.php
+// pages/AboutPage/about_bad.php
 $year = date("Y");
 
 $timeline = [
@@ -11,38 +11,18 @@ $timeline = [
 ];
 
 $values = [
-    ["icon" => "bi-leaf",          "title" => "Ethically Sourced",    "body" => "Every bean is traceable. We work directly with smallholder farms in Benguet, Sagada, and Mt. Apo — paying above fair-trade rates because the people matter as much as the product."],
-    ["icon" => "bi-heart",         "title" => "Made to Order",        "body" => "Nothing is pre-made, pre-poured, or pre-syruped. Every drink is crafted fresh from the moment you order. The wait is worth it."],
-    ["icon" => "bi-recycle",       "title" => "Zero Waste Goals",     "body" => "Compostable cups, paper straws, and no single-use plastics across all branches. Spent coffee grounds go back to our partner farms as compost."],
-    ["icon" => "bi-people",        "title" => "Crew Over Everything", "body" => "Our baristas earn living wages, get paid training, and have a genuine path to growth. A happy team makes better coffee — it really is that simple."],
+    ["icon" => "bi-leaf",    "title" => "Ethically Sourced",    "body" => "Every bean is traceable. We work directly with smallholder farms in Benguet, Sagada, and Mt. Apo — paying above fair-trade rates because the people matter as much as the product."],
+    ["icon" => "bi-heart",   "title" => "Made to Order",        "body" => "Nothing is pre-made, pre-poured, or pre-syruped. Every drink is crafted fresh from the moment you order. The wait is worth it."],
+    ["icon" => "bi-recycle", "title" => "Zero Waste Goals",     "body" => "Compostable cups, paper straws, and no single-use plastics across all branches. Spent coffee grounds go back to our partner farms as compost."],
+    ["icon" => "bi-people",  "title" => "Crew Over Everything", "body" => "Our baristas earn living wages, get paid training, and have a genuine path to growth. A happy team makes better coffee — it really is that simple."],
 ];
 
 $team = [
-    [
-        "name" => "Steven Kyle",
-        "role" => "Lead Barista & Developer",
-        "note" => "Trains the bar team and obsesses over extractions so every shot tastes the same, every day."
-    ],
-    [
-        "name" => "Daniel",
-        "role" => "Head Roaster & Founder",
-        "note" => "Leads sourcing and roasting, making sure every bean that reaches the bar is worth brewing."
-    ],
-    [
-        "name" => "Hilary Ashley",
-        "role" => "Menu Organizer & Developer",
-        "note" => "Works on seasonal drinks and signatures, balancing flavors so nothing feels too sweet or too safe."
-    ],
-    [
-        "name" => "Rhanz Christian",
-        "role" => "Store Operations & Quality Assurance",
-        "note" => "Keeps the doors running smoothly and makes sure regulars feel like the space is theirs, too."
-    ],
-    [
-        "name" => "Amilia Danielle",
-        "role" => "Assistant Barista & Designer",
-        "note" => "Jumps between bar and floor, helping the team stay fast, calm, and extra friendly during rush hours."
-    ],
+    ["name" => "Steven Kyle",      "role" => "Lead Barista & Developer",          "note" => "Trains the bar team and obsesses over extractions so every shot tastes the same, every day."],
+    ["name" => "Daniel",           "role" => "Head Roaster & Founder",            "note" => "Leads sourcing and roasting, making sure every bean that reaches the bar is worth brewing."],
+    ["name" => "Hilary Ashley",    "role" => "Menu Organizer & Developer",        "note" => "Works on seasonal drinks and signatures, balancing flavors so nothing feels too sweet or too safe."],
+    ["name" => "Rhanz Christian",  "role" => "Store Operations & Quality Assurance", "note" => "Keeps the doors running smoothly and makes sure regulars feel like the space is theirs, too."],
+    ["name" => "Amilia Danielle",  "role" => "Assistant Barista & Designer",      "note" => "Jumps between bar and floor, helping the team stay fast, calm, and extra friendly during rush hours."],
 ];
 ?>
 <!DOCTYPE html>
@@ -50,784 +30,468 @@ $team = [
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Our Story — Mindflayer Coffee</title>
+    <title>About</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- Type system aligned with homepage: Playfair Display (display) + DM Sans (UI/body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+
+    <!-- BAD: Three completely different typefaces loaded with no typographic logic -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
 
     <style>
-        /* ══════════════════════════════════════
-           VARIABLES
-        ══════════════════════════════════════ */
         :root {
-            --espresso:   #3B2A2A;
-            --mocha:      #6F4C3E;
-            --sand:       #C2B280;
-            --cream:      #E8D8B0;
-            --linen:      #F5F5F0;
-            --white:      #FFFFFF;
-            --text-dark:  #2A1E1E;
-            --text-mid:   #6F4C3E;
-            --text-muted: #9C8878;
-
-            /* Type pairing to mirror homepage */
-            --font-display: 'Playfair Display', Georgia, serif;
-            --font-body:    'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-            /* Tip 41 — spacing system (multiples of base unit) */
-            --space-xs:  0.5rem;
-            --space-sm:  1rem;
-            --space-md:  2rem;
-            --space-lg:  4rem;
-            --space-xl:  7rem;
-            --space-2xl: 10rem;
-
-            --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --espresso: #3B2A2A;
+            --mocha:    #6F4C3E;
+            --sand:     #C2B280;
+            --cream:    #E8D8B0;
+            --linen:    #F5F5F0;
         }
 
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
+        /* BAD: No box-sizing reset, no consistent base */
         body {
-            /* Overall feel stays serif, like a crafted story page */
-            font-family: var(--font-display);
+            /* BAD: Body uses a monospace font — wrong tone, wrong readability */
+            font-family: 'Courier Prime', monospace;
             background: var(--linen);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            font-weight: 400;
-            line-height: 1.75;
+            color: #2A1E1E;
+            margin: 0;
         }
 
-        /* Noise texture */
-        body::before {
-            content: ''; position: fixed; inset: 0;
-            pointer-events: none; z-index: 9999; opacity: 0.35;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        /* BAD: Navbar crammed, tiny padding, no breathing room */
+        .bad-nav {
+            background: var(--espresso);
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2px;
         }
 
-        /* ══════════════════════════════════════
-           TYPOGRAPHY SCALE — Tip 31
-           All headings/body use Playfair Display,
-           varied only by size, weight, style, spacing
-        ══════════════════════════════════════ */
-        .t-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 500;
-            font-style: normal;
+        /* BAD: Brand uses yet another font (Oswald) — clashes with body */
+        .bad-nav-brand {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        .bad-nav-links {
+            list-style: none;
+            margin: 0; padding: 0;
+            display: flex; flex-wrap: wrap; gap: 3px;
+        }
+        .bad-nav-links a {
+            /* BAD: Nav links switch to DM Sans — 3rd font in the navbar alone */
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            color: var(--cream);
+            text-decoration: none;
+            padding: 1px 3px;
+        }
+        .bad-nav-cta {
+            /* BAD: CTA uses Courier Prime — monospace on a button looks wrong */
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.65rem;
+            background: var(--sand);
+            color: var(--espresso);
+            padding: 2px 7px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* BAD: Hero — minimal padding, no visual hierarchy established */
+        .bad-hero {
+            background: var(--espresso);
+            padding: 10px 12px 8px;
+        }
+
+        /* BAD: Hero eyebrow uses Oswald — feels like a poster, not a story page */
+        .bad-hero-eye {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.65rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--sand);
-            display: flex; align-items: center; gap: 0.75rem;
-        }
-        .t-eyebrow::before {
-            content: '';
-            display: inline-block;
-            width: 28px; height: 1px;
-            background: currentColor;
-            flex-shrink: 0;
+            margin: 0 0 4px;
         }
 
-        .t-display {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 6.5rem);
+        /* BAD: H1 suddenly switches to Playfair — third font style already on this page */
+        .bad-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
             font-weight: 900;
-            line-height: 1.0;
-            letter-spacing: -0.03em;
+            color: var(--linen);
+            margin: 0 0 4px;
+            line-height: 1.15;
         }
 
-        .t-h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.025em;
+        /* BAD: Hero desc uses Courier Prime — a dense, hard-to-read wall of monospace text */
+        .bad-hero p {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            color: rgba(245,245,240,0.55);
+            margin: 0;
+            line-height: 1.3;
+            max-width: 100%;
         }
 
-        .t-h3 {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.25;
-            letter-spacing: -0.01em;
-        }
-
-        .t-body-lg {
-            /* Smaller narrative blocks use the same sans-serif feel as product descriptions */
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            font-weight: 400;
-            font-style: italic;
-            line-height: 1.8;
-        }
-
-        .t-body {
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 400;
-            line-height: 1.85;
-        }
-
-        .t-small {
-            font-family: var(--font-body);
-            font-size: 0.78rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
-        }
-
-        .t-italic { font-style: italic; }
-        .t-sand   { color: var(--sand); }
-        .t-muted  { color: var(--text-muted); }
-        .t-linen  { color: var(--linen); }
-        .t-cream  { color: var(--cream); }
-
-        /* ══════════════════════════════════════
-           NAVBAR
-        ══════════════════════════════════════ */
-        .navbar {
-            background-color: var(--espresso);
-            padding: 1.1rem 2.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
-        }
-        .navbar-brand {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.55rem;
-            font-weight: 900;
-            color: var(--cream) !important;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .navbar-brand .dot { color: var(--sand); }
-
-        .navbar-nav .nav-link {
-            font-family: 'DM Sans', sans-serif;
-            color: rgba(232, 216, 176, 0.75) !important;
-            font-size: 0.88rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.25rem 1rem !important;
-            transition: color var(--ease);
-        }
-        .navbar-nav .nav-link:hover {
-            color: var(--cream) !important;
-        }
-
-        .btn-nav-cta {
-            font-family: 'DM Sans', sans-serif;
-            background: linear-gradient(135deg, var(--sand), var(--cream));
-            color: var(--espresso) !important;
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 0.6rem 1.7rem !important;
-            border-radius: 2px;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 26px rgba(194, 178, 128, 0.28);
-            transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), filter 0.35s var(--ease);
-        }
-        .btn-nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 34px rgba(194, 178, 128, 0.45);
-            filter: saturate(1.05);
-        }
-
-        .btn-nav-cta::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.16);
-            transform: translateX(-110%);
-            transition: transform 0.45s ease;
-        }
-
-        .btn-nav-cta:hover::after {
-            transform: translateX(0);
-        }
-
-        /* ══════════════════════════════════════
-           HERO
-        ══════════════════════════════════════ */
-        .about-hero {
-            background: var(--espresso);
-            /* Tip 41: generous top/bottom padding */
-            padding: var(--space-xl) 2.5rem;
-            position: relative; overflow: hidden;
-        }
-        .about-hero::after {
-            content: '"';
-            position: absolute; right: -20px; bottom: -80px;
-            font-size: 40vw; font-weight: 900; font-style: italic;
-            color: rgba(194,178,128,0.04); line-height: 1;
-            pointer-events: none;
-        }
-        .hero-inner { position: relative; z-index: 2; max-width: 780px; }
-
-        /* ══════════════════════════════════════
-           SECTION WRAPPER — Tip 41: spacing key
-        ══════════════════════════════════════ */
-        .about-section {
-            /* Tip 41: every section gets identical generous vertical rhythm */
-            padding: var(--space-xl) 2.5rem;
-        }
-
-        .about-section + .about-section {
-            padding-top: 0; /* sections share the xl gap between them */
-        }
-
-        /* Alternating background for clear separation */
-        .bg-linen  { background: var(--linen); }
-        .bg-white  { background: var(--white); }
-        .bg-dark   { background: var(--espresso); }
-        .bg-mocha  { background: var(--mocha); }
-
-        /* Section header block — consistent across all sections */
-        .section-header {
-            /* Tip 41: bottom margin separates label from content */
-            margin-bottom: var(--space-lg);
-        }
-        .section-header .t-eyebrow { margin-bottom: var(--space-sm); }
-
-        /* ══════════════════════════════════════
-           INTRO / MANIFESTO
-        ══════════════════════════════════════ */
-        .manifesto-text {
-            font-size: clamp(1.4rem, 3vw, 2rem);
-            font-weight: 500; font-style: italic;
-            line-height: 1.65; color: var(--text-dark);
-            max-width: 820px;
-        }
-        .manifesto-text em { color: var(--mocha); font-style: italic; }
-
-        .stat-block {
-            /* Tip 41: generous padding inside stat blocks */
-            padding: var(--space-md) 0;
-            border-top: 1px solid var(--cream);
-        }
-        .stat-num {
-            font-size: 3.5rem; font-weight: 900;
-            color: var(--espresso); line-height: 1;
-            letter-spacing: -0.04em;
-        }
-        .stat-label {
-            font-size: 0.7rem; font-weight: 500;
-            letter-spacing: 0.22em; text-transform: uppercase;
-            color: var(--text-muted); margin-top: var(--space-xs);
-        }
-
-        /* ══════════════════════════════════════
-           TIMELINE
-        ══════════════════════════════════════ */
-        .timeline-list { list-style: none; padding: 0; margin: 0; }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 80px 1px 1fr;
-            gap: 0 var(--space-md);
-            /* Tip 41: vertical gap between each timeline entry */
-            padding-bottom: var(--space-lg);
-            position: relative;
-        }
-        .timeline-item:last-child { padding-bottom: 0; }
-
-        .timeline-year {
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--sand); padding-top: 4px;
-            text-align: right;
-        }
-
-        .timeline-line {
-            position: relative;
-            background: var(--cream);
-            width: 1px;
-        }
-        .timeline-line::before {
-            content: '';
-            position: absolute; top: 6px; left: 50%;
-            transform: translateX(-50%);
-            width: 9px; height: 9px; border-radius: 50%;
-            background: var(--sand);
-            border: 2px solid var(--espresso);
-        }
-        .timeline-item:last-child .timeline-line { background: transparent; }
-
-        .timeline-body {
-            /* Tip 41: padding separates content from the line */
-            padding-left: var(--space-sm);
-            padding-bottom: var(--space-sm);
-        }
-        .timeline-body .t-h3 { margin-bottom: var(--space-xs); color: var(--linen); }
-        .timeline-body .t-body { color: rgba(245,245,240,0.6); }
-
-        /* ══════════════════════════════════════
-           VALUES
-        ══════════════════════════════════════ */
-        .value-card {
-            /* Tip 41: internal padding = breathing room */
-            padding: var(--space-md);
+        /* ── MANIFESTO ──────────────────────────── */
+        /* BAD: No section gap — content immediately follows hero with only 6px breathing room */
+        .bad-manifesto {
+            padding: 6px 12px;
             background: var(--linen);
-            border: 1px solid var(--cream);
-            border-radius: 4px;
-            height: 100%;
-            transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
-        }
-        .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 16px 48px rgba(59,42,42,0.09);
-            border-color: var(--sand);
         }
 
-        .value-icon {
-            width: 52px; height: 52px; border-radius: 50%;
-            background: var(--cream); border: 1px solid var(--sand);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: var(--mocha);
-            /* Tip 41: space below icon before title */
-            margin-bottom: var(--space-md);
+        /* BAD: Section label uses Oswald — again inconsistent with everything around it */
+        .bad-section-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mocha);
+            margin: 0 0 3px;
         }
-        .value-card .t-h3 { margin-bottom: var(--space-sm); color: var(--espresso); }
-        .value-card .t-body { color: var(--text-muted); }
 
-        /* ══════════════════════════════════════
-           PULL QUOTE
-        ══════════════════════════════════════ */
-        .pull-quote {
-            /* Tip 41: very generous padding for quote block */
-            padding: var(--space-xl) 2.5rem;
-            text-align: center; background: var(--mocha);
+        /* BAD: Manifesto heading uses Courier Prime — monospace for a big statement looks terrible */
+        .bad-manifesto h2 {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin: 0 0 4px;
+            line-height: 1.3;
         }
-        .quote-mark {
-            font-size: 5rem; font-weight: 900; font-style: italic;
-            color: rgba(232,216,176,0.25); line-height: 0;
-            display: block; margin-bottom: var(--space-md);
+
+        /* BAD: Body uses DM Sans here but Courier Prime elsewhere — jarring switch */
+        .bad-manifesto p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            color: #7A6355;
+            margin: 0 0 3px;
+            line-height: 1.35;
         }
-        .quote-body {
-            font-size: clamp(1.5rem, 3vw, 2.3rem);
-            font-weight: 500; font-style: italic;
-            color: var(--linen); max-width: 720px;
-            margin: 0 auto var(--space-md); line-height: 1.55;
+
+        /* BAD: Stats crammed inline with no visual separation from manifesto text */
+        .bad-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 5px;
         }
-        .quote-attr {
-            font-size: 0.72rem; font-weight: 500;
-            letter-spacing: 0.22em; text-transform: uppercase;
+        .bad-stat {
+            /* BAD: tiny stat block, no padding, no border separation */
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            color: var(--espresso);
+            border-left: 2px solid var(--sand);
+            padding-left: 5px;
+        }
+        /* BAD: stat number barely bigger than label — no visual weight */
+        .bad-stat strong {
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        /* ── TIMELINE ───────────────────────────── */
+        /* BAD: No section gap — abuts the manifesto section directly */
+        .bad-timeline {
+            padding: 8px 12px;
+            background: var(--espresso);
+        }
+
+        /* BAD: Timeline heading uses Playfair after Oswald labels — inconsistent again */
+        .bad-timeline h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--linen);
+            margin: 0 0 6px;
+        }
+
+        /* BAD: All five timeline entries dumped as a single dense paragraph blob,
+                no year labels, no visual grouping, no separation between entries */
+        .bad-timeline-blob {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            color: rgba(245,245,240,0.6);
+            line-height: 1.35;
+            margin: 0;
+        }
+
+        /* ── QUOTE ──────────────────────────────── */
+        /* BAD: Almost no vertical spacing from timeline above */
+        .bad-quote {
+            background: var(--mocha);
+            padding: 8px 12px;
+            text-align: left; /* BAD: Quote not centered, feels like body text */
+        }
+
+        /* BAD: Quote text uses Oswald — wrong tone for a warm human quote */
+        .bad-quote p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--linen);
+            margin: 0 0 2px;
+            line-height: 1.3;
+        }
+
+        /* BAD: Attribution uses Courier Prime — wildly different from the quote above it */
+        .bad-quote cite {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.6rem;
             color: var(--sand);
         }
 
-        /* ══════════════════════════════════════
-           TEAM
-        ══════════════════════════════════════ */
-        .team-card {
-            /* Tip 41: padding inside card + gap between cards via Bootstrap g-4 */
-            padding: var(--space-md);
-            border: 1px solid rgba(194,178,128,0.18);
-            border-radius: 4px; background: rgba(245,245,240,0.04);
-            height: 100%;
-            transition: border-color 0.3s ease, background 0.3s ease;
-        }
-        .team-card:hover {
-            border-color: rgba(194,178,128,0.4);
-            background: rgba(245,245,240,0.07);
+        /* ── VALUES ─────────────────────────────── */
+        /* BAD: Minimal top padding — barely separated from quote block */
+        .bad-values {
+            padding: 6px 12px;
+            background: #fff;
         }
 
-        .team-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--sand);
-            background: var(--mocha);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-md);
-        }
-        .team-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .team-avatar-fallback {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--cream);
-            letter-spacing: -0.02em;
+        /* BAD: Values heading switches back to Playfair — 4th font style shift so far */
+        .bad-values h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin: 0 0 5px;
         }
 
-        .team-card .t-h3 { color: var(--linen); margin-bottom: var(--space-xs); }
-        .team-role {
-            font-size: 0.7rem; font-weight: 500;
-            letter-spacing: 0.16em; text-transform: uppercase;
-            color: var(--sand); margin-bottom: var(--space-sm);
+        /* BAD: All four values crammed into one dense paragraph block, no cards or icons */
+        .bad-values-blob {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            color: #7A6355;
+            line-height: 1.4;
+            margin: 0;
         }
-        .team-card .t-body { color: rgba(245,245,240,0.5); font-style: italic; }
 
-        /* ══════════════════════════════════════
-           FOOTER CTA
-        ══════════════════════════════════════ */
-        .footer-cta {
+        /* BAD: Values listed inline with just dashes — no grouping, no icons, no spacing */
+        .bad-values-blob span {
+            font-family: 'Oswald', sans-serif; /* BAD: inline font switch inside a paragraph */
+            font-weight: 600;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+        }
+
+        /* ── TEAM ───────────────────────────────── */
+        /* BAD: 4px gap from values — indistinguishable from previous section */
+        .bad-team {
+            padding: 5px 12px 8px;
             background: var(--espresso);
-            /* Tip 41: generous padding */
-            padding: var(--space-xl) 2.5rem;
-            position: relative; overflow: hidden;
-        }
-        .footer-cta::before {
-            content: '';
-            position: absolute; top: -120px; right: -120px;
-            width: 500px; height: 500px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(194,178,128,0.07) 0%, transparent 70%);
         }
 
-        .btn-cta-primary {
-            background: linear-gradient(135deg, var(--sand), var(--cream));
-            color: var(--espresso); font-weight: 700;
-            font-size: 0.88rem; letter-spacing: 0.14em; text-transform: uppercase;
-            padding: 1rem 2.5rem; border-radius: 2px; border: none;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 0.65rem;
-            cursor: pointer; transition: all 0.35s var(--ease);
-            position: relative; overflow: hidden;
-        }
-        .btn-cta-primary:hover {
-            color: var(--espresso); transform: translateY(-3px);
-            box-shadow: 0 12px 36px rgba(194,178,128,0.35);
+        /* BAD: Team heading uses Courier Prime — monospace heading on dark bg */
+        .bad-team h2 {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--linen);
+            margin: 0 0 4px;
         }
 
-        .btn-cta-ghost {
-            background: transparent; color: var(--cream);
-            font-size: 0.82rem; font-weight: 400;
-            letter-spacing: 0.1em; text-transform: uppercase;
-            padding: 1rem 2rem; border-radius: 2px;
-            border: 1px solid rgba(232,216,176,0.3);
-            text-decoration: none; display: inline-flex; align-items: center; gap: 0.6rem;
-            transition: all 0.3s ease;
+        /* BAD: Team members all dumped as one run-on block. 
+                No avatar, no role label hierarchy, no padding between members */
+        .bad-team-blob {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.73rem;
+            color: rgba(245,245,240,0.55);
+            line-height: 1.35;
+            margin: 0;
         }
-        .btn-cta-ghost:hover { border-color: var(--sand); color: var(--sand); }
 
-        /* ══════════════════════════════════════
-           FOOTER BAR
-        ══════════════════════════════════════ */
-        .footer-bar {
+        /* BAD: Name uses yet another inline font — Oswald — mid-paragraph */
+        .bad-team-blob strong {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* BAD: Role is styled same size/weight as body — no visual hierarchy */
+        .bad-team-blob em {
+            font-family: 'Courier Prime', monospace;
+            font-style: italic;
+            color: var(--sand);
+            font-size: 0.7rem;
+        }
+
+        /* ── FOOTER CTA ─────────────────────────── */
+        /* BAD: No gap from team section — flows right into it */
+        .bad-footer-cta {
             background: var(--espresso);
             border-top: 1px solid rgba(194,178,128,0.12);
-            padding: 1.5rem 2.5rem;
+            padding: 6px 12px;
         }
-        .footer-bar-txt { font-size: 0.72rem; color: rgba(245,245,240,0.3); letter-spacing: 0.04em; }
-        .footer-bar-brand { font-size: 0.9rem; font-weight: 900; color: rgba(245,245,240,0.4); }
-        .footer-bar-brand span { color: var(--sand); }
 
-        /* ══════════════════════════════════════
-           SCROLL REVEAL
-        ══════════════════════════════════════ */
-        .reveal {
-            opacity: 0; transform: translateY(22px);
-            transition: opacity 0.65s ease, transform 0.65s ease;
+        /* BAD: CTA heading uses DM Sans — 4th typeface in this section */
+        .bad-footer-cta h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--linen);
+            margin: 0 0 3px;
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ══════════════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════════════ */
-        @media (max-width: 991px) {
-            :root { --space-xl: 5rem; --space-lg: 3rem; }
+        .bad-footer-cta p {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.67rem;
+            color: rgba(245,245,240,0.45);
+            margin: 0 0 5px;
+            line-height: 1.3;
         }
-        @media (max-width: 767px) {
-            :root { --space-xl: 4rem; --space-lg: 2.5rem; }
-            .about-hero { padding: var(--space-lg) 1.5rem; }
-            .about-section { padding: var(--space-xl) 1.5rem; }
-            .navbar { padding: 0.9rem 1.5rem; }
-            .timeline-item { grid-template-columns: 56px 1px 1fr; }
+
+        /* BAD: CTA button — tiny, left-aligned, no prominence */
+        .bad-cta-btn {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: var(--sand);
+            color: var(--espresso);
+            padding: 3px 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .bad-ghost-btn {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.65rem;
+            color: rgba(245,245,240,0.5);
+            text-decoration: underline;
+            display: inline-block;
+        }
+
+        /* BAD: Footer bar — no padding, barely visible */
+        .bad-footer-bar {
+            background: var(--espresso);
+            border-top: 1px solid rgba(194,178,128,0.08);
+            padding: 3px 12px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        /* BAD: Brand uses Playfair, txt uses Courier — two fonts in one footer bar */
+        .bad-footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.72rem;
+            font-weight: 900;
+            color: rgba(245,245,240,0.35);
+        }
+        .bad-footer-brand span { color: var(--sand); }
+        .bad-footer-txt {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.58rem;
+            color: rgba(245,245,240,0.2);
         }
     </style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════
-     NAVBAR — match homepage
-════════════════════════════════════ -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-
-        <!-- PRIMARY: Brand — leftmost, high recall -->
-        <a class="navbar-brand" href="../../index.php">
-            ☕ Mindflayer<span class="dot">.</span>
-        </a>
-
-        <button class="border-0 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-            <i class="text-warning bi bi-list fs-4"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navMain">
-            <!-- Center nav items -->
-            <ul class="gap-1 mx-auto navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="../ProductListPage/products.php">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.php">Our Story</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>
-                <li class="nav-item"><a class="nav-link" href="../ProfilePage/profile.php">Profile</a></li>
-            </ul>
-
-            <!-- Auth + primary CTA on the right -->
-            <div class="d-flex align-items-center gap-2">
-                <a href="../SignupPage/login.php" class="nav-link" style="font-size: 0.85rem;">
-                    Login
-                </a>
-                <a href="../SignupPage/signup.php" class="btn-nav-cta nav-link">
-                    Sign Up <i class="bi bi-arrow-right ms-1"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
+<!-- BAD: Navbar crammed, three fonts in one bar, minimal padding -->
+<div class="bad-nav">
+    <a href="../../index.php" class="bad-nav-brand">☕ Mindflayer.</a>
+    <ul class="bad-nav-links">
+        <li><a href="../ProductListPage/products.php">Menu</a></li>
+        <li><a href="about.php">Our Story</a></li>
+        <li><a href="../../index.php#experience">Experience</a></li>
+        <li><a href="../../index.php#contact">Locations</a></li>
+        <li><a href="../ProfilePage/profile.php">Profile</a></li>
+    </ul>
+    <a href="../SignupPage/login.php" class="bad-nav-cta">Sign Up</a>
+</div>
 
 
-<!-- ════════════════════════════════════
-     HERO
-════════════════════════════════════ -->
-<header class="about-hero">
-    <div class="container">
-        <div class="hero-inner reveal">
-            <p class="t-eyebrow mb-4">Est. 2020 · Makati City</p>
-            <h1 class="t-display t-linen mb-0">
-                We didn't open<br>
-                a coffee shop.<br>
-                <em class="t-sand t-italic">We built a ritual.</em>
-            </h1>
-        </div>
-    </div>
-</header>
+<!-- BAD: Hero — no section breathing room, dense text dump, inconsistent fonts -->
+<div class="bad-hero">
+    <p class="bad-hero-eye">Est. 2020 · Makati City</p>
+    <!-- BAD: H1 in Playfair after an Oswald eyebrow — jarring font switch -->
+    <h1>We didn't open a coffee shop. We built a ritual.</h1>
+    <!-- BAD: Dense paragraph with no spacing from h1. Manifesto and intro merged into one block -->
+    <p>Mindflayer Coffee started in 2020 as a 10-sqm corner stall in Salcedo Village. We believe coffee is more than caffeine. It's the five minutes before a hard day begins, the slow Sunday morning, the first sip that tells you today will be okay. We make drinks that earn that moment. Every decision we make — where we source our beans, how we pay our farmers, what goes into a recipe, how we design a space — comes back to one question: does this make the moment better? If the answer is yes, we do it. If it isn't, we don't. We've served 5,000+ regulars across 3 branches using 100% real ingredients for 4+ years of craft.</p>
+</div>
 
 
-<!-- ════════════════════════════════════
-     SECTION 1 — MANIFESTO
-     Tip 41: section separated by full xl padding
-════════════════════════════════════ -->
-<section class="about-section bg-linen">
-    <div class="container">
+<!-- BAD: Timeline section — no top gap, heading font shifts again, all entries as one blob -->
+<div class="bad-timeline">
+    <!-- BAD: Section label in Oswald, heading in Playfair — immediate font clash -->
+    <p class="bad-section-label">How We Got Here</p>
+    <h2>Five years. One cup at a time.</h2>
 
-        <div class="row gy-5 align-items-start reveal">
-            <div class="col-lg-7">
-                <div class="section-header">
-                    <p class="t-eyebrow t-mid mb-3" style="color: var(--mocha);">
-                        What We Believe
-                    </p>
-                    <p class="manifesto-text">
-                        Coffee is more than caffeine. It's the five minutes before a hard day begins.
-                        The slow Sunday morning. The first sip that tells you <em>today will be okay.</em>
-                        We make drinks that earn that moment.
-                    </p>
-                </div>
-
-                <p class="t-body t-muted" style="max-width: 560px;">
-                    Every decision we make — where we source our beans, how we pay our farmers, what goes into a recipe, how we design a space — comes back to one question: does this make the moment better?
-                    If the answer is yes, we do it. If it isn't, we don't.
-                </p>
-            </div>
-
-            <!-- Stats — Tip 41: generous padding on each block -->
-            <div class="col-lg-4 offset-lg-1">
-                <?php
-                $stats = [
-                    ["5K+",    "Happy Regulars"],
-                    ["3",      "Branches in Metro Manila"],
-                    ["100%",   "Real Ingredients. Always."],
-                    ["4+",     "Years of Craft"],
-                ];
-                foreach ($stats as $stat): ?>
-                <div class="stat-block">
-                    <div class="stat-num"><?= $stat[0] ?></div>
-                    <div class="stat-label"><?= $stat[1] ?></div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ════════════════════════════════════
-     SECTION 2 — TIMELINE
-════════════════════════════════════ -->
-<section class="about-section bg-dark">
-    <div class="container">
-
-        <div class="section-header reveal">
-            <p class="t-eyebrow mb-3">How We Got Here</p>
-            <h2 class="t-h2 t-linen">
-                Five years.<br>
-                <em class="t-sand">One cup at a time.</em>
-            </h2>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-8">
-                <ul class="timeline-list reveal">
-                    <?php foreach ($timeline as $i => $entry): ?>
-                    <li class="timeline-item" style="transition-delay:<?= $i * 0.1 ?>s">
-                        <div class="timeline-year"><?= $entry['year'] ?></div>
-                        <div class="timeline-line"></div>
-                        <div class="timeline-body">
-                            <h3 class="t-h3"><?= $entry['title'] ?></h3>
-                            <p class="t-body"><?= $entry['body'] ?></p>
-                        </div>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ════════════════════════════════════
-     PULL QUOTE
-════════════════════════════════════ -->
-<blockquote class="pull-quote reveal">
-    <span class="quote-mark">"</span>
-    <p class="quote-body">
-        Good coffee doesn't have to be complicated. It just has to be honest.
+    <!-- BAD: All 5 timeline entries crammed into a single dense paragraph,
+              no year labels, no visual separation, no readable structure -->
+    <p class="bad-timeline-blob">
+        <?php foreach ($timeline as $i => $entry): ?>
+        (<?= $entry['year'] ?>) <?= $entry['title'] ?>: <?= $entry['body'] ?><?= $i < count($timeline)-1 ? ' — ' : '' ?>
+        <?php endforeach; ?>
     </p>
-    <cite class="quote-attr">— Daniel Ling, Founder of Mindflayer</cite>
-</blockquote>
+</div>
 
 
-<!-- ════════════════════════════════════
-     SECTION 3 — VALUES
-════════════════════════════════════ -->
-<section class="about-section bg-white">
-    <div class="container">
-
-        <div class="section-header reveal">
-            <p class="t-eyebrow mb-3" style="color: var(--mocha);">What Drives Us</p>
-            <h2 class="t-h2" style="color: var(--espresso);">
-                Things we refuse<br>
-                <em class="t-italic" style="color: var(--mocha);">to compromise on.</em>
-            </h2>
-        </div>
-
-        <div class="row g-4 reveal">
-            <?php foreach ($values as $i => $val): ?>
-            <div class="col-sm-6 col-lg-3" style="transition-delay:<?= $i * 0.08 ?>s">
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="bi <?= $val['icon'] ?>"></i>
-                    </div>
-                    <h3 class="t-h3"><?= $val['title'] ?></h3>
-                    <p class="t-body"><?= $val['body'] ?></p>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-
-    </div>
-</section>
+<!-- BAD: Quote immediately after timeline with no gap, left-aligned, wrong font -->
+<div class="bad-quote">
+    <p>"Good coffee doesn't have to be complicated. It just has to be honest."</p>
+    <cite>— Daniel Ling, Founder of Mindflayer</cite>
+</div>
 
 
-<!-- ════════════════════════════════════
-     SECTION 4 — TEAM
-════════════════════════════════════ -->
-<section class="about-section bg-dark">
-    <div class="container">
+<!-- BAD: Values — 6px padding from quote, no icons, all 4 values in one run-on paragraph -->
+<div class="bad-values">
+    <p class="bad-section-label">What Drives Us</p>
+    <h2>Things we refuse to compromise on.</h2>
 
-        <div class="section-header reveal">
-            <p class="t-eyebrow mb-3">The People Behind the Bar</p>
-            <h2 class="t-h2 t-linen">
-                You'll recognize them.<br>
-                <em class="t-sand">They remember you too.</em>
-            </h2>
-        </div>
-
-        <div class="row g-4 reveal">
-            <?php foreach ($team as $i => $member): ?>
-            <div class="col-6 col-lg" style="transition-delay:<?= $i * 0.08 ?>s">
-                <div class="team-card">
-                    <div class="team-avatar">
-                        <?php if (!empty($member['image'] ?? '')): ?>
-                            <img src="<?= htmlspecialchars($member['image']) ?>" alt="<?= htmlspecialchars($member['name']) ?> photo">
-                        <?php else: ?>
-                            <span class="team-avatar-fallback">
-                                <?= mb_substr($member['name'], 0, 1) ?>
-                            </span>
-                        <?php endif; ?>
-                    </div>
-                    <h3 class="t-h3"><?= $member['name'] ?></h3>
-                    <p class="team-role"><?= $member['role'] ?></p>
-                    <p class="t-body"><?= $member['note'] ?></p>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-
-    </div>
-</section>
+    <!-- BAD: Dense text block — no icons, no cards, no grouping, inline font switches -->
+    <p class="bad-values-blob">
+        <span>Ethically Sourced</span> — <?= $values[0]['body'] ?>
+        <span>Made to Order</span> — <?= $values[1]['body'] ?>
+        <span>Zero Waste Goals</span> — <?= $values[2]['body'] ?>
+        <span>Crew Over Everything</span> — <?= $values[3]['body'] ?>
+    </p>
+</div>
 
 
-<!-- ════════════════════════════════════
-     FOOTER CTA — Gutenberg: CTA bottom-right
-════════════════════════════════════ -->
-<section class="footer-cta">
-    <div class="container">
-        <div class="row align-items-end gy-5 reveal">
-            <div class="col-lg-7">
-                <p class="t-eyebrow mb-4">Come Find Us</p>
-                <h2 class="t-h2 t-linen mb-3">
-                    Now you know our story.<br>
-                    <em class="t-sand">Come be part of it.</em>
-                </h2>
-                <p class="t-body" style="color: rgba(245,245,240,0.5); max-width: 420px;">
-                    Three branches, one menu, zero shortcuts. Walk in any day between 7AM and 10PM — we'll have something warm (or cold) waiting for you.
-                </p>
-                <p class="t-small mt-3" style="color: rgba(245,245,240,0.3); letter-spacing: 0.1em; text-transform: uppercase;">
-                    Salcedo Village · BGC · Poblacion
-                </p>
-            </div>
-            <!-- Gutenberg terminal CTA — bottom-right -->
-            <div class="col-lg-5 d-flex flex-column align-items-lg-end align-items-start gap-3">
-                <a href="../ProductListPage/products.php" class="btn-cta-primary">
-                    Explore the Menu <i class="bi bi-arrow-right-circle"></i>
-                </a>
-                <a href="../../index.php" class="btn-cta-ghost">
-                    <i class="bi bi-arrow-left"></i> Back to Home
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- BAD: Team — 5px top padding, heading uses Courier Prime, all members as one blob -->
+<div class="bad-team">
+    <p class="bad-section-label">The People Behind the Bar</p>
+    <!-- BAD: Team heading in Courier Prime — monospace on dark bg, hard to read -->
+    <h2>You'll recognize them. They remember you too.</h2>
+
+    <!-- BAD: All 5 team members dumped as a single dense paragraph.
+              No avatars, no role hierarchy, no card separation.
+              Names use Oswald mid-sentence, roles use Courier italic — 3 fonts in one blob -->
+    <p class="bad-team-blob">
+        <?php foreach ($team as $i => $member): ?>
+        <strong><?= $member['name'] ?></strong> — <em><?= $member['role'] ?></em>: <?= $member['note'] ?><?= $i < count($team)-1 ? ' | ' : '' ?>
+        <?php endforeach; ?>
+    </p>
+</div>
 
 
-<!-- FOOTER BAR -->
-<footer class="footer-bar">
-    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
-        <span class="footer-bar-brand">Mindflayer<span>.</span></span>
-        <span class="footer-bar-txt">&copy; <?= $year ?> Mindflayer Coffee · Brewed with intention. Served with soul.</span>
-    </div>
-</footer>
+<!-- BAD: Footer CTA — no gap from team, heading in DM Sans, paragraph in Courier -->
+<div class="bad-footer-cta">
+    <!-- BAD: CTA heading in DM Sans after entire page of serif/mono mix -->
+    <h2>Now you know our story. Come be part of it.</h2>
+    <p>Three branches, one menu, zero shortcuts. Open 7AM–10PM daily. Salcedo Village · BGC · Poblacion</p>
+    <!-- BAD: Buttons left-aligned, mismatched fonts, no visual prominence -->
+    <a href="../ProductListPage/products.php" class="bad-cta-btn">Explore Menu</a>
+    <a href="../../index.php" class="bad-ghost-btn">Back to Home</a>
+</div>
 
+
+<!-- BAD: Footer bar — 3px padding, two fonts, barely legible -->
+<div class="bad-footer-bar">
+    <span class="bad-footer-brand">Mindflayer<span>.</span></span>
+    <span class="bad-footer-txt">&copy; <?= $year ?> Mindflayer Coffee · Brewed with intention. Served with soul.</span>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e, i) => {
-            if (e.isIntersecting) {
-                setTimeout(() => e.target.classList.add('visible'), i * 80);
-                obs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => obs.observe(el));
-</script>
-
 </body>
 </html>
