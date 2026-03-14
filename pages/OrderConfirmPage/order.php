@@ -71,6 +71,8 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             background-color: var(--linen);
             color: var(--text-dark);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
         a {
@@ -80,11 +82,11 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         /* ── INTENTIONALLY BAD NAVBAR ── */
         .navbar {
             background-color: var(--espresso);
-            padding: 1.1rem 2.5rem;
+            padding: 2px 4px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
+            border-bottom: 5px solid rgba(194, 178, 128, 0.2);
         }
 
         .navbar-brand {
@@ -150,155 +152,126 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
         /* ── Page content styles (unchanged) ── */
         .confirm-wrapper {
-            max-width: 640px;
-            margin: 2.5rem auto;
-            padding: 0 1.25rem 3rem;
+            max-width: 100%;
+            margin: 0;
+            padding: 4px 8px;
+            line-height: 1.2;
         }
 
         .confirm-card {
             background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.09);
-            border: 1px solid rgba(194, 178, 128, 0.25);
-            padding: 2rem 1.8rem;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .confirm-card {
-                padding: 2.5rem 3rem;
-            }
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 4px 0;
         }
 
         .success-icon {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            border-radius: 0;
             background: transparent;
-            color: rgba(194, 178, 128, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.25rem;
-            box-shadow: none;
+            color: var(--text-light);
+            display: inline;
+            font-size: 0.8rem;
+            margin: 0 4px 0 0;
+            opacity: 0.7;
         }
 
         .confirm-heading {
             font-family: var(--font-body);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 400;
-            letter-spacing: 0;
+            display: inline;
             color: var(--text-light);
-            margin-bottom: 0.35rem;
+            margin: 0 4px 0 0;
         }
 
         .confirm-subtitle {
             color: var(--text-light);
             font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+            margin: 0;
+            display: inline;
         }
 
         .order-id-badge {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0.25rem 0;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
+            display: inline;
+            margin: 0 0 0 4px;
+            font-size: 0.85rem;
             font-weight: 400;
             color: var(--text-light);
-            margin-bottom: 1rem;
-            display: inline-block;
         }
 
-        /* ── Estimated Delivery ── */
         .eta-banner {
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            border: none;
-            border-radius: 0;
-            padding: 0.25rem 0;
-            margin-bottom: 1rem;
-            text-align: left;
+            display: inline;
+            margin: 0;
+            padding: 0;
         }
 
         .eta-icon {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--mocha);
-            flex-shrink: 0;
         }
 
-        .eta-label {
-            font-size: 0.72rem;
-            text-transform: none;
-            letter-spacing: 0;
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        .eta-time {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--text-light);
-        }
-
+        .eta-label,
+        .eta-time,
         .eta-date {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--text-light);
         }
 
         .details-section {
-            text-align: left;
-            border-top: none;
-            padding-top: 0;
-            margin-top: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
         }
 
         .details-title {
-            font-family: var(--font-body);
             font-size: 0.9rem;
-            font-weight: 400;
             color: var(--text-light);
-            margin-bottom: 0.5rem;
-            text-transform: none;
-            letter-spacing: 0;
+            margin: 0;
+            display: inline;
         }
 
         .details-row {
             font-size: 0.9rem;
             color: var(--text-light);
-            margin-bottom: 0.25rem;
+            margin: 0;
+            display: inline;
         }
 
         .details-row strong {
+            font-weight: 400;
             color: var(--text-light);
+        }
+
+        .details-row::after {
+            content: " · ";
         }
 
         .order-summary-box {
-            background: transparent;
-            border-radius: 0;
-            padding: 0.5rem 0;
+            margin: 0;
+            padding: 0;
             border: none;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            display: inline;
         }
 
         .order-summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.25rem;
-            color: var(--text-light);
+            display: inline;
+            margin: 0;
             font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .order-summary-row::after {
+            content: " · ";
+        }
+
+        .order-summary-row.total::after {
+            content: "";
         }
 
         .order-summary-row.total {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
             font-weight: 400;
             color: var(--text-light);
         }
@@ -306,96 +279,66 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         .btn-back-home {
             background: transparent;
             color: var(--text-light);
-            border: 1px solid rgba(194, 178, 128, 0.3);
-            padding: 0.55rem 1.1rem;
+            border: none;
+            padding: 0;
             font-size: 0.85rem;
             font-weight: 400;
-            letter-spacing: 0;
-            text-transform: none;
-            border-radius: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-top: 1rem;
-            transition: none;
+            margin: 0 0 0 4px;
+            display: inline;
         }
 
         .btn-back-home:hover {
-            transform: none;
-            box-shadow: none;
             color: var(--text-light);
-            background: rgba(194, 178, 128, 0.1);
-            border-color: rgba(194, 178, 128, 0.3);
+            background: transparent;
+        }
+
+        .email-plain {
+            font-weight: 400;
+            color: var(--text-light);
         }
 
         .empty-state {
-            padding: 3rem 2rem;
-        }
-
-        .empty-state .success-icon {
-            opacity: 1;
+            padding: 4px 0;
         }
 
         .checkout-steps {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.75rem;
-            margin: 2rem 0 2.4rem;
-            position: relative;
+            display: inline;
+            margin: 0;
+            padding: 0;
         }
 
         .checkout-steps::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 22px;
-            height: 2px;
-            background: rgba(194, 178, 128, 0.35);
-            z-index: 1;
+            display: none;
         }
 
         .checkout-step {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            text-align: center;
+            display: inline;
+            margin: 0 2px 0 0;
         }
 
         .step-circle {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border: 2px solid rgba(194, 178, 128, 0.7);
-            background-color: var(--linen);
-            color: var(--text-mid);
+            width: 16px;
+            height: 16px;
+            font-size: 0.65rem;
+            display: inline-flex;
+            vertical-align: middle;
         }
 
         .step-label {
-            margin-top: 0.4rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-light);
+            display: inline;
+            margin: 0 8px 0 0;
+            font-size: 0.7rem;
         }
 
-        .checkout-step.completed .step-circle {
-            background-color: var(--sand);
-            color: var(--espresso);
-            border-color: var(--sand);
+        .dense-block {
+            margin: 0;
+            padding: 4px 8px;
+            line-height: 1.3;
         }
 
-        .checkout-step.completed .step-label {
-            color: var(--text-mid);
-            font-weight: 500;
+        .dense-block p,
+        .dense-block div {
+            margin: 0 0 2px 0;
         }
     </style>
 </head>
@@ -413,11 +356,11 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
             <div class="collapse navbar-collapse" id="navMain">
                 <ul class="gap-1 mx-auto navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../../pages/ProductListPage/products.php">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../pages/AboutPage/about.php">Our Story</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../pages/ProfilePage/profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../pages/ProductListPage/products.php">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../pages/AboutPage/about.php">Our Story</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
                     <a href="../../pages/ProductListPage/products.php" class="btn-nav-cta nav-link">
@@ -429,110 +372,14 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
     </nav>
 
     <main class="confirm-wrapper">
+        <div class="confirm-card dense-block">
         <?php if ($has_order): ?>
-<<<<<<< HEAD
-            <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge"></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
-=======
-<<<<<<< HEAD
-            <!-- Process Bar: all steps completed -->
-            <section aria-label="Order progress" class="position-relative checkout-steps">
-                <div style="position:absolute;left:0;top:22px;height:2px;width:100%;background:linear-gradient(90deg,var(--sand),var(--cream));z-index:1;"></div>
-                <div class="checkout-step completed">
-                    <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-                    <div class="step-label">Cart</div>
-                </div>
-                <div class="checkout-step completed">
-                    <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-                    <div class="step-label">Shipping</div>
-                </div>
-                <div class="checkout-step completed">
-                    <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-                    <div class="step-label">Payment</div>
-                </div>
-                <div class="checkout-step completed">
-                    <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-                    <div class="step-label">Confirmation</div>
-                </div>
-            </section>
-
-            <section class="confirm-card" aria-label="Order confirmation">
-                <div class="success-icon">
-                    <i class="bi bi-check-lg"></i>
-                </div>
-                <h1 class="confirm-heading">Order Confirmed!</h1>
-                <p class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</p>
-                <div class="order-id-badge">Order #<?= $order_id ?></div>
-
-                <!-- Estimated Delivery -->
-                <div class="eta-banner">
-                    <i class="bi bi-clock eta-icon"></i>
-                    <div>
-                        <div class="eta-label">Estimated Delivery</div>
-                        <span class="eta-time"><?= $eta_range ?></span>
-                        <span class="ms-1 eta-date">· <?= $eta_date ?></span>
-                    </div>
-                </div>
-
-                <div class="details-section">
-                    <div class="details-title">Delivery Details</div>
-                    <div class="details-row"><strong><?= $fullName ?></strong></div>
-                    <div class="details-row"><?= $email ?></div>
-                    <div class="details-row"><?= $phone ?></div>
-                    <div class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></div>
-                    <?php if ($deliveryNotes): ?>
-                        <div class="text-muted details-row"><em>Note: <?= $deliveryNotes ?></em></div>
-                    <?php endif; ?>
-
-                    <div class="mt-3 details-title">Order Summary</div>
-                    <div class="order-summary-box">
-                        <div class="order-summary-row">
-                            <span><?= $order_items ?></span>
-                            <span><?= $order_subtotal ?></span>
-                        </div>
-                        <div class="order-summary-row">
-                            <span>Delivery</span>
-                            <span><?= $order_delivery ?></span>
-                        </div>
-                        <div class="order-summary-row">
-                            <span>Promo (FREEDELIVERY)</span>
-                            <span><?= $order_promo ?></span>
-                        </div>
-                        <div class="order-summary-row total">
-                            <span>Total</span>
-                            <span><?= $order_total ?></span>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="mt-3 mb-0 text-muted small">A confirmation email has been sent to <strong><?= $email ?></strong></p>
-                <a href="../../index.php" class="btn btn-back-home">
-                    <i class="bi bi-house-door"></i> Back to Home
-                </a>
-            </section>
-        <?php else: ?>
-            <!-- No order data (direct visit) -->
-            <section class="confirm-card empty-state">
-                <div class="success-icon">
-                    <i class="bi bi-cart-x"></i>
-                </div>
-                <h1 class="confirm-heading">No Order Found</h1>
-                <p class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</p>
-                <a href="../../index.php" class="btn btn-back-home">
-                    <i class="bi bi-house-door"></i> Browse Menu
-                </a>
-                <a href="../CheckoutPage/checkout.php" class="ms-2 mt-2 btn-outline-secondary btn" style="border-color:var(--sand);color:var(--espresso);">
-                    <i class="bi bi-bag-check"></i> Go to Checkout
-                </a>
-            </section>
-=======
             <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge">Order #<?= $order_id ?></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
-            <p><span class="details-title">Delivery Details</span><span class="details-row"><strong><?= $fullName ?></strong></span><span class="details-row"><?= $email ?></span><span class="details-row"><?= $phone ?></span><span class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></span><?php if ($deliveryNotes): ?><span class="details-row"><em>Note: <?= $deliveryNotes ?></em></span><?php endif; ?><span class="details-title">Order Summary</span><span class="order-summary-box"><span class="order-summary-row"><?= $order_items ?> <?= $order_subtotal ?></span><span class="order-summary-row">Delivery <?= $order_delivery ?></span><span class="order-summary-row">Promo (FREEDELIVERY) <?= $order_promo ?></span><span class="order-summary-row total">Total <?= $order_total ?></span></span></p>
->>>>>>> 063ed705485e65bc54f1f0ad67652c7ed3216a14
             <p>A confirmation email has been sent to <span class="email-plain"><?= $email ?></span> <a href="../../index.php" class="btn btn-back-home">Back to Home</a></p>
         <?php else: ?>
             <p><span class="success-icon"><i class="bi bi-cart-x"></i></span><span class="confirm-heading">No Order Found</span><span class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</span><a href="../../index.php" class="btn btn-back-home">Browse Menu</a><a href="../CheckoutPage/checkout.php" class="btn btn-back-home">Go to Checkout</a></p>
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         <?php endif; ?>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
