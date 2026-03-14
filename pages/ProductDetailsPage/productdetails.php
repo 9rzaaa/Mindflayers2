@@ -15,7 +15,7 @@ foreach ($products as $product) {
 }
 
 if (!$selectedProduct) {
-    header('Location: /Mindflayers/pages/ProductListPage/products.php');
+    header('Location: ../ProductListPage/products.php');
     exit;
 }
 
@@ -69,6 +69,8 @@ function html($text)
             background-color: var(--linen);
             color: var(--text-dark);
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         h1,
@@ -86,7 +88,7 @@ function html($text)
         /* ── Navbar ── */
         .navbar {
             background-color: var(--espresso);
-            padding: 1.1rem 2.5rem;
+            padding: 4px 8px;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -142,425 +144,53 @@ function html($text)
             }
         }
 
-        /* ── Breadcrumb ── */
-        .breadcrumb-bar {
-            background: var(--white);
-            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
-            padding: 0.75rem 0;
-        }
+        .breadcrumb-bar { padding: 4px 8px; background: var(--white); border: none; }
+        .breadcrumb-bar .breadcrumb { padding: 0; margin: 0; background: transparent; }
+        .breadcrumb-bar .breadcrumb-item { display: inline; font-size: 0.85rem; }
+        .breadcrumb-bar .breadcrumb-item + .breadcrumb-item::before { content: " / "; }
+        .breadcrumb-item a { color: var(--text-light); }
+        .breadcrumb-item.active { color: var(--text-mid); }
+        .btn-back-arrow { width: 20px; height: 20px; font-size: 0.75rem; padding: 0; display: inline-flex; }
 
-        .breadcrumb-item a {
-            color: var(--text-light);
-            font-size: 0.82rem;
-            letter-spacing: 0.04em;
-            transition: color var(--transition);
-        }
-
-        .breadcrumb-item a:hover {
-            color: var(--mocha);
-        }
-
-        .breadcrumb-item.active {
-            color: var(--text-mid);
-            font-size: 0.82rem;
-        }
-
-        .breadcrumb-item+.breadcrumb-item::before {
-            color: var(--text-light);
-        }
-
-        /* ── Back Arrow ── */
-        .btn-back-arrow {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 1px solid rgba(194, 178, 128, 0.4);
-            background: transparent;
-            color: var(--text-mid);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            flex-shrink: 0;
-            transition: all var(--transition);
-        }
-
-        .btn-back-arrow:hover {
-            background: var(--espresso);
-            border-color: var(--espresso);
-            color: var(--cream);
-        }
-
-        /* ── Hero Product Section ── */
-        .product-hero {
-            background-color: var(--white);
-            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
-        }
-
+        .dense-wrapper { max-width: 100%; margin: 0; padding: 4px 8px; line-height: 1.2; }
+        .dense-block p { margin: 0 0 2px 0; }
         .product-image-wrap {
-            position: relative;
-            background: linear-gradient(135deg, var(--espresso), var(--mocha));
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 48px; height: 48px; display: inline-block; vertical-align: middle;
+            overflow: hidden; border-radius: 0; margin-right: 4px;
         }
+        .product-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .product-image-fallback { font-size: 1.5rem; }
+        .product-badge-pill, .product-title, .product-tagline, .rating-row, .price-display, .price-label { display: inline; margin: 0; padding: 0 4px 0 0; }
+        .product-title { font-size: 0.95rem; }
+        .product-tagline { font-size: 0.9rem; }
+        .rating-stars, .rating-num, .rating-count { display: inline; margin: 0 4px 0 0; font-size: 0.85rem; }
+        .price-display { font-size: 0.95rem; }
+        .price-label { font-size: 0.78rem; }
+        .quick-stats { display: inline; margin: 0; padding: 0; border: none; }
+        .quick-stat { display: inline; padding: 0 4px 0 0; border: none; }
+        .quick-stat-val, .quick-stat-lbl { display: inline; font-size: 0.85rem; }
+        .quick-stat::after { content: " · "; }
+        .quick-stat:last-child::after { content: ""; }
 
-        .product-image-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .product-image-wrap:hover img {
-            transform: scale(1.04);
-        }
-
-        .product-image-fallback {
-            font-size: 6rem;
-            line-height: 1;
-        }
-
-        .product-badge-pill {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.3rem 0.8rem;
-            border-radius: 999px;
-            background: rgba(194, 178, 128, 0.2);
-            color: var(--mocha);
-            border: 1px solid rgba(194, 178, 128, 0.5);
-            margin-bottom: 0.75rem;
-        }
-
-        .product-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            color: var(--espresso);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-tagline {
-            font-size: 1rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .rating-row {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .rating-stars {
-            color: var(--sand);
-            font-size: 0.9rem;
-        }
-
-        .rating-num {
-            font-weight: 700;
-            color: var(--espresso);
-            font-size: 0.95rem;
-        }
-
-        .rating-count {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-
-        .price-display {
-            font-family: var(--font-display);
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: var(--espresso);
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 0.25rem;
-        }
-
-        .price-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-light);
-            margin-bottom: 1.75rem;
-        }
-
-        /* ── Add to Cart Button ── */
         .btn-add-cart {
-            background: linear-gradient(135deg, var(--sand), var(--cream));
-            color: var(--espresso);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            min-width: 180px;
-            justify-content: center;
+            padding: 2px 8px; font-size: 0.85rem; min-width: auto;
+            display: inline-flex; margin: 0 0 0 4px;
         }
+        .btn-add-cart.added { padding: 2px 8px; }
+        .btn-add-cart .ripple { display: none; }
 
-        .btn-add-cart:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(194, 178, 128, 0.45);
-            color: var(--espresso);
-        }
-
-        /* Added state */
-        .btn-add-cart.added {
-            background: linear-gradient(135deg, #2d7a4f, #3a9e65) !important;
-            color: #fff !important;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(45, 122, 79, 0.4) !important;
-            pointer-events: none;
-        }
-
-        .btn-add-cart.added:hover {
-            color: #fff;
-        }
-
-        /* Ripple */
-        .btn-add-cart .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: ripple-anim 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple-anim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* Label swap */
-        .btn-add-cart .btn-label-default,
-        .btn-add-cart .btn-label-added {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-
-        .btn-add-cart .btn-label-added {
-            position: absolute;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        .btn-add-cart.added .btn-label-default {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        .btn-add-cart.added .btn-label-added {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .btn-details {
-            background: transparent;
-            color: var(--mocha);
-            font-size: 0.88rem;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            padding: 0.9rem 1.6rem;
-            border: 1px solid rgba(111, 76, 62, 0.35);
-            border-radius: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all var(--transition);
-            cursor: pointer;
-        }
-
-        .btn-details:hover {
-            border-color: var(--mocha);
-            background: rgba(111, 76, 62, 0.05);
-            color: var(--espresso);
-        }
-
-        /* ── Quick Stats Row ── */
-        .quick-stats {
-            display: flex;
-            gap: 0;
-            border: 1px solid rgba(194, 178, 128, 0.3);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .quick-stat {
-            flex: 1;
-            padding: 0.85rem 1rem;
-            text-align: center;
-            border-right: 1px solid rgba(194, 178, 128, 0.3);
-        }
-
-        .quick-stat:last-child {
-            border-right: none;
-        }
-
-        .quick-stat-val {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--espresso);
-            display: block;
-        }
-
-        .quick-stat-lbl {
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-light);
-        }
-
-        /* ── Tabs / Detail Sections ── */
-        .detail-tabs {
-            background: var(--white);
-            border-top: 1px solid rgba(194, 178, 128, 0.2);
-            padding-top: 0;
-        }
-
-        .nav-tabs-mf {
-            border-bottom: 1px solid rgba(194, 178, 128, 0.25);
-            gap: 0;
-            padding: 0;
-        }
-
-        .nav-tabs-mf .nav-link {
-            font-family: var(--font-body);
-            font-size: 0.82rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            border: none;
-            border-bottom: 2px solid transparent;
-            border-radius: 0;
-            padding: 1rem 1.25rem;
-            margin-bottom: -1px;
-            transition: all var(--transition);
-        }
-
-        .nav-tabs-mf .nav-link:hover {
-            color: var(--mocha);
-        }
-
-        .nav-tabs-mf .nav-link.active {
-            color: var(--espresso);
-            border-bottom-color: var(--sand);
-            background: transparent;
-        }
-
-        .tab-panel {
-            padding: 2.5rem 0;
-            max-width: 100%;
-        }
-
-        .detail-tabs .container-fluid,
-        .tab-panel {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        /* ── Spec cards ── */
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-        }
-
-        .spec-card-mf {
-            background: var(--linen);
-            border: 1px solid rgba(194, 178, 128, 0.3);
-            border-radius: 8px;
-            padding: 1.1rem;
-            transition: all var(--transition);
-        }
-
-        .spec-card-mf:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(59, 42, 42, 0.08);
-            border-color: rgba(194, 178, 128, 0.6);
-        }
-
-        .spec-card-icon {
-            font-size: 1.2rem;
-            color: var(--sand);
-            margin-bottom: 0.5rem;
-        }
-
-        .spec-card-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-light);
-            margin-bottom: 0.2rem;
-        }
-
-        .spec-card-value {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--espresso);
-        }
-
-        /* ── Taste pills ── */
-        .taste-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.9rem;
-            background: var(--linen);
-            border: 1px solid rgba(194, 178, 128, 0.4);
-            border-radius: 999px;
-            font-size: 0.82rem;
-            color: var(--text-mid);
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-up {
-            animation: fadeUp 0.6s ease both;
-        }
-
-        .fade-up-delay {
-            animation: fadeUp 0.6s 0.15s ease both;
-        }
+        .detail-tabs { padding: 4px 0; border: none; background: transparent; }
+        .nav-tabs-mf { display: none; }
+        .tab-panel { padding: 4px 0; }
+        .tab-pane { display: block !important; }
+        .spec-grid { display: inline; }
+        .spec-card-mf { display: inline; padding: 0 4px 0 0; margin: 0; border: none; background: transparent; }
+        .spec-card-icon { display: none; }
+        .spec-card-label, .spec-card-value { display: inline; font-size: 0.85rem; }
+        .spec-card-label::after { content: ": "; }
+        .spec-card-mf:not(:last-child)::after { content: " · "; }
+        .taste-pill { display: inline; padding: 0; margin: 0 4px 0 0; border: none; background: transparent; font-size: 0.85rem; }
+        .taste-pill::after { content: " · "; }
     </style>
 </head>
 
@@ -593,262 +223,56 @@ function html($text)
         </div>
     </nav>
 
-    <!-- ═══ BREADCRUMB ════════════════════════════════════════════ -->
-    <div class="breadcrumb-bar">
-        <div class="d-flex align-items-center justify-content-between container">
-            <div class="d-flex align-items-center gap-3">
-                <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn-back-arrow" aria-label="Back to Menu">
-                    <i class="bi-arrow-left bi"></i>
-                </a>
-                <nav aria-label="breadcrumb">
-                    <ol class="mb-0 breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Mindflayers/index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/Mindflayers/pages/ProductListPage/products.php">Menu</a></li>
-                        <li class="breadcrumb-item active"><?= html($selectedProduct['name']) ?></li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+    <div class="breadcrumb-bar dense-wrapper">
+        <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn-back-arrow" aria-label="Back to Menu"><i class="bi-arrow-left bi"></i></a>
+        <nav aria-label="breadcrumb"><ol class="mb-0 breadcrumb"><li class="breadcrumb-item"><a href="/Mindflayers/index.php">Home</a></li><li class="breadcrumb-item"><a href="/Mindflayers/pages/ProductListPage/products.php">Menu</a></li><li class="breadcrumb-item active"><?= html($selectedProduct['name']) ?></li></ol></nav>
     </div>
 
-    <!-- ═══ PRODUCT HERO ══════════════════════════════════════════ -->
-    <section class="py-5 product-hero">
-        <div class="py-2 container">
-            <div class="align-items-center row g-5">
-
-                <!-- Left: Image -->
-                <div class="col-lg-5 fade-up">
-                    <div class="product-image-wrap">
-                        <?php if (!empty($selectedProduct['image'])): ?>
-                            <img src="/Mindflayers/pages/ProductListPage/<?= html($selectedProduct['image']) ?>" alt="<?= html($selectedProduct['name']) ?>">
-                        <?php else: ?>
-                            <div class="product-image-fallback">☕</div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <!-- Right: Info -->
-                <div class="col-lg-7 fade-up-delay">
-                    <div class="product-badge-pill"><?= html($selectedProduct['badge']) ?></div>
-                    <h1 class="product-title"><?= html($selectedProduct['name']) ?></h1>
-                    <p class="product-tagline"><?= html($selectedProduct['tagline']) ?></p>
-
-                    <!-- Rating -->
-                    <div class="rating-row">
-                        <span class="rating-stars">
-                            <?php for ($i = 0; $i < 5; $i++): ?>
-                                <i class="bi bi-star<?= $i < floor($selectedProduct['rating']) ? '-fill' : ($i < $selectedProduct['rating'] ? '-half' : '') ?>"></i>
-                            <?php endfor; ?>
-                        </span>
-                        <span class="rating-num"><?= number_format($selectedProduct['rating'], 1) ?></span>
-                        <span class="rating-count">(<?= html($selectedProduct['reviews']) ?> reviews)</span>
-                    </div>
-
-                    <!-- Quick stats -->
-                    <div class="quick-stats">
-                        <div class="quick-stat">
-                            <span class="quick-stat-val"><?= html($selectedProduct['volume']) ?></span>
-                            <span class="quick-stat-lbl">Volume</span>
-                        </div>
-                        <div class="quick-stat">
-                            <span class="quick-stat-val"><?= html($selectedProduct['calories']) ?></span>
-                            <span class="quick-stat-lbl">Calories</span>
-                        </div>
-                        <div class="quick-stat">
-                            <span class="quick-stat-val"><?= html($selectedProduct['category']) ?></span>
-                            <span class="quick-stat-lbl">Category</span>
-                        </div>
-                    </div>
-
-                    <!-- Price + CTA -->
-                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                        <div>
-                            <div class="price-display">₱<?= number_format($selectedProduct['price']) ?></div>
-                            <div class="price-label">Philippine Peso · Inclusive of taxes</div>
-                        </div>
-                        <form method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="m-0" id="cart-form">
-                            <input type="hidden" name="product_id" value="<?= (int)$selectedProduct['id'] ?>">
-                            <button type="submit" class="btn-add-cart" id="btn-add-cart">
-                                <span class="btn-label-default">
-                                    <i class="bi bi-cart-fill"></i> Add to Cart
-                                </span>
-                                <span class="btn-label-added">
-                                    <i class="bi bi-check-circle-fill"></i> Added
-                                </span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ DETAIL TABS ═══════════════════════════════════════════ -->
-    <section class="detail-tabs">
-        <div class="px-0 container">
-            <ul class="nav nav-tabs-mf" id="detailTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-about" type="button">About</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-specs" type="button">Specifications</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-taste" type="button">Taste Profile</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-shipping" type="button">Delivery</button>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-
-                <!-- About Tab -->
-                <div class="tab-pane fade show active" id="tab-about">
-                    <div class="tab-panel">
-                        <div class="row g-5">
-                            <div class="col-lg-7">
-                                <p class="mb-0" style="font-size:1rem;line-height:1.85;color:var(--text-mid);">
-                                    <?= html($selectedProduct['desc']) ?>
-                                </p>
-                                <div class="d-flex flex-wrap gap-2 mt-4">
-                                    <span class="taste-pill"><i class="bi bi-heart-fill" style="color:var(--sand);font-size:0.75rem;"></i> Cozy Flavor</span>
-                                    <span class="taste-pill"><i class="bi bi-lightning-fill" style="color:var(--sand);font-size:0.75rem;"></i> Energy Boost</span>
-                                    <span class="taste-pill"><i class="bi bi-emoji-smile-fill" style="color:var(--sand);font-size:0.75rem;"></i> Feel Good</span>
-                                    <span class="taste-pill"><i class="bi bi-award-fill" style="color:var(--sand);font-size:0.75rem;"></i> <?= html($selectedProduct['badge']) ?></span>
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div style="background:var(--espresso);border-radius:10px;padding:1.75rem;">
-                                    <p style="font-family:var(--font-display);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sand);margin-bottom:1rem;">At a glance</p>
-                                    <?php
-                                    $glanceItems = [
-                                        ['bi-geo-alt', 'Origin', 'Ethically sourced beans'],
-                                        ['bi-clock', 'Prep Time', 'Made fresh to order'],
-                                        ['bi-recycle', 'Packaging', 'Eco-friendly, compostable'],
-                                        ['bi-wifi', 'Dine In', 'Free WiFi available'],
-                                    ];
-                                    foreach ($glanceItems as $item): ?>
-                                        <div class="d-flex align-items-center gap-3 mb-3">
-                                            <div style="width:32px;height:32px;border-radius:50%;background:rgba(194,178,128,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                                <i class="bi <?= $item[0] ?>" style="color:var(--sand);font-size:0.85rem;"></i>
-                                            </div>
-                                            <div>
-                                                <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,216,176,0.5);"><?= $item[1] ?></div>
-                                                <div style="font-size:0.88rem;color:var(--cream);"><?= $item[2] ?></div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Specs Tab -->
-                <div class="tab-pane fade" id="tab-specs">
-                    <div class="tab-panel">
-                        <div class="spec-grid">
-                            <?php foreach ($selectedProduct['specs'] as $spec):
-                                $specIcon = match (strtolower($spec['label'])) {
-                                    'temperature' => 'bi-thermometer-half',
-                                    'base'        => 'bi-cup-straw',
-                                    'milk'        => 'bi-droplet-half',
-                                    'caffeine'    => 'bi-lightning-charge',
-                                    'sugar'       => 'bi-pentagon',
-                                    'size'        => 'bi-rulers',
-                                    'origin'      => 'bi-geo-alt',
-                                    default       => $spec['icon'] ?? 'bi-dot',
-                                };
-                            ?>
-                                <div class="spec-card-mf">
-                                    <div class="spec-card-icon"><i class="bi <?= html($specIcon) ?>"></i></div>
-                                    <div class="spec-card-label"><?= html($spec['label']) ?></div>
-                                    <div class="spec-card-value"><?= html($spec['value']) ?></div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Taste Profile Tab -->
-                <div class="tab-pane fade" id="tab-taste">
-                    <div class="tab-panel">
-                        <div class="align-items-center row g-4">
-                            <div class="col-lg-6">
-                                <?php
-                                $tastePairs = [
-                                    ['Sweetness',  85, 'var(--sand)'],
-                                    ['Bitterness', 30, '#8C6647'],
-                                    ['Creaminess', 90, '#C2B280'],
-                                    ['Intensity',  60, '#6F4C3E'],
-                                ];
-                                foreach ($tastePairs as $taste): ?>
-                                    <div class="mb-4">
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <span style="font-size:0.82rem;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.08em;"><?= $taste[0] ?></span>
-                                            <span style="font-size:0.82rem;color:var(--text-light);"><?= $taste[1] ?>%</span>
-                                        </div>
-                                        <div style="height:6px;background:rgba(194,178,128,0.2);border-radius:999px;overflow:hidden;">
-                                            <div style="height:100%;width:<?= $taste[1] ?>%;background:<?= $taste[2] ?>;border-radius:999px;transition:width 1s ease;"></div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                            <div class="col-lg-6">
-                                <div style="background:var(--linen);border:1px solid rgba(194,178,128,0.3);border-radius:10px;padding:1.5rem;">
-                                    <p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-light);margin-bottom:1rem;">Tasting Notes</p>
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <?php
-                                        $notes = ['Creamy', 'Smooth', 'Sweet', 'Floral', 'Warm', 'Rich'];
-                                        foreach ($notes as $note): ?>
-                                            <span class="taste-pill"><?= $note ?></span>
-                                        <?php endforeach; ?>
-                                    </div>
-                                    <hr style="border-color:rgba(194,178,128,0.25);margin:1.25rem 0;">
-                                    <p style="font-size:0.88rem;color:var(--text-light);line-height:1.7;margin:0;">
-                                        Best enjoyed mid-morning or as an afternoon pick-me-up. Pairs well with our pastry selection.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Delivery Tab -->
-                <div class="tab-pane fade" id="tab-shipping">
-                    <div class="tab-panel">
-                        <div class="row g-4">
-                            <?php
-                            $deliveryInfo = [
-                                ['bi-clock-history', 'Preparation Time', '5–10 minutes after order is placed. All drinks are made fresh to order — no pre-made batches.'],
-                                ['bi-scooter', 'Delivery Estimate', '30–45 minutes for Metro Manila. Salcedo, BGC, and Poblacion branches offer 20-minute delivery windows.'],
-                                ['bi-box-seam', 'Packaging', 'All orders use eco-friendly, compostable cups and paper straws. No single-use plastics.'],
-                                ['bi-arrow-repeat', 'Order Changes', 'Modifications accepted within 2 minutes of placing your order via the app or by calling the branch directly.'],
-                            ];
-                            foreach ($deliveryInfo as $info): ?>
-                                <div class="col-md-6">
-                                    <div style="background:var(--linen);border:1px solid rgba(194,178,128,0.3);border-radius:10px;padding:1.5rem;height:100%;">
-                                        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
-                                            <div style="width:38px;height:38px;border-radius:50%;background:rgba(194,178,128,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                                <i class="bi <?= $info[0] ?>" style="color:var(--mocha);font-size:1rem;"></i>
-                                            </div>
-                                            <span style="font-size:0.88rem;font-weight:600;color:var(--espresso);"><?= $info[1] ?></span>
-                                        </div>
-                                        <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7;margin:0;"><?= $info[2] ?></p>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /tab-content -->
-        </div><!-- /container -->
-    </section>
+    <main class="dense-wrapper dense-block">
+        <p>
+            <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn-back-arrow"><i class="bi-arrow-left bi"></i></a>
+            <span class="product-image-wrap">
+                <?php if (!empty($selectedProduct['image'])): ?>
+                    <img src="/Mindflayers/pages/ProductListPage/<?= html($selectedProduct['image']) ?>" alt="">
+                <?php else: ?>
+                    <span class="product-image-fallback">☕</span>
+                <?php endif; ?>
+            </span>
+            <span class="product-badge-pill"><?= html($selectedProduct['badge']) ?></span>
+            <span class="product-title"><?= html($selectedProduct['name']) ?></span>
+            <span class="product-tagline"><?= html($selectedProduct['tagline']) ?></span>
+            <span class="rating-row">
+                <span class="rating-stars"><?php for ($i = 0; $i < 5; $i++): ?><i class="bi bi-star<?= $i < floor($selectedProduct['rating']) ? '-fill' : ($i < $selectedProduct['rating'] ? '-half' : '') ?>"></i><?php endfor; ?></span>
+                <span class="rating-num"><?= number_format($selectedProduct['rating'], 1) ?></span>
+                <span class="rating-count">(<?= html($selectedProduct['reviews']) ?> reviews)</span>
+            </span>
+            <span class="quick-stats">
+                <span class="quick-stat"><span class="quick-stat-val"><?= html($selectedProduct['volume']) ?></span><span class="quick-stat-lbl">Volume</span></span>
+                <span class="quick-stat"><span class="quick-stat-val"><?= html($selectedProduct['calories']) ?></span><span class="quick-stat-lbl">Calories</span></span>
+                <span class="quick-stat"><span class="quick-stat-val"><?= html($selectedProduct['category']) ?></span><span class="quick-stat-lbl">Category</span></span>
+            </span>
+            <span class="price-display">₱<?= number_format($selectedProduct['price']) ?></span>
+            <span class="price-label">Philippine Peso · Inclusive of taxes</span>
+            <form method="post" action="/Mindflayers/pages/ShoppingCartPage/shoppingcart.php" class="d-inline m-0" id="cart-form">
+                <input type="hidden" name="product_id" value="<?= (int)$selectedProduct['id'] ?>">
+                <button type="submit" class="btn-add-cart" id="btn-add-cart">
+                    <span class="btn-label-default"><i class="bi bi-cart-fill"></i> Add to Cart</span>
+                    <span class="btn-label-added"><i class="bi bi-check-circle-fill"></i> Added</span>
+                </button>
+            </form>
+        </p>
+        <p><?= html($selectedProduct['desc']) ?> <span class="taste-pill">Cozy Flavor</span><span class="taste-pill">Energy Boost</span><span class="taste-pill">Feel Good</span><span class="taste-pill"><?= html($selectedProduct['badge']) ?></span> Origin: Ethically sourced beans · Prep Time: Made fresh to order · Packaging: Eco-friendly, compostable · Dine In: Free WiFi available</p>
+        <p>
+            <?php foreach ($selectedProduct['specs'] as $spec): ?>
+                <span class="spec-card-mf"><span class="spec-card-label"><?= html($spec['label']) ?></span><span class="spec-card-value"><?= html($spec['value']) ?></span></span>
+            <?php endforeach; ?>
+        </p>
+        <p>Sweetness 85% · Bitterness 30% · Creaminess 90% · Intensity 60% · Tasting Notes: Creamy · Smooth · Sweet · Floral · Warm · Rich · Best enjoyed mid-morning or as an afternoon pick-me-up. Pairs well with our pastry selection.</p>
+        <p>Preparation Time: 5–10 minutes after order is placed. All drinks are made fresh to order — no pre-made batches. Delivery Estimate: 30–45 minutes for Metro Manila. Salcedo, BGC, and Poblacion branches offer 20-minute delivery windows. Packaging: All orders use eco-friendly, compostable cups and paper straws. No single-use plastics. Order Changes: Modifications accepted within 2 minutes of placing your order via the app or by calling the branch directly.</p>
+    </main>
 
     <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
-    <footer style="background-color:var(--espresso);border-top:1px solid rgba(194,178,128,0.12);padding:1.5rem 2.5rem;">
+    <footer style="background-color:var(--espresso);border-top:1px solid rgba(194,178,128,0.12);padding:4px 8px;">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 container-fluid">
             <p class="mb-0" style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:rgba(245,245,240,0.5);">
                 Mindflayer<span style="color:var(--sand);">.</span>
