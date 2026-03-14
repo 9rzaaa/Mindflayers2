@@ -372,11 +372,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
     </nav>
 
     <main class="confirm-wrapper">
-        <div class="dense-block confirm-card">
         <?php if ($has_order): ?>
-<<<<<<< HEAD
-            <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge"></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
-=======
 <<<<<<< HEAD
             <!-- Process Bar: all steps completed -->
             <section aria-label="Order progress" class="position-relative checkout-steps">
@@ -471,7 +467,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 =======
             <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge">Order #<?= $order_id ?></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
             <p><span class="details-title">Delivery Details</span><span class="details-row"><strong><?= $fullName ?></strong></span><span class="details-row"><?= $email ?></span><span class="details-row"><?= $phone ?></span><span class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></span><?php if ($deliveryNotes): ?><span class="details-row"><em>Note: <?= $deliveryNotes ?></em></span><?php endif; ?><span class="details-title">Order Summary</span><span class="order-summary-box"><span class="order-summary-row"><?= $order_items ?> <?= $order_subtotal ?></span><span class="order-summary-row">Delivery <?= $order_delivery ?></span><span class="order-summary-row">Promo (FREEDELIVERY) <?= $order_promo ?></span><span class="order-summary-row total">Total <?= $order_total ?></span></span></p>
->>>>>>> 063ed705485e65bc54f1f0ad67652c7ed3216a14
             <p>A confirmation email has been sent to <span class="email-plain"><?= $email ?></span> <a href="../../index.php" class="btn btn-back-home">Back to Home</a></p>
         <?php else: ?>
             <p><span class="success-icon"><i class="bi bi-cart-x"></i></span><span class="confirm-heading">No Order Found</span><span class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</span><a href="../../index.php" class="btn btn-back-home">Browse Menu</a><a href="../CheckoutPage/checkout.php" class="btn btn-back-home">Go to Checkout</a></p>
