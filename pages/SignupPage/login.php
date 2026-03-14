@@ -218,36 +218,36 @@
         }
 
         .primary-btn {
-            width: 100%;
+            width: 48%;
             border-radius: 999px;
-            border: none;
-            background: linear-gradient(135deg, var(--sand), var(--cream));
+            border: 1px solid rgba(194, 178, 128, 0.7);
+            background-color: #FFFFFF;
             color: var(--espresso);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 0.9rem 1rem;
+            padding: 0.85rem 1rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            transition: background-color 0.15s ease, transform 0.15s ease;
         }
 
         .primary-btn:hover {
+            background-color: rgba(232, 216, 176, 0.2);
             transform: translateY(-1px);
-            box-shadow: 0 12px 32px rgba(59, 42, 42, 0.45);
-            filter: brightness(1.02);
         }
 
         .secondary-btn {
-            width: 100%;
+            width: 48%;
             margin-top: 0.75rem;
+            margin-left: auto;
             border-radius: 999px;
-            border: 1px solid rgba(194, 178, 128, 0.8);
-            background-color: transparent;
-            color: var(--mocha);
+            border: 1px solid rgba(194, 178, 128, 0.7);
+            background-color: #FFFFFF;
+            color: var(--espresso);
             font-size: 0.9rem;
             font-weight: 500;
             letter-spacing: 0.12em;
@@ -342,24 +342,8 @@
 
         <div class="d-flex flex-column justify-content-between auth-card">
             <div>
-                <h2 class="auth-title">Log in</h2>
-                <p class="auth-subtitle">Jump back into your account or continue with social.</p>
-
-                <!-- Social login first (Tip 16) -->
-                <button type="button" class="social-login-btn">
-                    <i class="bi bi-google"></i>
-                    Continue with Google
-                </button>
-                <button type="button" class="social-login-btn">
-                    <i class="bi bi-facebook"></i>
-                    Continue with Facebook
-                </button>
-
-                <div class="divider">
-                    <span></span>
-                    <div>or log in with email</div>
-                    <span></span>
-                </div>
+                <h2 class="auth-title">Log in or Sign up</h2>
+                <p class="auth-subtitle">Choose below.</p>
 
                 <form id="login-form" novalidate>
                     <div class="mb-3">
@@ -380,13 +364,15 @@
                         <a href="#" style="font-size: 0.8rem; text-decoration: none; color: #273ED3;">Forgot password?</a>
                     </div>
 
-                    <!-- Primary vs secondary button hierarchy (Tip 30) -->
-                    <button type="submit" class="mt-3 primary-btn">
-                        Log in
-                    </button>
-                    <a href="signup.php" class="secondary-btn">
-                        <span>Sign up</span>
-                    </a>
+                    <!-- Equal weight buttons, no hierarchy -->
+                    <div style="display: flex; gap: 1rem; justify-content: space-between; margin-top: 1.5rem;">
+                        <button type="submit" class="primary-btn">
+                            Log in
+                        </button>
+                        <a href="signup.php" class="secondary-btn">
+                            <span>Sign up</span>
+                        </a>
+                    </div>
                 </form>
             </div>
 

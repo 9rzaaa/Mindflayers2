@@ -360,53 +360,62 @@
         <div class="d-flex flex-column justify-content-between auth-card">
             <div>
                 <h2 class="auth-title">Create your account</h2>
-                <p class="auth-subtitle">Sign up in seconds or continue with social.</p>
-
-                <!-- Social login first (reduces friction) -->
-                <button type="button" class="social-login-btn">
-                    <i class="bi bi-google"></i>
-                    Continue with Google
-                </button>
-                <button type="button" class="social-login-btn">
-                    <i class="bi bi-facebook"></i>
-                    Continue with Facebook
-                </button>
-
-                <div class="divider">
-                    <span></span>
-                    <div>or sign up with email</div>
-                    <span></span>
-                </div>
+                <p class="auth-subtitle">Please fill in all required fields below.</p>
 
                 <form id="signup-form" novalidate>
                     <div class="mb-3">
+                        <label class="form-label" for="address1">Address line 1</label>
+                        <input type="text" class="form-control" id="address1" placeholder="" required>
+                        <div class="field-error" id="error-address1">Address line 1 is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="address2">Address line 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="" required>
+                        <div class="field-error" id="error-address2">Address line 2 is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="" required>
+                        <div class="field-error" id="error-city">City is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="country">Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="" required>
+                        <div class="field-error" id="error-country">Country is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="occupation">Occupation</label>
+                        <input type="text" class="form-control" id="occupation" placeholder="" required>
+                        <div class="field-error" id="error-occupation">Occupation is required.</div>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="name">Full name</label>
-                        <input type="text" class="form-control" id="name" placeholder="e.g. Alex Reyes" required>
+                        <input type="text" class="form-control" id="name" placeholder="" required>
                         <div class="field-error" id="error-name">Please enter your full name.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                        <input type="email" class="form-control" id="email" placeholder="" required>
                         <div class="field-error" id="error-email">Enter a valid email address.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="phone">Mobile number</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="+63 912 345 6789" maxlength="17" required>
-                        <div class="field-error" id="error-phone">Use the format +63 912 345 6789.</div>
+                        <input type="text" class="form-control" id="phone" placeholder="" required>
+                        <div class="field-error" id="error-phone">Mobile number is required.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="birthdate">Birthday</label>
-                        <input type="text" class="form-control" id="birthdate" placeholder="MM/DD/YYYY" maxlength="10" required>
-                        <div class="field-error" id="error-birthdate">Enter a valid date (MM/DD/YYYY).</div>
+                        <input type="text" class="form-control" id="birthdate" placeholder="" required>
+                        <div class="field-error" id="error-birthdate">Birthday is required.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="At least 8 characters" minlength="8" required>
+                        <input type="password" class="form-control" id="password" placeholder="" minlength="8" required>
                         <div class="field-error" id="error-password">Password must be at least 8 characters.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="confirm_password">Confirm password</label>
-                        <input type="password" class="form-control" id="confirm_password" placeholder="Repeat your password" minlength="8" required>
+                        <input type="password" class="form-control" id="confirm_password" placeholder="" minlength="8" required>
                         <div class="field-error" id="error-confirm">Passwords do not match.</div>
                     </div>
 
@@ -450,7 +459,12 @@
             phone: document.getElementById('phone'),
             birthdate: document.getElementById('birthdate'),
             password: document.getElementById('password'),
-            confirm: document.getElementById('confirm_password')
+            confirm: document.getElementById('confirm_password'),
+            address1: document.getElementById('address1'),
+            address2: document.getElementById('address2'),
+            city: document.getElementById('city'),
+            country: document.getElementById('country'),
+            occupation: document.getElementById('occupation')
         };
 
         function setValidity(input, isValid, errorId) {
@@ -466,99 +480,35 @@
             }
         }
 
-        // Phone input mask: +63 912 345 6789
-        fields.phone.addEventListener('input', function() {
-            let value = this.value.replace(/[^\d]/g, '');
+        function validateAll() {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (value.startsWith('0')) value = value.slice(1);
-            if (!value.startsWith('63')) value = '63' + value;
+            setValidity(fields.name, fields.name.value.trim().length > 1, 'error-name');
+            setValidity(fields.email, emailPattern.test(fields.email.value.trim()), 'error-email');
+            setValidity(fields.phone, fields.phone.value.trim().length > 5, 'error-phone');
+            setValidity(fields.birthdate, fields.birthdate.value.trim().length > 4, 'error-birthdate');
+            setValidity(fields.password, fields.password.value.length >= 8, 'error-password');
+            setValidity(fields.confirm, fields.confirm.value === fields.password.value && fields.confirm.value.length >= 8, 'error-confirm');
+            setValidity(fields.address1, fields.address1.value.trim().length > 0, 'error-address1');
+            setValidity(fields.address2, fields.address2.value.trim().length > 0, 'error-address2');
+            setValidity(fields.city, fields.city.value.trim().length > 0, 'error-city');
+            setValidity(fields.country, fields.country.value.trim().length > 0, 'error-country');
+            setValidity(fields.occupation, fields.occupation.value.trim().length > 0, 'error-occupation');
 
-            let formatted = '+' + value.substring(0, 2);
-            if (value.length > 2) formatted += ' ' + value.substring(2, 5);
-            if (value.length > 5) formatted += ' ' + value.substring(5, 8);
-            if (value.length > 8) formatted += ' ' + value.substring(8, 12);
-
-            this.value = formatted;
-
-            const isValid = /^\+63 \d{3} \d{3} \d{4}$/.test(this.value);
-            setValidity(this, isValid, 'error-phone');
-        });
-
-        // Birthdate input mask: MM/DD/YYYY
-        fields.birthdate.addEventListener('input', function() {
-            let v = this.value.replace(/[^\d]/g, '');
-            if (v.length > 2 && v.length <= 4) {
-                v = v.slice(0, 2) + '/' + v.slice(2);
-            } else if (v.length > 4) {
-                v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4, 8);
-            }
-            this.value = v.slice(0, 10);
-
-            const parts = this.value.split('/');
-            let isValid = false;
-            if (parts.length === 3) {
-                const m = parseInt(parts[0], 10);
-                const d = parseInt(parts[1], 10);
-                const y = parseInt(parts[2], 10);
-                const date = new Date(y, m - 1, d);
-                isValid =
-                    m >= 1 && m <= 12 &&
-                    d >= 1 && d <= 31 &&
-                    !isNaN(date.getTime()) &&
-                    date.getMonth() === m - 1 &&
-                    date.getDate() === d;
-            }
-            setValidity(this, isValid, 'error-birthdate');
-        });
-
-        // Inline validation for other fields
-        fields.name.addEventListener('input', function() {
-            setValidity(this, this.value.trim().length > 1, 'error-name');
-        });
-
-        fields.email.addEventListener('input', function() {
-            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            setValidity(this, pattern.test(this.value.trim()), 'error-email');
-        });
-
-        fields.password.addEventListener('input', function() {
-            const isValid = this.value.length >= 8;
-            setValidity(this, isValid, 'error-password');
-            // Also re-check confirm field
-            if (fields.confirm.value.length > 0) {
-                const confirmValid = fields.confirm.value === this.value && isValid;
-                setValidity(fields.confirm, confirmValid, 'error-confirm');
-            }
-        });
-
-        fields.confirm.addEventListener('input', function() {
-            const isValid = this.value.length >= 8 && this.value === fields.password.value;
-            setValidity(this, isValid, 'error-confirm');
-        });
+            return !document.querySelector('.form-control.is-invalid');
+        }
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Trigger all validators
-            fields.name.dispatchEvent(new Event('input'));
-            fields.email.dispatchEvent(new Event('input'));
-            fields.phone.dispatchEvent(new Event('input'));
-            fields.birthdate.dispatchEvent(new Event('input'));
-            fields.password.dispatchEvent(new Event('input'));
-            fields.confirm.dispatchEvent(new Event('input'));
-
-            const hasError = document.querySelector('.form-control.is-invalid');
-            if (hasError) {
-                alert('Please fix the highlighted fields before continuing.');
+            const valid = validateAll();
+            if (!valid) {
+                alert('Please fix the fields in the form after submission.');
                 return;
             }
 
-            // Set user as logged in
             setLoggedIn(fields.email.value);
-
             alert('Signup successful! Redirecting to home page...');
-
-            // Redirect to home page
             setTimeout(() => {
                 window.location.href = '../../index.php';
             }, 500);
