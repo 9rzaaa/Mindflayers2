@@ -15,8 +15,10 @@ $order_id = "MF-" . strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));
 
 // Estimated delivery: 45–60 min from now (Philippine Time)
 $now      = new DateTime('now', new DateTimeZone('Asia/Manila'));
-$eta_from = clone $now; $eta_from->modify('+45 minutes');
-$eta_to   = clone $now; $eta_to->modify('+60 minutes');
+$eta_from = clone $now;
+$eta_from->modify('+45 minutes');
+$eta_to   = clone $now;
+$eta_to->modify('+60 minutes');
 $eta_date  = $eta_from->format('F j, Y');
 $eta_range = $eta_from->format('g:i A') . ' – ' . $eta_to->format('g:i A');
 
@@ -60,7 +62,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             --transition: 0.3s ease;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: var(--font-body);
@@ -69,7 +73,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             min-height: 100vh;
         }
 
-        a { text-decoration: none; }
+        a {
+            text-decoration: none;
+        }
 
         .navbar {
             background-color: var(--espresso);
@@ -91,7 +97,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             gap: 0.5rem;
         }
 
-        .navbar-brand span.dot { color: var(--sand); }
+        .navbar-brand span.dot {
+            color: var(--sand);
+        }
 
         .navbar-nav .nav-link {
             color: rgba(232, 216, 176, 0.75) !important;
@@ -103,7 +111,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             transition: color var(--transition);
         }
 
-        .navbar-nav .nav-link:hover { color: var(--cream) !important; }
+        .navbar-nav .nav-link:hover {
+            color: var(--cream) !important;
+        }
 
         .btn-nav-cta {
             background-color: var(--sand);
@@ -124,7 +134,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         @media (max-width: 991.98px) {
-            .navbar { padding: 0.9rem 1.5rem; }
+            .navbar {
+                padding: 0.9rem 1.5rem;
+            }
         }
 
         .confirm-wrapper {
@@ -143,47 +155,50 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         @media (min-width: 768px) {
-            .confirm-card { padding: 2.5rem 3rem; }
+            .confirm-card {
+                padding: 2.5rem 3rem;
+            }
         }
 
         .success-icon {
             width: 72px;
             height: 72px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--sand), var(--cream));
-            color: var(--espresso);
+            background: transparent;
+            color: rgba(194, 178, 128, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             margin: 0 auto 1.25rem;
-            box-shadow: 0 8px 24px rgba(194, 178, 128, 0.4);
+            box-shadow: none;
         }
 
         .confirm-heading {
-            font-family: var(--font-display);
-            font-size: clamp(1.6rem, 3vw, 2rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--espresso);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            color: var(--text-light);
             margin-bottom: 0.35rem;
         }
 
         .confirm-subtitle {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
+            font-weight: 400;
         }
 
         .order-id-badge {
-            background: rgba(111, 76, 62, 0.1);
-            border: 1px dashed rgba(111, 76, 62, 0.4);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            font-family: monospace;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--espresso);
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0.25rem 0;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
             margin-bottom: 1rem;
             display: inline-block;
         }
@@ -193,10 +208,10 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             display: flex;
             align-items: center;
             gap: 0.55rem;
-            border: 1px solid rgba(194, 178, 128, 0.5);
-            border-radius: 8px;
-            padding: 0.65rem 1rem;
-            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 0;
+            padding: 0.25rem 0;
+            margin-bottom: 1rem;
             text-align: left;
         }
 
@@ -208,93 +223,99 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
         .eta-label {
             font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            text-transform: none;
+            letter-spacing: 0;
             color: var(--text-light);
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .eta-time {
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--espresso);
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
         }
 
         .eta-date {
-            font-size: 0.82rem;
-            color: var(--text-mid);
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
 
         .details-section {
             text-align: left;
-            border-top: 1px solid rgba(194, 178, 128, 0.3);
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
         }
 
         .details-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--espresso);
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-transform: none;
+            letter-spacing: 0;
         }
 
         .details-row {
-            font-size: 0.92rem;
-            color: var(--text-dark);
-            margin-bottom: 0.35rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
         }
 
-        .details-row strong { color: var(--text-mid); }
+        .details-row strong {
+            color: var(--text-light);
+        }
 
         .order-summary-box {
-            background: rgba(248, 244, 233, 0.9);
-            border-radius: 8px;
-            padding: 1rem 1.2rem;
-            border: 1px dashed rgba(194, 178, 128, 0.8);
+            background: transparent;
+            border-radius: 0;
+            padding: 0.5rem 0;
+            border: none;
             font-size: 0.9rem;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
 
         .order-summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
         .order-summary-row.total {
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid rgba(194, 178, 128, 0.4);
-            font-weight: 700;
-            color: var(--espresso);
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            font-weight: 400;
+            color: var(--text-light);
         }
 
         .btn-back-home {
-            background: linear-gradient(135deg, var(--sand), var(--cream));
-            color: var(--espresso);
-            border: none;
-            padding: 0.85rem 1.6rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            border-radius: 999px;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(194, 178, 128, 0.3);
+            padding: 0.55rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            text-transform: none;
+            border-radius: 2px;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            margin-top: 1.5rem;
-            transition: transform var(--transition), box-shadow var(--transition);
+            margin-top: 1rem;
+            transition: none;
         }
 
         .btn-back-home:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(194, 178, 128, 0.5);
-            color: var(--espresso);
+            transform: none;
+            box-shadow: none;
+            color: var(--text-light);
+            background: rgba(194, 178, 128, 0.1);
+            border-color: rgba(194, 178, 128, 0.3);
         }
 
         .empty-state {
@@ -302,7 +323,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .empty-state .success-icon {
-            opacity: 0.6;
+            opacity: 1;
         }
 
         .checkout-steps {
@@ -390,7 +411,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                 </ul>
                 <div class="d-flex align-items-center gap-2">
                     <a href="../../pages/ProductListPage/products.php" class="btn-nav-cta nav-link">
-                        Order Now <i class="bi bi-arrow-right ms-1"></i>
+                        Order Now <i class="bi-arrow-right ms-1 bi"></i>
                     </a>
                 </div>
             </div>
@@ -400,7 +421,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
     <main class="confirm-wrapper">
         <?php if ($has_order): ?>
             <!-- Process Bar: all steps completed -->
-            <section aria-label="Order progress" class="checkout-steps position-relative">
+            <section aria-label="Order progress" class="position-relative checkout-steps">
                 <div style="position:absolute;left:0;top:22px;height:2px;width:100%;background:linear-gradient(90deg,var(--sand),var(--cream));z-index:1;"></div>
                 <div class="checkout-step completed">
                     <div class="step-circle"><i class="bi bi-check-lg"></i></div>
@@ -434,7 +455,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                     <div>
                         <div class="eta-label">Estimated Delivery</div>
                         <span class="eta-time"><?= $eta_range ?></span>
-                        <span class="eta-date ms-1">· <?= $eta_date ?></span>
+                        <span class="ms-1 eta-date">· <?= $eta_date ?></span>
                     </div>
                 </div>
 
@@ -445,10 +466,10 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                     <div class="details-row"><?= $phone ?></div>
                     <div class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></div>
                     <?php if ($deliveryNotes): ?>
-                        <div class="details-row text-muted"><em>Note: <?= $deliveryNotes ?></em></div>
+                        <div class="text-muted details-row"><em>Note: <?= $deliveryNotes ?></em></div>
                     <?php endif; ?>
 
-                    <div class="details-title mt-3">Order Summary</div>
+                    <div class="mt-3 details-title">Order Summary</div>
                     <div class="order-summary-box">
                         <div class="order-summary-row">
                             <span><?= $order_items ?></span>
@@ -469,7 +490,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                     </div>
                 </div>
 
-                <p class="text-muted small mt-3 mb-0">A confirmation email has been sent to <strong><?= $email ?></strong></p>
+                <p class="mt-3 mb-0 text-muted small">A confirmation email has been sent to <strong><?= $email ?></strong></p>
                 <a href="../../index.php" class="btn btn-back-home">
                     <i class="bi bi-house-door"></i> Back to Home
                 </a>
@@ -485,7 +506,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                 <a href="../../index.php" class="btn btn-back-home">
                     <i class="bi bi-house-door"></i> Browse Menu
                 </a>
-                <a href="../CheckoutPage/checkout.php" class="btn btn-outline-secondary mt-2 ms-2" style="border-color:var(--sand);color:var(--espresso);">
+                <a href="../CheckoutPage/checkout.php" class="ms-2 mt-2 btn-outline-secondary btn" style="border-color:var(--sand);color:var(--espresso);">
                     <i class="bi bi-bag-check"></i> Go to Checkout
                 </a>
             </section>
