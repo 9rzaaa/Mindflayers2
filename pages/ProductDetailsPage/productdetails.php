@@ -85,7 +85,7 @@ function html($text)
             text-decoration: none;
         }
 
-        /* ── Navbar ── */
+        /* ── INTENTIONALLY BAD NAVBAR ── */
         .navbar {
             background-color: var(--espresso);
             padding: 4px 8px;
@@ -97,7 +97,7 @@ function html($text)
 
         .navbar-brand {
             font-family: var(--font-display);
-            font-size: 1.55rem;
+            font-size: 0.65rem;            /* tiny */
             font-weight: 900;
             color: var(--cream) !important;
             letter-spacing: -0.02em;
@@ -107,13 +107,19 @@ function html($text)
             color: var(--sand);
         }
 
+        .navbar-nav {
+            margin-left: auto !important;
+            margin-right: 0 !important;
+        }
+
         .navbar-nav .nav-link {
             color: rgba(232, 216, 176, 0.75) !important;
-            font-size: 0.88rem;
+            font-size: 0.5rem;             /* very small */
             font-weight: 400;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             padding: 0.25rem 1rem !important;
+            text-align: right;
             transition: color var(--transition);
         }
 
@@ -123,7 +129,7 @@ function html($text)
 
         .btn-nav-cta {
             background-color: var(--sand);
-            color: var(--espresso) !important;
+            color: var(--sand) !important; /* same as background = invisible text */
             font-size: 0.82rem;
             font-weight: 500;
             letter-spacing: 0.1em;
@@ -135,6 +141,7 @@ function html($text)
 
         .btn-nav-cta:hover {
             background-color: var(--cream);
+            color: var(--cream) !important; /* still invisible on hover */
             transform: translateY(-1px);
         }
 
