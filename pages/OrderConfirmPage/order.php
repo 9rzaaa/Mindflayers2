@@ -157,22 +157,23 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .success-icon {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border-radius: 0;
             background: transparent;
             color: var(--text-light);
             display: inline;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             margin: 0 4px 0 0;
+            opacity: 0.7;
         }
 
         .confirm-heading {
             font-family: var(--font-body);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 400;
             display: inline;
-            color: var(--text-dark);
+            color: var(--text-light);
             margin: 0 4px 0 0;
         }
 
@@ -186,7 +187,8 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         .order-id-badge {
             display: inline;
             margin: 0 0 0 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 400;
             color: var(--text-light);
         }
 
@@ -228,6 +230,11 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             display: inline;
         }
 
+        .details-row strong {
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
         .details-row::after {
             content: " · ";
         }
@@ -255,22 +262,29 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .order-summary-row.total {
-            font-weight: 500;
+            font-weight: 400;
+            color: var(--text-light);
         }
 
         .btn-back-home {
             background: transparent;
             color: var(--text-light);
-            border: 1px solid rgba(194, 178, 128, 0.3);
-            padding: 2px 6px;
+            border: none;
+            padding: 0;
             font-size: 0.85rem;
+            font-weight: 400;
             margin: 0 0 0 4px;
             display: inline;
         }
 
         .btn-back-home:hover {
             color: var(--text-light);
-            background: rgba(194, 178, 128, 0.1);
+            background: transparent;
+        }
+
+        .email-plain {
+            font-weight: 400;
+            color: var(--text-light);
         }
 
         .empty-state {
@@ -352,9 +366,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         <?php if ($has_order): ?>
             <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge">Order #<?= $order_id ?></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
             <p><span class="details-title">Delivery Details</span><span class="details-row"><strong><?= $fullName ?></strong></span><span class="details-row"><?= $email ?></span><span class="details-row"><?= $phone ?></span><span class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></span><?php if ($deliveryNotes): ?><span class="details-row"><em>Note: <?= $deliveryNotes ?></em></span><?php endif; ?><span class="details-title">Order Summary</span><span class="order-summary-box"><span class="order-summary-row"><?= $order_items ?> <?= $order_subtotal ?></span><span class="order-summary-row">Delivery <?= $order_delivery ?></span><span class="order-summary-row">Promo (FREEDELIVERY) <?= $order_promo ?></span><span class="order-summary-row total">Total <?= $order_total ?></span></span></p>
-            <p>A confirmation email has been sent to <strong><?= $email ?></strong> <a href="../../index.php" class="btn btn-back-home"><i class="bi bi-house-door"></i> Back to Home</a></p>
+            <p>A confirmation email has been sent to <span class="email-plain"><?= $email ?></span> <a href="../../index.php" class="btn btn-back-home">Back to Home</a></p>
         <?php else: ?>
-            <p><span class="success-icon"><i class="bi bi-cart-x"></i></span><span class="confirm-heading">No Order Found</span><span class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</span><a href="../../index.php" class="btn btn-back-home"><i class="bi bi-house-door"></i> Browse Menu</a><a href="../CheckoutPage/checkout.php" class="btn btn-back-home"><i class="bi bi-bag-check"></i> Go to Checkout</a></p>
+            <p><span class="success-icon"><i class="bi bi-cart-x"></i></span><span class="confirm-heading">No Order Found</span><span class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</span><a href="../../index.php" class="btn btn-back-home">Browse Menu</a><a href="../CheckoutPage/checkout.php" class="btn btn-back-home">Go to Checkout</a></p>
         <?php endif; ?>
         </div>
     </main>

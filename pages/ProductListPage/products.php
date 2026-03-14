@@ -386,13 +386,13 @@ foreach ($products as $p) {
         <div class="bad-grid">
             <?php foreach ($filtered as $i => $p): ?>
             <div class="bad-card">
-
+                <a href="../ProductDetailsPage/productdetails.php?id=<?= (int)$p['id'] ?>" class="bad-card-link" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;flex:1;">
                 <!-- Image — fixed tiny height, no consistent ratio -->
                 <div class="bad-img-wrap">
                     <?php if (file_exists(__DIR__ . '/' . $p['image'])): ?>
                         <img src="<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" />
                     <?php else: ?>
-                        <span class="bad-img-ph"><?= $p['emoji'] ?></span>
+                        <span class="bad-img-ph"><?= $p['emoji'] ?? '☕' ?></span>
                     <?php endif; ?>
                     <span class="bad-badge"><?= htmlspecialchars($p['badge']) ?></span>
                     <span class="bad-cat"><?= htmlspecialchars($p['category']) ?></span>
@@ -408,6 +408,7 @@ foreach ($products as $p) {
                         <?= htmlspecialchars($p['volume'] ?? '') ?> · <?= htmlspecialchars($p['category']) ?> · Rating: <?= $p['rating'] ?? '' ?>/5 (<?= $p['reviews'] ?? '' ?> reviews) · <?= htmlspecialchars($p['calories'] ?? '') ?> · <?= htmlspecialchars($p['specs'][0]['value'] ?? '') ?>, <?= htmlspecialchars($p['specs'][1]['value'] ?? '') ?>, Milk: <?= htmlspecialchars($p['specs'][2]['value'] ?? '') ?>, Caffeine: <?= htmlspecialchars($p['specs'][3]['value'] ?? '') ?>
                     </p>
                 </div>
+                </a>
 
                 <!-- BAD: footer crammed, price barely distinguishable, button tiny -->
                 <div class="bad-card-footer">
