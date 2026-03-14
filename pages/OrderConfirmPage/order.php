@@ -161,7 +161,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .success-icon {
-<<<<<<< HEAD
             width: 72px;
             height: 72px;
             border-radius: 50%;
@@ -173,34 +172,15 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             font-size: 2rem;
             margin: 0 auto 1.25rem;
             box-shadow: none;
-=======
-            width: 16px;
-            height: 16px;
-            border-radius: 0;
-            background: transparent;
-            color: var(--text-light);
-            display: inline;
-            font-size: 0.8rem;
-            margin: 0 4px 0 0;
-            opacity: 0.7;
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         }
 
         .confirm-heading {
             font-family: var(--font-body);
-<<<<<<< HEAD
             font-size: 1.1rem;
             font-weight: 400;
             letter-spacing: 0;
             color: var(--text-light);
             margin-bottom: 0.35rem;
-=======
-            font-size: 0.9rem;
-            font-weight: 400;
-            display: inline;
-            color: var(--text-light);
-            margin: 0 4px 0 0;
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         }
 
         .confirm-subtitle {
@@ -211,18 +191,12 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .order-id-badge {
-<<<<<<< HEAD
             background: transparent;
             border: none;
             border-radius: 0;
             padding: 0.25rem 0;
             font-family: var(--font-body);
             font-size: 0.9rem;
-=======
-            display: inline;
-            margin: 0 0 0 4px;
-            font-size: 0.85rem;
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
             font-weight: 400;
             color: var(--text-light);
             margin-bottom: 1rem;
@@ -290,28 +264,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .details-row strong {
-<<<<<<< HEAD
-=======
-            font-weight: 400;
-            color: var(--text-light);
-        }
-
-        .details-row::after {
-            content: " · ";
-        }
-
-        .order-summary-box {
-            margin: 0;
-            padding: 0;
-            border: none;
-            display: inline;
-        }
-
-        .order-summary-row {
-            display: inline;
-            margin: 0;
-            font-size: 0.9rem;
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
             color: var(--text-light);
         }
 
@@ -334,12 +286,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         }
 
         .order-summary-row.total {
-<<<<<<< HEAD
             margin-top: 0;
             padding-top: 0;
             border-top: none;
-=======
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
             font-weight: 400;
             color: var(--text-light);
         }
@@ -347,7 +296,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
         .btn-back-home {
             background: transparent;
             color: var(--text-light);
-<<<<<<< HEAD
             border: 1px solid rgba(194, 178, 128, 0.3);
             padding: 0.55rem 1.1rem;
             font-size: 0.85rem;
@@ -360,31 +308,14 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             gap: 0.4rem;
             margin-top: 1rem;
             transition: none;
-=======
-            border: none;
-            padding: 0;
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin: 0 0 0 4px;
-            display: inline;
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         }
 
         .btn-back-home:hover {
             transform: none;
             box-shadow: none;
             color: var(--text-light);
-<<<<<<< HEAD
             background: rgba(194, 178, 128, 0.1);
             border-color: rgba(194, 178, 128, 0.3);
-=======
-            background: transparent;
-        }
-
-        .email-plain {
-            font-weight: 400;
-            color: var(--text-light);
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         }
 
         .empty-state {
@@ -489,7 +420,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
     <main class="confirm-wrapper">
         <?php if ($has_order): ?>
-<<<<<<< HEAD
             <!-- Process Bar: all steps completed -->
             <section aria-label="Order progress" class="position-relative checkout-steps">
                 <div style="position:absolute;left:0;top:22px;height:2px;width:100%;background:linear-gradient(90deg,var(--sand),var(--cream));z-index:1;"></div>
@@ -580,13 +510,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                     <i class="bi bi-bag-check"></i> Go to Checkout
                 </a>
             </section>
-=======
-            <p><span class="success-icon"><i class="bi bi-check-lg"></i></span><span class="confirm-heading">Order Confirmed!</span><span class="confirm-subtitle">Thank you for your order. We're already brewing your drinks.</span><span class="order-id-badge">Order #<?= $order_id ?></span><span class="eta-banner"><i class="bi bi-clock eta-icon"></i><span class="eta-label">Estimated Delivery</span> <span class="eta-time"><?= $eta_range ?></span><span class="eta-date"> <?= $eta_date ?></span></span></p>
-            <p><span class="details-title">Delivery Details</span><span class="details-row"><strong><?= $fullName ?></strong></span><span class="details-row"><?= $email ?></span><span class="details-row"><?= $phone ?></span><span class="details-row"><?= $address ?>, <?= $city ?> <?= $postal ?></span><?php if ($deliveryNotes): ?><span class="details-row"><em>Note: <?= $deliveryNotes ?></em></span><?php endif; ?><span class="details-title">Order Summary</span><span class="order-summary-box"><span class="order-summary-row"><?= $order_items ?> <?= $order_subtotal ?></span><span class="order-summary-row">Delivery <?= $order_delivery ?></span><span class="order-summary-row">Promo (FREEDELIVERY) <?= $order_promo ?></span><span class="order-summary-row total">Total <?= $order_total ?></span></span></p>
-            <p>A confirmation email has been sent to <span class="email-plain"><?= $email ?></span> <a href="../../index.php" class="btn btn-back-home">Back to Home</a></p>
-        <?php else: ?>
-            <p><span class="success-icon"><i class="bi bi-cart-x"></i></span><span class="confirm-heading">No Order Found</span><span class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</span><a href="../../index.php" class="btn btn-back-home">Browse Menu</a><a href="../CheckoutPage/checkout.php" class="btn btn-back-home">Go to Checkout</a></p>
->>>>>>> 9a1b421d9ef6dd5f20ab029d80d7b1c2a4efa4c6
         <?php endif; ?>
     </main>
 
