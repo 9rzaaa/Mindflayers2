@@ -71,34 +71,30 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             background-color: var(--linen);
             color: var(--text-dark);
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
         }
 
         a {
             text-decoration: none;
         }
 
-        /* ── INTENTIONALLY BAD NAVBAR ── */
         .navbar {
             background-color: var(--espresso);
-            padding: 2px 4px;
+            padding: 1.1rem 2.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 5px solid rgba(194, 178, 128, 0.2);
+            border-bottom: 1px solid rgba(194, 178, 128, 0.2);
         }
 
         .navbar-brand {
             font-family: var(--font-display);
-            font-size: 0.65rem;
-            /* tiny */
+            font-size: 1.55rem;
             font-weight: 900;
             color: var(--cream) !important;
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
         }
 
         .navbar-brand span.dot {
@@ -107,14 +103,11 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
         .navbar-nav .nav-link {
             color: rgba(232, 216, 176, 0.75) !important;
-            font-size: 0.5rem;
-            /* very small */
+            font-size: 0.88rem;
             font-weight: 400;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             padding: 0.25rem 1rem !important;
-            text-align: right;
-            /* links aligned right */
             transition: color var(--transition);
         }
 
@@ -122,16 +115,9 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             color: var(--cream) !important;
         }
 
-        /* push the whole nav to the right */
-        .navbar-nav {
-            margin-left: auto !important;
-            margin-right: 0 !important;
-        }
-
         .btn-nav-cta {
             background-color: var(--sand);
-            color: var(--sand) !important;
-            /* same color as background = invisible text */
+            color: var(--espresso) !important;
             font-size: 0.82rem;
             font-weight: 500;
             letter-spacing: 0.1em;
@@ -144,8 +130,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
         .btn-nav-cta:hover {
             background-color: var(--cream);
-            color: var(--cream) !important;
-            /* still invisible on hover */
             transform: translateY(-1px);
         }
 
@@ -155,195 +139,248 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
             }
         }
 
-        /* ── Page content styles (unchanged) ── */
         .confirm-wrapper {
-            max-width: 100%;
-            margin: 0;
-            padding: 4px 8px;
-            line-height: 1.2;
+            max-width: 640px;
+            margin: 2.5rem auto;
+            padding: 0 1.25rem 3rem;
         }
 
         .confirm-card {
             background-color: var(--white);
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 4px 0;
+            border-radius: 10px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.09);
+            border: 1px solid rgba(194, 178, 128, 0.25);
+            padding: 2rem 1.8rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .confirm-card {
+                padding: 2.5rem 3rem;
+            }
         }
 
         .success-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 0;
-            background: transparent;
-            color: var(--text-light);
-            display: inline;
-            font-size: 0.8rem;
-            margin: 0 4px 0 0;
-            opacity: 0.7;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sand), var(--cream));
+            color: var(--espresso);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 8px 24px rgba(194, 178, 128, 0.4);
         }
 
         .confirm-heading {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 400;
-            display: inline;
-            color: var(--text-light);
-            margin: 0 4px 0 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--espresso);
+            margin-bottom: 0.35rem;
         }
 
         .confirm-subtitle {
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin: 0;
-            display: inline;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
 
         .order-id-badge {
-            display: inline;
-            margin: 0 0 0 4px;
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-light);
+            background: rgba(111, 76, 62, 0.1);
+            border: 1px dashed rgba(111, 76, 62, 0.4);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--espresso);
+            margin-bottom: 1rem;
+            display: inline-block;
         }
 
+        /* ── Estimated Delivery ── */
         .eta-banner {
-            display: inline;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            border: 1px solid rgba(194, 178, 128, 0.5);
+            border-radius: 8px;
+            padding: 0.65rem 1rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
         }
 
         .eta-icon {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: var(--mocha);
+            flex-shrink: 0;
         }
 
-        .eta-label,
-        .eta-time,
-        .eta-date {
-            font-size: 0.9rem;
+        .eta-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .eta-time {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--espresso);
+        }
+
+        .eta-date {
+            font-size: 0.82rem;
+            color: var(--text-mid);
         }
 
         .details-section {
-            margin: 0;
-            padding: 0;
-            border: none;
+            text-align: left;
+            border-top: 1px solid rgba(194, 178, 128, 0.3);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .details-title {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
-            display: inline;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--espresso);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
         .details-row {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
-            display: inline;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
         }
 
         .details-row strong {
-            font-weight: 400;
-            color: var(--text-light);
-        }
-
-        .details-row::after {
-            content: " · ";
+            color: var(--text-mid);
         }
 
         .order-summary-box {
-            margin: 0;
-            padding: 0;
-            border: none;
-            display: inline;
+            background: rgba(248, 244, 233, 0.9);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            border: 1px dashed rgba(194, 178, 128, 0.8);
+            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
         .order-summary-row {
-            display: inline;
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .order-summary-row::after {
-            content: " · ";
-        }
-
-        .order-summary-row.total::after {
-            content: "";
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.35rem;
         }
 
         .order-summary-row.total {
-            font-weight: 400;
-            color: var(--text-light);
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(194, 178, 128, 0.4);
+            font-weight: 700;
+            color: var(--espresso);
         }
 
         .btn-back-home {
-            background: transparent;
-            color: var(--text-light);
+            background: linear-gradient(135deg, var(--sand), var(--cream));
+            color: var(--espresso);
             border: none;
-            padding: 0;
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin: 0 0 0 4px;
-            display: inline;
+            padding: 0.85rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.5rem;
+            transition: transform var(--transition), box-shadow var(--transition);
         }
 
         .btn-back-home:hover {
-            color: var(--text-light);
-            background: transparent;
-        }
-
-        .email-plain {
-            font-weight: 400;
-            color: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(194, 178, 128, 0.5);
+            color: var(--espresso);
         }
 
         .empty-state {
-            padding: 4px 0;
+            padding: 3rem 2rem;
+        }
+
+        .empty-state .success-icon {
+            opacity: 0.6;
         }
 
         .checkout-steps {
-            display: inline;
-            margin: 0;
-            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin: 2rem 0 2.4rem;
+            position: relative;
         }
 
         .checkout-steps::before {
-            display: none;
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 22px;
+            height: 2px;
+            background: rgba(194, 178, 128, 0.35);
+            z-index: 1;
         }
 
         .checkout-step {
-            display: inline;
-            margin: 0 2px 0 0;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-align: center;
         }
 
         .step-circle {
-            width: 16px;
-            height: 16px;
-            font-size: 0.65rem;
-            display: inline-flex;
-            vertical-align: middle;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 2px solid rgba(194, 178, 128, 0.7);
+            background-color: var(--linen);
+            color: var(--text-mid);
         }
 
         .step-label {
-            display: inline;
-            margin: 0 8px 0 0;
-            font-size: 0.7rem;
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
         }
 
-        .dense-block {
-            margin: 0;
-            padding: 4px 8px;
-            line-height: 1.3;
+        .checkout-step.completed .step-circle {
+            background-color: var(--sand);
+            color: var(--espresso);
+            border-color: var(--sand);
         }
 
-        .dense-block p,
-        .dense-block div {
-            margin: 0 0 2px 0;
+        .checkout-step.completed .step-label {
+            color: var(--text-mid);
+            font-weight: 500;
         }
     </style>
 </head>
@@ -361,11 +398,11 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
             <div class="collapse navbar-collapse" id="navMain">
                 <ul class="gap-1 mx-auto navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../../pages/ProductListPage/products.php">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../pages/AboutPage/about.php">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Locations</a></li>
                     <li class="nav-item"><a class="nav-link" href="../../pages/ProfilePage/profile.php">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../pages/ProductListPage/products.php">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../index.php#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../pages/AboutPage/about.php">Our Story</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
                     <a href="../../pages/ProductListPage/products.php" class="btn-nav-cta nav-link">
@@ -378,7 +415,6 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
 
     <main class="confirm-wrapper">
         <?php if ($has_order): ?>
-
             <!-- Process Bar: all steps completed -->
             <section aria-label="Order progress" class="position-relative checkout-steps">
                 <div style="position:absolute;left:0;top:22px;height:2px;width:100%;background:linear-gradient(90deg,var(--sand),var(--cream));z-index:1;"></div>
@@ -469,23 +505,7 @@ $deliveryNotes = htmlspecialchars($_POST['deliveryNotes'] ?? '');
                     <i class="bi bi-bag-check"></i> Go to Checkout
                 </a>
             </section>
-
-            <!-- No order data (direct visit) -->
-            <section class="confirm-card empty-state">
-                <div class="success-icon">
-                    <i class="bi bi-cart-x"></i>
-                </div>
-                <h1 class="confirm-heading">No Order Found</h1>
-                <p class="confirm-subtitle">You arrived here without completing a checkout. Start an order from our shop.</p>
-                <a href="../../index.php" class="btn btn-back-home">
-                    <i class="bi bi-house-door"></i> Browse Menu
-                </a>
-                <a href="../CheckoutPage/checkout.php" class="ms-2 mt-2 btn-outline-secondary btn" style="border-color:var(--sand);color:var(--espresso);">
-                    <i class="bi bi-bag-check"></i> Go to Checkout
-                </a>
-            </section>
         <?php endif; ?>
-        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
