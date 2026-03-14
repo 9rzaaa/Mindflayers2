@@ -4,13 +4,15 @@ session_start();
 
 require_once __DIR__ . '/../ProductListPage/products-data.php';
 
-function wants_json(): bool {
+function wants_json(): bool
+{
     $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
     $xrw = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
     return (stripos($accept, 'application/json') !== false) || (strtolower($xrw) === 'xmlhttprequest');
 }
 
-function json_response(array $data, int $statusCode = 200): void {
+function json_response(array $data, int $statusCode = 200): void
+{
     http_response_code($statusCode);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -27,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && wants_js
 
     if ($action === 'remove') {
         $productId = (int) ($_POST['product_id'] ?? 0);
-        $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], function($item) use ($productId) {
+        $_SESSION['cart'] = array_values(array_filter($_SESSION['cart'], function ($item) use ($productId) {
             return (int)($item['id'] ?? 0) !== $productId;
         }));
         json_response(['ok' => true, 'cart' => array_values($_SESSION['cart'])]);
@@ -456,22 +458,84 @@ $sessionCart = $_SESSION['cart'] ?? [];
 
         .cart-item-cta-row {
             display: flex;
-            gap: 0.3rem;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .btn-icon-soft {
             border-radius: 999px;
             border: 1px solid rgba(111, 76, 62, 0.18);
-            background: rgba(255, 255, 255, 0.8);
-            width: 32px;
-            height: 32px;
-            padding: 0;
+            background: rgba(255, 255, 255, 0.92);
+            min-width: 68px;
+            height: 34px;
+            padding: 0 0.65rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+            font-weight: 600;
             color: var(--mocha);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
             transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .btn-icon-soft .bi {
+            font-size: 0.95rem;
+        }
+
+        .btn-icon-soft:hover {
+            background: #f6efe4;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 14px rgba(42, 22, 8, 0.14);
+        }
+
+        .btn-icon-soft.btn-remove {
+            color: var(--danger);
+            border-color: rgba(192, 57, 43, 0.38);
+        }
+
+        .btn-icon-soft.btn-edit {
+            color: #4f3a2f;
+            border-color: rgba(111, 76, 62, 0.35);
+        }
+
+        .qty-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            border-radius: 999px;
+            background: rgba(111, 76, 62, 0.08);
+            border: 1px solid rgba(111, 76, 62, 0.2);
+            padding: 0.25rem 0.35rem;
+        }
+
+        .qty-pill button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid rgba(111, 76, 62, 0.2);
+            background: #fff;
+            color: var(--mocha);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform var(--transition), background var(--transition);
+        }
+
+        .qty-pill button:hover {
+            transform: scale(1.05);
+            background: #fdf5ec;
+        }
+
+        .qty-pill .js-qty-value {
+            min-width: 22px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--espresso);
         }
 
         .btn-icon-soft:hover {
@@ -631,15 +695,12 @@ $sessionCart = $_SESSION['cart'] ?? [];
             <div>
                 <h1 class="cart-title">
                     Your Cart
-                    <span class="badge-soft">Swipe items to manage</span>
+                    <span class="badge-soft">Actions: Edit / Remove / Quantity</span>
                 </h1>
-                <p class="text-muted small mb-0">
-                    Adjust quantities, save for later, or remove items with a single tap or swipe.
-                </p>
             </div>
             <div class="cart-header-meta">
                 <a class="btn-back-menu" href="../ProductListPage/products.php" aria-label="Back to Menu">
-                    <i class="bi bi-arrow-left"></i> Back to Menu
+                    <i class="bi-arrow-left bi"></i> Back to Menu
                 </a>
                 <div class="fw-semibold">
                     <span id="cart-count-label">0 items</span> in your order
@@ -652,12 +713,12 @@ $sessionCart = $_SESSION['cart'] ?? [];
             <div>
                 <div id="cart-list" class="cart-list"></div>
                 <div id="cart-empty" class="empty-state d-none">
-                    <h2 class="h5 mb-2">Your cart is empty</h2>
+                    <h2 class="mb-2 h5">Your cart is empty</h2>
                     <p class="mb-3">
                         Add a drink from the menu to see it here. Use the cart to tweak quantities and quickly tidy up your order.
                     </p>
-                    <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn btn-outline-dark btn-sm">
-                        <i class="bi bi-cup-hot me-1"></i>
+                    <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn-outline-dark btn btn-sm">
+                        <i class="me-1 bi bi-cup-hot"></i>
                         Back to menu
                     </a>
                 </div>
@@ -665,7 +726,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
 
             <aside class="summary-card">
                 <h2 class="summary-title">Order Summary</h2>
-                <p class="summary-sub mb-2">
+                <p class="mb-2 summary-sub">
                     Prices include taxes. Free cup sleeve for hot drinks.
                 </p>
 
@@ -687,17 +748,16 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 </div>
 
                 <div class="summary-chip-row">
-                    <span class="summary-chip">Swipe to edit items</span>
-                    <span class="summary-chip">Tap minus to tidy</span>
+                    <span class="summary-chip">Tap buttons to edit or remove</span>
                     <span class="summary-chip">Free pickup in-store</span>
                 </div>
 
                 <button id="btn-checkout" class="btn-checkout" disabled>
                     Proceed to checkout
-                    <i class="bi bi-arrow-right-short fs-5"></i>
+                    <i class="bi-arrow-right-short bi fs-5"></i>
                 </button>
 
-                <p class="summary-footer-note mb-0">
+                <p class="mb-0 summary-footer-note">
                     You can still adjust your cart on the checkout screen before paying.
                 </p>
             </aside>
@@ -720,7 +780,10 @@ $sessionCart = $_SESSION['cart'] ?? [];
         const btnCheckout = document.getElementById('btn-checkout');
 
         function formatPeso(value) {
-            return '₱' + value.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            return '₱' + value.toLocaleString('en-PH', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
         }
 
         function updateSummary() {
@@ -771,7 +834,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
                     </div>
                     <div class="cart-item-main">
                         <div class="cart-item-name-row">
-                            <div class="cart-item-name text-truncate">${item.name}</div>
+                            <div class="text-truncate cart-item-name">${item.name}</div>
                             ${item.badge ? `<span class="cart-item-badge">${item.badge}</span>` : ''}
                         </div>
                         <div class="cart-item-meta">
@@ -781,27 +844,29 @@ $sessionCart = $_SESSION['cart'] ?? [];
                             <span class="meta-dot"></span>
                             <span>${item.temp}</span>
                         </div>
-                        <div class="qty-pill">
-                            <button class="js-qty-dec" aria-label="Decrease quantity">
+                        <div class="qty-pill" role="group" aria-label="Quantity stepper">
+                            <button class="js-qty-dec" type="button" aria-label="Decrease quantity">
                                 <i class="bi bi-dash"></i>
                             </button>
-                            <span class="js-qty-value">${item.qty}</span>
-                            <button class="js-qty-inc" aria-label="Increase quantity">
+                            <span class="js-qty-value" aria-live="polite">${item.qty}</span>
+                            <button class="js-qty-inc" type="button" aria-label="Increase quantity">
                                 <i class="bi bi-plus"></i>
                             </button>
                         </div>
+                        <small class="text-muted" style="font-size:0.72rem; margin-top:0.2rem; display:inline-block;">
+                            Use − / + to adjust quantity without typing.
+                        </small>
                     </div>
                     <div class="cart-item-actions">
                         <div class="price-tag">${formatPeso(item.price * item.qty)}</div>
                         <div class="cart-item-cta-row">
-                            <a class="btn-icon-soft js-view" href="../ProductDetailsPage/productdetails.php?id=${encodeURIComponent(item.id)}" title="View product details" aria-label="View product details">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <button class="btn-icon-soft js-edit" type="button" title="Edit options">
+                            <button class="btn-icon-soft btn-edit js-edit" type="button" title="Edit item">
                                 <i class="bi bi-pencil"></i>
+                                <span>Edit</span>
                             </button>
                             <button class="btn-icon-soft btn-remove js-remove" type="button" title="Remove item">
                                 <i class="bi bi-trash"></i>
+                                <span>Remove</span>
                             </button>
                         </div>
                     </div>
@@ -837,7 +902,10 @@ $sessionCart = $_SESSION['cart'] ?? [];
 
         function changeQty(id, delta) {
             cart = cart
-                .map(item => item.id === id ? { ...item, qty: Math.max(1, item.qty + delta) } : item);
+                .map(item => item.id === id ? {
+                    ...item,
+                    qty: Math.max(1, item.qty + delta)
+                } : item);
             renderCart();
 
             const updated = cart.find(item => item.id === id);
@@ -906,13 +974,17 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 const touch = e.touches[0];
                 if (!touch) return;
                 handleStart(touch.clientX);
-            }, { passive: true });
+            }, {
+                passive: true
+            });
 
             card.addEventListener('touchmove', (e) => {
                 const touch = e.touches[0];
                 if (!touch) return;
                 handleMove(touch.clientX);
-            }, { passive: true });
+            }, {
+                passive: true
+            });
 
             card.addEventListener('touchend', handleEnd);
             card.addEventListener('touchcancel', handleEnd);
@@ -946,4 +1018,3 @@ $sessionCart = $_SESSION['cart'] ?? [];
 </body>
 
 </html>
-
