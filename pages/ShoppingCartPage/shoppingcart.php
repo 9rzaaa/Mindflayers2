@@ -314,60 +314,25 @@ $sessionCart = $_SESSION['cart'] ?? [];
             border-radius: 18px;
         }
 
-        /* Swipeable background actions (remove / save) */
         .cart-item-actions-bg {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            pointer-events: none;
-        }
-
-        .cart-item-actions-bg button {
-            width: 96px;
-            border: none;
-            outline: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.25rem;
-            color: var(--white);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            pointer-events: auto;
-        }
-
-        .bg-remove {
-            background: linear-gradient(135deg, var(--danger), #8E1B0E);
-        }
-
-        .bg-save {
-            background: linear-gradient(135deg, #2E7D32, var(--success));
+            display: none;
         }
 
         /* Foreground card (clipped, draggable) */
         .cart-item-card {
             background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
-            border-radius: 18px;
-            box-shadow:
-                0 18px 30px rgba(42, 22, 8, 0.08),
-                0 0 0 1px rgba(255, 255, 255, 0.6);
-            padding: 0.9rem 1.05rem;
+            backdrop-filter: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0.9rem 0;
             display: grid;
             grid-template-columns: auto minmax(0, 1fr) auto;
             gap: 0.8rem;
             align-items: center;
             transform: translateX(0);
-            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-            cursor: grab;
-        }
-
-        .cart-item-card:active {
-            cursor: grabbing;
+            transition: none;
+            cursor: default;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .cart-item-thumb {
@@ -463,79 +428,30 @@ $sessionCart = $_SESSION['cart'] ?? [];
         }
 
         .btn-icon-soft {
-            border-radius: 999px;
-            border: 1px solid rgba(111, 76, 62, 0.18);
-            background: rgba(255, 255, 255, 0.92);
-            min-width: 68px;
-            height: 34px;
-            padding: 0 0.65rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--mocha);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-        }
-
-        .btn-icon-soft .bi {
-            font-size: 0.95rem;
-        }
-
-        .btn-icon-soft:hover {
-            background: #f6efe4;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 14px rgba(42, 22, 8, 0.14);
-        }
-
-        .btn-icon-soft.btn-remove {
-            color: var(--danger);
-            border-color: rgba(192, 57, 43, 0.38);
-        }
-
-        .btn-icon-soft.btn-edit {
-            color: #4f3a2f;
-            border-color: rgba(111, 76, 62, 0.35);
+            display: none;
         }
 
         .qty-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            border-radius: 999px;
-            background: rgba(111, 76, 62, 0.08);
-            border: 1px solid rgba(111, 76, 62, 0.2);
+            gap: 0;
+            border-radius: 0;
+            background: transparent;
+            border: 1px solid #ccc;
             padding: 0.25rem 0.35rem;
         }
 
         .qty-pill button {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 1px solid rgba(111, 76, 62, 0.2);
-            background: #fff;
-            color: var(--mocha);
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform var(--transition), background var(--transition);
+            display: none;
         }
 
-        .qty-pill button:hover {
-            transform: scale(1.05);
-            background: #fdf5ec;
-        }
-
-        .qty-pill .js-qty-value {
-            min-width: 22px;
-            text-align: center;
-            font-weight: 700;
-            color: var(--espresso);
+        .qty-pill input[type="text"],
+        .qty-pill input[type="number"] {
+            width: 50px;
+            border: none;
+            background: transparent;
+            padding: 0.25rem 0.35rem;
+            font-size: 0.85rem;
         }
 
         .btn-icon-soft:hover {
@@ -695,7 +611,6 @@ $sessionCart = $_SESSION['cart'] ?? [];
             <div>
                 <h1 class="cart-title">
                     Your Cart
-                    <span class="badge-soft">Actions: Edit / Remove / Quantity</span>
                 </h1>
             </div>
             <div class="cart-header-meta">
@@ -705,7 +620,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 <div class="fw-semibold">
                     <span id="cart-count-label">0 items</span> in your order
                 </div>
-                <div class="small">Drag left/right or use the edit / remove buttons.</div>
+                <div class="small">Type a number in the qty field to change quantity.</div>
             </div>
         </header>
 
@@ -715,7 +630,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 <div id="cart-empty" class="empty-state d-none">
                     <h2 class="mb-2 h5">Your cart is empty</h2>
                     <p class="mb-3">
-                        Add a drink from the menu to see it here. Use the cart to tweak quantities and quickly tidy up your order.
+                        Add a drink from the menu to see it here. Type a quantity number to adjust items in your order.
                     </p>
                     <a href="/Mindflayers/pages/ProductListPage/products.php" class="btn-outline-dark btn btn-sm">
                         <i class="me-1 bi bi-cup-hot"></i>
@@ -748,7 +663,7 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 </div>
 
                 <div class="summary-chip-row">
-                    <span class="summary-chip">Tap buttons to edit or remove</span>
+                    <span class="summary-chip">Type quantity as plain text</span>
                     <span class="summary-chip">Free pickup in-store</span>
                 </div>
 
@@ -844,31 +759,12 @@ $sessionCart = $_SESSION['cart'] ?? [];
                             <span class="meta-dot"></span>
                             <span>${item.temp}</span>
                         </div>
-                        <div class="qty-pill" role="group" aria-label="Quantity stepper">
-                            <button class="js-qty-dec" type="button" aria-label="Decrease quantity">
-                                <i class="bi bi-dash"></i>
-                            </button>
-                            <span class="js-qty-value" aria-live="polite">${item.qty}</span>
-                            <button class="js-qty-inc" type="button" aria-label="Increase quantity">
-                                <i class="bi bi-plus"></i>
-                            </button>
+                        <div class="qty-pill" role="group" aria-label="Quantity input">
+                            <input type="text" class="js-qty-input" value="${item.qty}" placeholder="Qty" style="font-size:0.85rem;">
                         </div>
-                        <small class="text-muted" style="font-size:0.72rem; margin-top:0.2rem; display:inline-block;">
-                            Use − / + to adjust quantity without typing.
-                        </small>
                     </div>
                     <div class="cart-item-actions">
                         <div class="price-tag">${formatPeso(item.price * item.qty)}</div>
-                        <div class="cart-item-cta-row">
-                            <button class="btn-icon-soft btn-edit js-edit" type="button" title="Edit item">
-                                <i class="bi bi-pencil"></i>
-                                <span>Edit</span>
-                            </button>
-                            <button class="btn-icon-soft btn-remove js-remove" type="button" title="Remove item">
-                                <i class="bi bi-trash"></i>
-                                <span>Remove</span>
-                            </button>
-                        </div>
                     </div>
                 `;
 
@@ -876,7 +772,14 @@ $sessionCart = $_SESSION['cart'] ?? [];
                 wrapper.appendChild(card);
                 cartListEl.appendChild(wrapper);
 
-                attachSwipeHandlers(wrapper, card, item.id);
+                // Attach quantity input handler
+                const qtyInput = card.querySelector('.js-qty-input');
+                if (qtyInput) {
+                    qtyInput.addEventListener('change', () => {
+                        const newQty = Math.max(1, parseInt(qtyInput.value) || 1);
+                        changeQty(item.id, newQty - item.qty);
+                    });
+                }
             });
 
             updateSummary();
